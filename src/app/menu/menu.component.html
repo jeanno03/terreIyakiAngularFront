@@ -1,0 +1,65 @@
+<div class="container spacer">
+  <div class="panel panel-infos">
+    <div class="panel-body">
+      <ul class="nav nav-pills">
+        <li *ngFor="let c of comboes">
+          <a class="clickable" class="active" (click)=getComboByName(c.name)>{{c.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container spacer" *ngIf="combo">
+    <table class="table-striped">
+      <tr>
+        <th>
+          <span class="spacer-right">prix</span>
+        </th>
+        <th>
+          <span class="spacer-right">description</span>
+        </th>
+        <th>
+          <span class="spacer-right">photo</span>
+        </th>
+      </tr>
+      
+      <tr>
+        <td>
+          <span class="spacer-right"><a class="clickable" (click)=selectCombo(combo.id)>{{combo.vatPrice | currency:'EUR':true:'1.1-1'}}</a></span>
+        </td>
+        <td>
+          <span class="spacer-right"><a class="clickable" (click)=selectCombo(combo.id)>{{combo.description}}</a></span>
+        </td>
+        <td>
+          <span class="spacer-right">
+              <a class="clickable" (click)=selectCombo(combo.id)><img class="image" src={{combo.picture}} /></a>
+          </span>
+        </td>
+      </tr>
+    
+
+    </table>
+  </div>
+  <div *ngIf="combo">
+    <table class="table-striped">
+      <tr *ngFor="let c of this.category">
+        <th>
+          <span class="spacer-right">{{c.name}}</span>
+        </th>
+        <th>
+          <span class="spacer-right">{{c.theId}}</span>
+        </th>
+        
+      </tr>
+      <tr *ngFor="let p of this.product">
+        <td>
+          <span class="spacer-right">{{p.name}}</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- <br/>pour demain je récupère {{c.theId}} pour récuperer ==>8 -->
+<!-- <br/>http://localhost:8080/categories/8/comboCategories
+<br/>soit "theId" : 5 pour ensuite récupérer mes produits
+<br/>soit http://localhost:8080/comboCategories/5/products -->

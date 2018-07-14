@@ -1,0 +1,38 @@
+<div class="container spacer">
+    <div class="panel panel-info">
+      <div class="panel-body">
+
+<ul class="nav nav-pills">
+    <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
+      <a class="clickable" class="active" (click)=getPlatsByCategory(c.name)>
+        <span *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'">
+          {{c.name}}
+        </span></a>
+    </li>    
+</ul>
+
+<div class="tab-content" *ngIf="products?.content">
+    <div class="tab-pane active" id="tab1">
+</div>
+</div>
+
+<div class="container spacer">
+
+        <table class="table-striped">
+          <tr>
+            <th><span class="spacer-right">nom</span></th>
+            <th><span class="spacer-right">prix</span></th>
+            <th><span class="spacer-right">photo</span></th>       
+          </tr>
+          <tr *ngFor="let p of products">
+            <td><span class="spacer-right">{{p.name}}</span></td>
+            <td><span class="spacer-right">{{p.vatPrice | currency:'EUR':true:'1.1-1'}}</span></td>
+            <td><span class="spacer-right"><img class="image" src={{p.picture}} /></span></td>
+          </tr>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+

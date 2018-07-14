@@ -1,0 +1,44 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.spacer{
+    margin-top:30px;
+}
+
+.spacer-right{
+    margin-right: 10px;
+}
+
+.nav-green{
+    color:green;
+}
+
+.back-green{
+    background-color: green;
+    color:white;
+}
+
+.container2{
+    margin-top:15px;
+}
+
+.spacer-right2{
+    margin-right: 5px;
+}
+
+
+.nav-pills>li>a {
+    color: green;
+    background-color: white;
+    }
+    
+    .nav-pills > li > a:hover, .x-nav-tabs > .active > a, .x-nav-tabs > .active > a:hover {
+    color: white;
+    background: green;
+    }
+
+    .image {
+        display:block;
+        width:100px;
+        height:100px;
+        background-position:50% 50%;
+        }
