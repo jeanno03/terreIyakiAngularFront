@@ -46,23 +46,12 @@ export class ComboService {
     return this.http.get<any[]>(this.API+'/getComboCategoryById?id='+id);
 
   }
-  //ca marche a garder
-// findAllProducts(): Observable<Product[]> {
-//   return this.http.get<Product[]>(this.API+'/products').
-//     map((result:any)=>{
-//       console.log(result);
-//       this.products = result._embedded.products;
-//       this.products.forEach((element)=>{
-//         console.log(element.price);
-//       }) 
-//       return this.products;
-//     });
-//   }
-//comboCategories/2/products
 
-//marche pas a supprimer?
-generateArray(obj){
-  return Object.keys(obj).map((key)=>{ return obj[key]});
+  getComboCategoriesByCategory(id:number){
+    return this.http.get(this.API+'/categories/'+id+'/comboCategories').
+    map((result:any)=>{
+      return result._embedded.comboCategories;
+  })
 }
 
 }

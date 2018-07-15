@@ -21,36 +21,57 @@
           <span class="spacer-right">photo</span>
         </th>
       </tr>
-      
+
       <tr>
         <td>
-          <span class="spacer-right"><a class="clickable" (click)=selectCombo(combo.id)>{{combo.vatPrice | currency:'EUR':true:'1.1-1'}}</a></span>
-        </td>
-        <td>
-          <span class="spacer-right"><a class="clickable" (click)=selectCombo(combo.id)>{{combo.description}}</a></span>
+          <span class="spacer-right">
+            <a class="clickable" (click)=selectCombo(combo.id)>{{combo.vatPrice | currency:'EUR':true:'1.1-1'}}</a>
+          </span>
         </td>
         <td>
           <span class="spacer-right">
-              <a class="clickable" (click)=selectCombo(combo.id)><img class="image" src={{combo.picture}} /></a>
+            <a class="clickable" (click)=selectCombo(combo.id)>{{combo.description}}</a>
+          </span>
+        </td>
+        <td>
+          <span class="spacer-right">
+            <a class="clickable" (click)=selectCombo(combo.id)>
+              <img class="image" src={{combo.picture}} />
+            </a>
           </span>
         </td>
       </tr>
-    
+
 
     </table>
   </div>
-  <div *ngIf="combo">
+
+ 
+  
+
+
+  <div *ngIf="category">
     <table class="table-striped">
+        <th>
+            <span class="spacer-right">
+              Choisir
+            </span>
+          </th>
       <tr *ngFor="let c of this.category">
+
         <th>
-          <span class="spacer-right">{{c.name}}</span>
+          <span class="spacer-right">
+            <a class="clickable" (click)=getProductsFromComboCat(c.parentComboCategoryId)>
+              {{c.name}}
+            </a>
+          </span>
         </th>
         <th>
-          <span class="spacer-right">{{c.theId}}</span>
+          <span class="spacer-right">{{c.parentComboCategoryId}}</span>
         </th>
-        
+
       </tr>
-      <tr *ngFor="let p of this.product">
+      <tr *ngFor="let p of this.products">
         <td>
           <span class="spacer-right">{{p.name}}</span>
         </td>
@@ -58,8 +79,3 @@
     </table>
   </div>
 </div>
-
-<!-- <br/>pour demain je récupère {{c.theId}} pour récuperer ==>8 -->
-<!-- <br/>http://localhost:8080/categories/8/comboCategories
-<br/>soit "theId" : 5 pour ensuite récupérer mes produits
-<br/>soit http://localhost:8080/comboCategories/5/products -->

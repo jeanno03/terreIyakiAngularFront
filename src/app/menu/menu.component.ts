@@ -1,3 +1,5 @@
+import { CategoryModel } from './../../models/CategoryModel';
+import { Category } from './../../interfaces/category';
 import { ComboCategory } from '../../interfaces/combo-category';
 import { Combo } from '../../interfaces/combo';
 import { ComboService } from '../../services/combo.service';
@@ -5,23 +7,26 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { map } from 'rxjs-compat/operator/map';
 
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  comboes: any; //oui
-  combo: Combo; //oui
-   id: number;//oui
-  comboCat: any; //oui
-   comboCategory: any = null;//oui
-  products: any; //oui
+  comboes: any; 
+  combo: Combo; 
+   id: number;
+  comboCat: any; 
+   comboCategory: any = null;
+  products: any; 
   comboCategoryId: number;
-  productList: Array<any> = [];//oui
-  product: any = []; //oui
-  category: any; //oui
+  productList: Array<any> = [];
+  category: Array<CategoryModel>; 
   i: number;
+  categoryMother:any;
+  parentComboCategoryId:any;
+ categoryModel : CategoryModel;
 
   constructor(public comboService: ComboService) { }
 
@@ -51,35 +56,32 @@ export class MenuComponent implements OnInit {
       console.log(err);
     })
   }
-
+  
   selectCombo(id:number){
     console.log("id du combo : " + id);
     this.comboService.getComboCategoryByComboId(id).subscribe(data => {
       this.comboCat = data;
+      this.parentComboCategoryId=null;
       this.category = [];
-      this.product = [];
-      this.products = [];
-
       this.comboCat.forEach((element) => {
-
         this.comboService.getComboCategoryById(element.theId).subscribe(data => {
           this.comboCategory = data;
-          this.category.push(this.comboCategory.category);
-
-          this.comboService.getProductsByComboCategoryId(element.theId).subscribe(data => {
-            this.products = data;
-
-            for (this.i = 0; this.i < this.products.length; this.i++) {
-              this.product.push(this.products[this.i]);
-              console.log("produits de l arrayList : " + this.products[this.i].name);
-            }
-          })
+          this.parentComboCategoryId = element.theId;
+          this.categoryModel = new CategoryModel(this.comboCategory.category.name, this.comboCategory.category.theId, element.theId);
+          this.category.push(this.categoryModel);
         })
       })
     }, err => {
       console.log(err);
     })
-    
   }
 
+  getProductsFromComboCat(id:number){
+    console.log("id du cat : " + id);
+    this.comboService.getProductsByComboCategoryId(id).subscribe(data => {
+      this.products = data;
+    }, err => {
+      console.log(err);
+    })
+}
 }
