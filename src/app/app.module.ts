@@ -1,3 +1,4 @@
+import { MyTableService } from '../services/my-table.service';
 import { ComboService } from '../services/combo.service';
 import { ProductService } from '../services/product.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,18 +7,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { CarteComponent } from './carte/carte.component';
 import { HomeComponent } from './home/home.component';
-
 import { OrderModule } from 'ngx-order-pipe';
+import { MyTableComponent } from './my-table/my-table.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'carte', component: CarteComponent },
   { path: 'menu', component: MenuComponent },
+  { path:'myTable',component:MyTableComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     AppComponent,
     MenuComponent,
     CarteComponent,
-    HomeComponent
+    HomeComponent,
+    MyTableComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
   providers: [
     ProductService,
     ComboService,
+    MyTableService
   ],
   bootstrap: [AppComponent]
 })

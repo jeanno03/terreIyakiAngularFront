@@ -1,6 +1,4 @@
-import { CategoryModel } from './../../models/CategoryModel';
-import { Category } from './../../interfaces/category';
-import { ComboCategory } from '../../interfaces/combo-category';
+import { CategoryModel } from '../../models/categoryModel';
 import { Combo } from '../../interfaces/combo';
 import { ComboService } from '../../services/combo.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +11,7 @@ import { map } from 'rxjs-compat/operator/map';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
+
 export class MenuComponent implements OnInit {
   comboes: any; 
   combo: Combo; 
@@ -40,6 +39,11 @@ export class MenuComponent implements OnInit {
   }
 
   getComboByName(name: string) {
+//je reinitilise le choix des categories
+this.category = [];
+//je réinitiliase le choix des produits
+this.products=null;
+
     this.comboService.getComboByName(name).subscribe(data => {
       this.combo = data;
       this.id = this.combo.id;

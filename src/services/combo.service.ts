@@ -4,15 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
-import 'rxjs/add/operator/map'
-
 @Injectable({
   providedIn: 'root'
 })
 export class ComboService {
 
   public API = '//localhost:8080';
-  comboCategory : any;
 
   constructor(public http:HttpClient) { }
 
@@ -21,7 +18,6 @@ export class ComboService {
     map((result:any)=>{
       return result._embedded.comboes;
     })
-
   }
 
   getComboByName(name:string){
