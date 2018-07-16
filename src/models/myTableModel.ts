@@ -10,4 +10,28 @@ export class MyTableModel{
         this.theId = theId;
     }
 
+	public getTableNumber() {
+		return this.tableNumber;
+	}
+
+	public setTableNumber(tableNumber:number) {
+		this.tableNumber = tableNumber;
+    }
+    
+    public getStatut (){
+        return this.statut
+    }
+
+    public setStatut(statut:string){
+        this.statut = statut;
+    }
+
+    public getTheId(){
+        return this.theId;
+    }
+
+    public setTheId(theId:any){
+        this.theId=theId;
+    }
+
 }

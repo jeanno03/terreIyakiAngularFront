@@ -5,3 +5,21 @@
 {{myTableList.tableNumber}} - {{myTableList.statut}}
   </li>
 </ul>
+
+
+<br/>
+<ul>
+  <li *ngFor="let test of myTables | orderBy tableNumber">
+      {{test.tableNumber}}
+    <!--  - {{test.statut.name}} -->
+  </li>
+</ul>
+
+<br/>
+<ul>
+  <li *ngFor="let test of test | orderBy test">
+      {{test.name}}
+    <!--  - {{test.statut.name}} -->
+  </li>
+</ul>
+
