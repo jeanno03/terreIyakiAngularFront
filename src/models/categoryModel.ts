@@ -1,13 +1,16 @@
 export class CategoryModel{
 
     private name:string;
+    
     private theId:any;
     private parentComboCategoryId;
+    private parentComboCategoryNumber:number;
 
-    constructor(name: string, theId: any, parentComboCategoryId:any){
-        this.name= name;
+    constructor(name: string, theId: any, parentComboCategoryId:any, parentComboCategoryNumber : number){
+        this.name= name; 
         this.theId= theId;
         this.parentComboCategoryId = parentComboCategoryId;
+        this.parentComboCategoryNumber=parentComboCategoryNumber;
     }
 
     public getName() {
@@ -32,6 +35,14 @@ export class CategoryModel{
 
     public setParentComboCategoryId(value) {
         this.parentComboCategoryId = value;
+    }
+
+    public getComboCategoryNumber(){
+        return this.parentComboCategoryNumber;
+    }
+
+    public setComboCategoryNumber(value){
+        this.parentComboCategoryNumber=value;
     }
 
 }

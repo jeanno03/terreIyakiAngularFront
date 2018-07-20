@@ -42,7 +42,7 @@ export class MyTableComponent implements OnInit {
 
   getAllTableStatut(myTables: any) {
     this.myTableListProvisoire = [];
-       
+
 
     myTables.forEach(element => {
       //  en fonction de l'id de la table je récupère son statut
@@ -53,35 +53,35 @@ export class MyTableComponent implements OnInit {
           this.myTableListProvisoire.push(this.myTableModel);
 
 
-console.log("this.myTableListProvisoire.length in for each : " + this.myTableListProvisoire.length);
+          console.log("this.myTableListProvisoire.length in for each : " + this.myTableListProvisoire.length);
 
-//faire un tri croissant en fonction du numéro de table
-//1ere boucle si n<n+1 ne rien faire si n>n+1 alors on permut
-//2eme boucle tant que n>n+1 au moin une fois on recommande 1ere boucle
-//Cet algo ne correspond pas a celle annoncé et consomme de la ressource
-//Elle permet de réaliser le trie et reste provisoire
-  for(this.j=0;this.j<2;this.j++){
+          //faire un tri croissant en fonction du numéro de table
+          //1ere boucle si n<n+1 ne rien faire si n>n+1 alors on permut
+          //2eme boucle tant que n>n+1 au moin une fois on recommande 1ere boucle
+          //Cet algo ne correspond pas a celle annoncé et consomme de la ressource
+          //Elle permet de réaliser le trie et reste provisoire
+          for (this.j = 0; this.j < 2; this.j++) {
 
-for (this.i = 0; this.i < this.myTableListProvisoire.length-1; this.i++) {
+            for (this.i = 0; this.i < this.myTableListProvisoire.length - 1; this.i++) {
 
-    if (this.myTableListProvisoire[this.i].tableNumber > this.myTableListProvisoire[(this.i + 1)].tableNumber) {
-  
-      this.myTableModelProvisoire = this.myTableListProvisoire[this.i];
-      this.myTableListProvisoire[this.i] = this.myTableListProvisoire[(this.i + 1)];
-      this.myTableListProvisoire[(this.i + 1)] = this.myTableModelProvisoire;
-    }
-  
+              if (this.myTableListProvisoire[this.i].tableNumber > this.myTableListProvisoire[(this.i + 1)].tableNumber) {
+
+                this.myTableModelProvisoire = this.myTableListProvisoire[this.i];
+                this.myTableListProvisoire[this.i] = this.myTableListProvisoire[(this.i + 1)];
+                this.myTableListProvisoire[(this.i + 1)] = this.myTableModelProvisoire;
+              }
+
+            }
+          }
+        }, err => {
+          console.log(err);
+        })
+
+    }, err => {
+      console.log(err);
+    })
+    console.log("this.myTableListProvisoire.length : " + this.myTableListProvisoire.length);
+    return this.myTableListProvisoire;
   }
-  }
-}, err => {
-  console.log(err);
-})
-
-}, err => {
-console.log(err);
-})
-console.log("this.myTableListProvisoire.length : " + this.myTableListProvisoire.length);
-return this.myTableListProvisoire;
-}
 
 }
