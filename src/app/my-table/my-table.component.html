@@ -1,25 +1,12 @@
-<button type="button" class="btn btn-primary">Primary <span class="badge">7</span></button>
 
-<ul>
-  <li *ngFor="let myTableList of myTableList | orderBy tableNumber">
-{{myTableList.tableNumber}} - {{myTableList.statut}}
-  </li>
-</ul>
+  <button type="button" class="btn btn-primary spacer-right-top" *ngFor="let myTableList of myTableList | orderBy tableNumber">
+Table n°{{myTableList.tableNumber}} 
+      <span class="badge"> 
+        {{myTableList.statut}}
+      </span>
+
+  </button>
 
 
-<br/>
-<ul>
-  <li *ngFor="let test of myTables | orderBy tableNumber">
-      {{test.tableNumber}}
-    <!--  - {{test.statut.name}} -->
-  </li>
-</ul>
 
-<br/>
-<ul>
-  <li *ngFor="let test of test | orderBy test">
-      {{test.name}}
-    <!--  - {{test.statut.name}} -->
-  </li>
-</ul>
 
