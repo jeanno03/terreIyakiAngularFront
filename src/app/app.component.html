@@ -5,7 +5,11 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a routerLink="/home" >Profil</a></li>
+        <li><a routerLink="/auth" >Connexion</a></li>
         <li><a routerLink="/home" >Déconnexion</a></li>
+        <li *ngIf="user">
+          Bonjour {{user.email}}
+        </li>
       </ul>
       </div>
   </nav>
@@ -13,11 +17,11 @@
 
 
   <div class="container spacer">
-    <button routerLink="/carte" class="btn btn-info spacer-right2">Carte</button>    
-    <button routerLink="/menu" class="btn btn-info spacer-right2">Menus</button>
-    <button routerLink="/home" class="btn btn-info spacer-right2">Commandes</button>
-    <button routerLink="/myTable" class="btn btn-info spacer-right2">Tables</button>
-    <button routerLink="/test" class="btn btn-alert spacer-right2">Test</button>
+    <button routerLink="/carte" routerLinkActive="active" class="btn btn-info spacer-right2">Carte</button>    
+    <button routerLink="/menu" routerLinkActive="active" class="btn btn-info spacer-right2">Menus</button>
+    <button routerLink="/home" routerLinkActive="active" class="btn btn-info spacer-right2">Commandes</button>
+    <button routerLink="/myTable" routerLinkActive="active" class="btn btn-info spacer-right2">Tables</button>
+    <button routerLink="/test" routerLinkActive="active" class="btn btn-alert spacer-right2">Test</button>
     </div>
 
 

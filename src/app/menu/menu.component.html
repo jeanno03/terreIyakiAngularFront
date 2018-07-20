@@ -2,7 +2,7 @@
   <div class="panel panel-infos">
     <div class="panel-body">
       <ul class="nav nav-pills">
-        <li *ngFor="let c of comboes">
+        <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of comboes">
           <a class="clickable" class="active" (click)=getComboByName(c.name)>{{c.name}}</a>
         </li>
       </ul>

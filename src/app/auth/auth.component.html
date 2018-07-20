@@ -1,0 +1,10 @@
+<br/>
+<p>
+  auth works!
+</p>
+<br/>
+<button (click)="loginWithGoogle()">Login with Google</button>
+
+<p *ngIf="user">
+  Bonjour {{user.email}}
+</p>

@@ -1,4 +1,4 @@
-import { MyTableModel } from './../../models/myTableModel';
+import { MyTableModel } from '../../models/myTableModel';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

@@ -53,9 +53,6 @@ export class MyTableComponent implements OnInit {
           this.myTableModel = new MyTableModel(element.tableNumber, this.statut.name, element.theId);
           this.myTableListProvisoire.push(this.myTableModel);
 
-
-//          console.log("this.myTableListProvisoire.length in for each : " + this.myTableListProvisoire.length);
-
           //faire un tri croissant en fonction du numéro de table
           //1ere boucle si n<n+1 ne rien faire si n>n+1 alors on permut
           //2eme boucle tant que n>n+1 au moin une fois on recommande 1ere boucle

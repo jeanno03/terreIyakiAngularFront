@@ -30,6 +30,8 @@ export class MenuComponent implements OnInit {
   categoryModelProvisoire: CategoryModel;
   productMap: Map<number, Array<Product>>;
   productsMap: any;
+  currentPage:string;
+
 
   constructor(public comboService: ComboService) { }
 
@@ -47,6 +49,8 @@ export class MenuComponent implements OnInit {
     this.category = [];
     //je réinitiliase le choix des produits
     this.productsMap = null;
+
+    this.currentPage=name;
 
     this.comboService.getComboByName(name).subscribe(data => {
       this.combo = data;

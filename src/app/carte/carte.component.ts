@@ -53,4 +53,8 @@ export class CarteComponent implements OnInit {
 
 }
 
+myFunction(){
+  console.log(" commande !!! ");
+} 
+
 }
