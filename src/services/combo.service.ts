@@ -31,16 +31,8 @@ export class ComboService {
     })
   }
 
-  getProductsByComboCategoryId(id:number){
-    return this.http.get(this.API+'/comboCategories/'+id+'/products').
-    map((result:any)=>{
-      return result._embedded.products;
-    })
-  }
-
   getComboCategoryById(id:number){
     return this.http.get<any[]>(this.API+'/getComboCategoryById?id='+id);
-
   }
 
   getComboCategoriesByCategory(id:number){

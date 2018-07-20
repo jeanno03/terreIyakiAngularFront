@@ -1,7 +1,6 @@
 export class CategoryModel{
 
     private name:string;
-    
     private theId:any;
     private parentComboCategoryId;
     private parentComboCategoryNumber:number;

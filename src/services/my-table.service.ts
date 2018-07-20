@@ -23,4 +23,10 @@ getAllTables() :Observable<any[]>{
 getTableStatut(id:number){
 return this.http.get(this.API + '/myTables/' + id + '/statut');
 }
+
+//cette méthode servira plus tard pour les commandes des tables
+getMyTableById(id:number){
+  return this.http.get<any[]>(this.API+'/getMyTableById?id='+id);
+}
+
 }

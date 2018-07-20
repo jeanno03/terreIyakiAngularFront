@@ -49,9 +49,6 @@ export class CarteComponent implements OnInit {
     this.productService.findProductById(id).
       subscribe(data => {
         this.products = data;
-               this.products.forEach((element) => {
-                 console.log(element.vatPrice);
-      })
   })
 
 }

@@ -16,6 +16,7 @@ import 'rxjs/add/operator/mergeMap';
 export class MyTableComponent implements OnInit {
 
   myTables: any;
+  //myTable:any;
   statut: any;
   myTableModel: MyTableModel;
   myTableList: Array<MyTableModel>;
@@ -32,7 +33,7 @@ export class MyTableComponent implements OnInit {
       .subscribe(data => {
         this.myTables = data;
         this.myTableList = this.getAllTableStatut(this.myTables);
-        console.log("this.myTableList.length : " + this.myTableList.length);
+  //      console.log("this.myTableList.length : " + this.myTableList.length);
       }, err => {
         console.log(err);
       })
@@ -53,7 +54,7 @@ export class MyTableComponent implements OnInit {
           this.myTableListProvisoire.push(this.myTableModel);
 
 
-          console.log("this.myTableListProvisoire.length in for each : " + this.myTableListProvisoire.length);
+//          console.log("this.myTableListProvisoire.length in for each : " + this.myTableListProvisoire.length);
 
           //faire un tri croissant en fonction du numéro de table
           //1ere boucle si n<n+1 ne rien faire si n>n+1 alors on permut
@@ -80,7 +81,7 @@ export class MyTableComponent implements OnInit {
     }, err => {
       console.log(err);
     })
-    console.log("this.myTableListProvisoire.length : " + this.myTableListProvisoire.length);
+
     return this.myTableListProvisoire;
   }
 

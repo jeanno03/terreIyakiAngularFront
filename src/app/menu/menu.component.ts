@@ -28,6 +28,8 @@ export class MenuComponent implements OnInit {
   parentComboCategoryId: any;
   categoryModel: CategoryModel;
   categoryModelProvisoire: CategoryModel;
+  productMap: Map<number, Array<Product>>;
+  productsMap: any;
 
   constructor(public comboService: ComboService) { }
 
@@ -44,7 +46,7 @@ export class MenuComponent implements OnInit {
     //je reinitilise le choix des categories
     this.category = [];
     //je réinitiliase le choix des produits
-    this.products = null;
+    this.productsMap = null;
 
     this.comboService.getComboByName(name).subscribe(data => {
       this.combo = data;
@@ -55,20 +57,15 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  getProductsByComboCategoryId(id: number) {
-    this.comboService.getProductsByComboCategoryId(id).subscribe(data => {
-      this.productList = data;
-    }, err => {
-      console.log(err);
-    })
-  }
-
   selectCombo(id: number) {
-    console.log("id du combo : " + id);
+
     this.comboService.getComboCategoryByComboId(id).subscribe(data => {
       this.comboCat = data;
       this.parentComboCategoryId = null;
       this.category = [];
+      //Cette hashMap va servir pour afficher les produits (values)
+      //en fonction du parentComboCategoryId (keys)
+      this.productMap = new Map();
       this.comboCat.forEach((element) => {
         this.comboService.getComboCategoryById(element.theId).subscribe(data => {
           this.comboCategory = data;
@@ -80,9 +77,9 @@ export class MenuComponent implements OnInit {
             this.comboCategory.number);
           this.category.push(this.categoryModel);
 
-//algo de tri provisoire
-//le mieux c'est d attendre la creation définitive avant de lancer la méthode de trie 
-// realisé en java
+          //algo de tri provisoire
+          //le mieux c'est d attendre la creation définitive avant de lancer la méthode de trie 
+          // realisé en java
           for (this.j = 0; this.j < 2; this.j++) {
 
             for (this.i = 0; this.i < this.category.length - 1; this.i++) {
@@ -97,6 +94,8 @@ export class MenuComponent implements OnInit {
             }
           }
 
+          this.productMap.set(this.parentComboCategoryId, this.comboCategory.products);
+
         })
       })
     }, err => {
@@ -105,11 +104,10 @@ export class MenuComponent implements OnInit {
   }
 
   getProductsFromComboCat(id: number) {
-    console.log("id du cat : " + id);
-    this.comboService.getProductsByComboCategoryId(id).subscribe(data => {
-      this.products = data;
-    }, err => {
-      console.log(err);
-    })
+    this.productsMap = this.getProductsFromMap(id);
+  }
+
+  getProductsFromMap(id: number) {
+    return Array.from(this.productMap.get(id));
   }
 }
