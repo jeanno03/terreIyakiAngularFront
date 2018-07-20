@@ -13,12 +13,14 @@ import { CarteComponent } from './carte/carte.component';
 import { HomeComponent } from './home/home.component';
 import { OrderModule } from 'ngx-order-pipe';
 import { MyTableComponent } from './my-table/my-table.component';
+import { TestComponent } from './test/test.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'carte', component: CarteComponent },
   { path: 'menu', component: MenuComponent },
   { path:'myTable',component:MyTableComponent},
+  { path:'test',component:TestComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -28,7 +30,8 @@ const appRoutes: Routes = [
     MenuComponent,
     CarteComponent,
     HomeComponent,
-    MyTableComponent
+    MyTableComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
