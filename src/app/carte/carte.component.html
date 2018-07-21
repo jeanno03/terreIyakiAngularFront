@@ -25,7 +25,13 @@
             <th><span class="spacer-right">photo</span></th>       
           </tr>
           <tr *ngFor="let p of products">
-            <td><span class="spacer-right">{{p.name}}</span></td>
+            <td>
+              <span class="spacer-right">
+              <a class="clickable" (click)=selectProduct(p.theId)>
+                {{p.name}}
+              </a>
+            </span>
+          </td>
             <td><span class="spacer-right">{{p.vatPrice | currency:'EUR':true:'1.1-1'}}</span></td>
             <td><span class="spacer-right"><img class="image" src={{p.picture}} /></span></td>
           </tr>
@@ -34,5 +40,6 @@
       </div>
     </div>
   </div>
-
-
+<span *ngIf="product">
+{{product.name}}
+</span>

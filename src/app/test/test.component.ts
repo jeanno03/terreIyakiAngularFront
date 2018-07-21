@@ -22,6 +22,11 @@ export class TestComponent implements OnInit {
   i: number;
   j: number;
 
+  hashExemple: Map<number,string>;
+
+  retourHash:string;
+  
+
   // tableNumber:number;
   // statut:string;
   // theId:any;
@@ -41,11 +46,10 @@ export class TestComponent implements OnInit {
       this.myExemple03,
       this.myExemple04, )
 
-    console.log("this.MyExempleArray02.length : " + this.MyExempleArray02.length + " - It works!");
-
-
-    this.myTableModelArray03 = this.createMyTableModelArray01(this.MyExempleArray02);
-    console.log("this.myTableModelArray03.length : " + this.myTableModelArray03.length + " - It works!");
+     this.hashExemple= new Map();
+     this.hashExemple.set(1,"un");
+     this.hashExemple.set(2,"deux");
+     this.hashExemple.set(3,"trois");
 
   }
 
@@ -90,6 +94,12 @@ export class TestComponent implements OnInit {
     this.myTableModelArray03 = this.createMyTableModelArray01(this.MyExempleArray02);
     console.log("this.myTableModelArray03.length : " + this.myTableModelArray03.length + " - It works!");
 
+  }
+
+  getHashValue(id:number){
+this.retourHash=this.hashExemple.get(id);
+console.log(" this.retourHash : "+ this.retourHash);
+return this.retourHash;
   }
 
 }

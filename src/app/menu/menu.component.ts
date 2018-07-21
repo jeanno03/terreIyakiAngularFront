@@ -28,7 +28,9 @@ export class MenuComponent implements OnInit {
   parentComboCategoryId: any;
   categoryModel: CategoryModel;
   categoryModelProvisoire: CategoryModel;
+  //HashMap qui va contenir les produits qu'on pourra reselectionner
   productMap: Map<number, Array<Product>>;
+  //conversion de la HashMap en ArrayList pour l'affichage
   productsMap: any;
   currentPage:string;
 
@@ -111,6 +113,7 @@ export class MenuComponent implements OnInit {
     this.productsMap = this.getProductsFromMap(id);
   }
 
+  //return la list de produit en fonction de l id parent
   getProductsFromMap(id: number) {
     return Array.from(this.productMap.get(id));
   }

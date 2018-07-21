@@ -58,7 +58,7 @@ export class MyTableComponent implements OnInit {
           //2eme boucle tant que n>n+1 au moin une fois on recommande 1ere boucle
           //Cet algo ne correspond pas a celle annoncé et consomme de la ressource
           //Elle permet de réaliser le trie et reste provisoire
-          for (this.j = 0; this.j < 2; this.j++) {
+          for (this.j = 0; this.j < this.myTableListProvisoire.length; this.j++) {
 
             for (this.i = 0; this.i < this.myTableListProvisoire.length - 1; this.i++) {
 
