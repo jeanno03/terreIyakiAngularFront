@@ -5,12 +5,14 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a routerLink="/home" >Profil</a></li>
-        <li><a routerLink="/auth" >Connexion</a></li>
-        <li><a routerLink="/home" >Déconnexion</a></li>
-        <li *ngIf="user">
-          Bonjour {{user.email}}
-        </li>
+
+        <li *ngIf="!user"><a class="clickable" class="active" (click)=loginWithGoogle() >Connexion</a></li>
+
+
+        <li *ngIf="user"><a class="clickable" class="active" (click)=logoutWithGoogle() >Déconnexion</a></li>
+
       </ul>
+      <span *ngIf="user">Connect as <br/>{{user.email}}</span>
       </div>
   </nav>
   

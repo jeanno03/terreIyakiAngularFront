@@ -17,14 +17,21 @@ export class AuthComponent implements OnInit {
     public db: AngularFireDatabase) { }
 
   ngOnInit() {
-    this.auth.getAuthState().subscribe(
-      (user) => this.user = user);
-      this.topics = this.db.list('/topics');
+
   }
 
   loginWithGoogle() {
+    this.auth.getAuthState().subscribe(
+      (user) => this.user = user);
+      this.topics = this.db.list('/topics');
+      
     this.auth.loginWithGoogle();
     console.log("this.user : "+this.user.email);
+  }
+
+  logoutWithGoogle(){
+    window.alert(this.user.email + " a été déconnecté")
+    this.auth.logoutWithGoogle();
   }
 
 }

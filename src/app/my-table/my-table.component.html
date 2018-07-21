@@ -1,12 +1,12 @@
-
-  <button type="button" class="btn btn-primary spacer-right-top" *ngFor="let myTableList of myTableList | orderBy tableNumber">
-Table n°{{myTableList.tableNumber}} 
-      <span class="badge"> 
-        {{myTableList.statut}}
-      </span>
-
-  </button>
-
-
-
-
+<div class="container spacer">
+  <div class="panel panel-info">
+    <div class="panel-body">
+      <button type="button" class="btn btn-primary spacer-right-top" *ngFor="let myTableList of myTableList | orderBy tableNumber">
+        Table n°{{myTableList.tableNumber}}
+        <span class="badge">
+          {{myTableList.statut}}
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -31,5 +31,8 @@ export class AuthService {
       new firebase.auth.GoogleAuthProvider());
   }
 
+  logoutWithGoogle() {
+    return this.afAuth.auth.signOut();
+  }
 
 }
