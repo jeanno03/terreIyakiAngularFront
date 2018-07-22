@@ -1,4 +1,4 @@
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { environment } from '../environments/environment.prod';
 import { MyTableService } from '../services/my-table.service';
 import { ComboService } from '../services/combo.service';
@@ -17,21 +17,20 @@ import { OrderModule } from 'ngx-order-pipe';
 import { MyTableComponent } from './my-table/my-table.component';
 import { TestComponent } from './test/test.component';
 import { AngularFireModule } from 'angularfire2';
-//import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AuthComponent } from './auth/auth.component';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ProfilComponent } from './profil/profil.component';
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'profil/:email', component: ProfilComponent },
   { path: 'carte', component: CarteComponent },
   { path: 'menu', component: MenuComponent },
   { path:'myTable',component:MyTableComponent},
   { path:'test',component:TestComponent},
-  { path:'auth',component:AuthComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -43,7 +42,7 @@ const appRoutes: Routes = [
     HomeComponent,
     MyTableComponent,
     TestComponent,
-    AuthComponent
+    ProfilComponent
   ],
   imports: [
     BrowserModule,

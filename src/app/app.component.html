@@ -4,7 +4,8 @@
         <a class="navbar-brand" routerLink="/home" >TerreIyaki</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a routerLink="/home" >Profil</a></li>
+        <li *ngIf="user"><a (click)="emailOnProfil(user.email)" >Profil</a></li>
+        
 
         <li *ngIf="!user"><a class="clickable" class="active" (click)=loginWithGoogle() >Connexion</a></li>
 

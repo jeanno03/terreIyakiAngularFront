@@ -1,8 +1,8 @@
 export class MyTableModel{
 
-    tableNumber:number;
-    statut:string;
-    theId:any;
+    private tableNumber:number;
+    private statut:string;
+    private theId:any;
 
     constructor(tableNumber:number, statut:string, theId:any){
         this.tableNumber = tableNumber;

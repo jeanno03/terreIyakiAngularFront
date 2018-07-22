@@ -16,7 +16,6 @@ import 'rxjs/add/operator/mergeMap';
 export class MyTableComponent implements OnInit {
 
   myTables: any;
-  //myTable:any;
   statut: any;
   myTableModel: MyTableModel;
   myTableList: Array<MyTableModel>;
@@ -33,7 +32,6 @@ export class MyTableComponent implements OnInit {
       .subscribe(data => {
         this.myTables = data;
         this.myTableList = this.getAllTableStatut(this.myTables);
-  //      console.log("this.myTableList.length : " + this.myTableList.length);
       }, err => {
         console.log(err);
       })
@@ -62,7 +60,7 @@ export class MyTableComponent implements OnInit {
 
             for (this.i = 0; this.i < this.myTableListProvisoire.length - 1; this.i++) {
 
-              if (this.myTableListProvisoire[this.i].tableNumber > this.myTableListProvisoire[(this.i + 1)].tableNumber) {
+              if (this.myTableListProvisoire[this.i].getTableNumber() > this.myTableListProvisoire[(this.i + 1)].getTableNumber()) {
 
                 this.myTableModelProvisoire = this.myTableListProvisoire[this.i];
                 this.myTableListProvisoire[this.i] = this.myTableListProvisoire[(this.i + 1)];

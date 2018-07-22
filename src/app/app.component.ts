@@ -1,7 +1,8 @@
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Component } from '@angular/core';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class AppComponent {
   topics: FirebaseListObservable<any[]>;
 
   constructor(private auth:AuthService,
-    public db: AngularFireDatabase) { }
+    public db: AngularFireDatabase,
+    public router:Router) { }
 
   loginWithGoogle() {
     this.auth.getAuthState().subscribe(
@@ -29,5 +31,11 @@ export class AppComponent {
     window.alert(this.user.email + " a été déconnecté")
     this.auth.logoutWithGoogle();
   }
+
+emailOnProfil(email:string){
+  console.log(" email : "+ email);
+  this.router.navigate(['profil',email]);
+}
+
 }
 
