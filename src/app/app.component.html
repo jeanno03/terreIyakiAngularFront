@@ -13,13 +13,16 @@
         <li *ngIf="user"><a class="clickable" class="active" (click)=logoutWithGoogle() >Déconnexion</a></li>
 
       </ul>
-      <span *ngIf="user">Connect as <br/>{{user.email}}</span>
+      <span *ngIf="user">
+        <strong>Votre identifiant gmail</strong>
+        <br/>{{user.email}}
+      </span>
       </div>
   </nav>
   
 
 
-  <div class="container spacer">
+  <div class="container spacer" *ngIf="user">
     <button routerLink="/carte" routerLinkActive="active" class="btn btn-info spacer-right2">Carte</button>    
     <button routerLink="/menu" routerLinkActive="active" class="btn btn-info spacer-right2">Menus</button>
     <button routerLink="/home" routerLinkActive="active" class="btn btn-info spacer-right2">Commandes</button>

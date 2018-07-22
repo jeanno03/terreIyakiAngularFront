@@ -15,27 +15,27 @@ export class AppComponent {
   user = null;
   topics: FirebaseListObservable<any[]>;
 
-  constructor(private auth:AuthService,
+  constructor(private auth: AuthService,
     public db: AngularFireDatabase,
-    public router:Router) { }
+    public router: Router) { }
 
   loginWithGoogle() {
     this.auth.getAuthState().subscribe(
       (user) => this.user = user);
-      this.topics = this.db.list('/topics');
-      
+    this.topics = this.db.list('/topics');
+
     this.auth.loginWithGoogle();
   }
 
-  logoutWithGoogle(){
+  logoutWithGoogle() {
     window.alert(this.user.email + " a été déconnecté")
     this.auth.logoutWithGoogle();
+    this.router.navigateByUrl('/home');
   }
 
-emailOnProfil(email:string){
-  console.log(" email : "+ email);
-  this.router.navigate(['profil',email]);
-}
+  emailOnProfil(email: string) {
+    this.router.navigate(['profil', email]);
+  }
 
 }
 
