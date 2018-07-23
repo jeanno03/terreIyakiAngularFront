@@ -48,7 +48,7 @@
             </li>
           </ul>
 
-          <div class="panel panel-infos">
+          <div class="panel panel-infos" *ngIf="!userFromAp">
             <div class="panel-heading">Enregistrez-vous</div>
             <div class="panel-body">
               <form #f="ngForm" (ngSubmit)="creerUserFromAp(f.value)">

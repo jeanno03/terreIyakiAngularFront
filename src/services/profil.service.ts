@@ -13,4 +13,8 @@ export class ProfilService {
   getUserByEmail(email:string){
     return this.http.get<any>(this.API+'/getUserByEmail?email='+email);
   }
+
+  tryAndSaveMyUser(email :string, login :string, lastName :string, firstName :string){
+    return this.http.get<any>(this.API+'/tryAndSaveMyUser?email='+email+'&login='+login+'&lastName='+lastName+'&firstName='+firstName);
+  }
 }

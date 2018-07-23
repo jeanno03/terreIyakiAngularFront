@@ -6,39 +6,43 @@ export class MyUserModel{
      firstName:string="";
     
 
-//     constructor(email:string, login:string, lastName:string, firstName:string){
-//         this.email=email;
-//         this.login=login;
-//         this.lastName=lastName;
-//         this.firstName=firstName;
-//     }
+    constructor(email:string, login:string, lastName:string, firstName:string){
+        this.email=email;
+        this.login=login;
+        this.lastName=lastName;
+        this.firstName=firstName;
+    }
 
-// public getEmail(){
-//     return this.email;
-// }
+public getEmail(){
+    return this.email;
+}
 
-// public getLogin(){
-//     return this.login;
-// }
+public setEmail(value){
+    this.email=value;
+}
 
-// public setLogin(value){
-//     this.login=value;
-// }
+public getLogin(){
+    return this.login;
+}
 
-// public getLastName(){
-//     return this.lastName;
-// }
+public setLogin(value){
+    this.login=value;
+}
 
-// public setLastName(value){
-//     this.lastName=value;
-// }
+public getLastName(){
+    return this.lastName;
+}
 
-// public getFirstName(){
-//     return this.firstName;
-// }
+public setLastName(value){
+    this.lastName=value;
+}
 
-// public setFirstName(value){
-//     this.firstName=value;
-// }
+public getFirstName(){
+    return this.firstName;
+}
+
+public setFirstName(value){
+    this.firstName=value;
+}
 
 }

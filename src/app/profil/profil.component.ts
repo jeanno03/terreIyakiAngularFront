@@ -13,7 +13,8 @@ export class ProfilComponent implements OnInit {
 
   email: string;
   userFromAp: any;
-  myUserModel: MyUserModel = new MyUserModel();
+  myUserModel: MyUserModel = new MyUserModel(null, null, null, null);
+  newMyUserModel : MyUserModel;
 
 
   constructor(public activatedRoute: ActivatedRoute,
@@ -40,9 +41,16 @@ export class ProfilComponent implements OnInit {
 
 
   creerUserFromAp() {
-    console.log("myUserModel.login : " + this.myUserModel.login);
-    console.log("this.email  : " + this.email);
-  }
+    this.myUserModel.setEmail(this.email);
 
-
+  this.profilService.tryAndSaveMyUser(this.myUserModel.getEmail(),
+  this.myUserModel.getLogin(),
+  this.myUserModel.getFirstName(),
+  this.myUserModel.getLastName()
+).subscribe(data=>{
+  this.newMyUserModel=data;
+}, err => {
+  console.log(err);
+})
+}
 }
