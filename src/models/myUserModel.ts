@@ -1,9 +1,9 @@
 export class MyUserModel{
 
-     email:any=null;
-     login:string="";
-     lastName:string="";
-     firstName:string="";
+     private email:any=null;
+     private login:string="";
+     private lastName:string="";
+     private firstName:string="";
     
 
     constructor(email:string, login:string, lastName:string, firstName:string){
