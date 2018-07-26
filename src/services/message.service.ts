@@ -24,5 +24,7 @@ export class MessageService {
     return this.http.get<any[]>(this.API + '/getMessageCreateUser?email=' + email + '&login=' + login + '&lastName=' + lastName + '&firstName=' + firstName);
   }
 
-
+  getMessageEditUser(email: string, login: string, lastName: string, firstName: string) {
+    return this.http.get<any[]>(this.API + '/getMessageEditUser?email=' + email + '&login=' + login + '&lastName=' + lastName + '&firstName=' + firstName);
+  }
 }
