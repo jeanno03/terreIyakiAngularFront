@@ -1,4 +1,4 @@
-import { MessageService } from './../../services/message.service';
+import { MessageService } from '../../services/message.service';
 import { MyUserModel } from '../../models/myUserModel';
 import { ProfilService } from '../../services/profil.service';
 import { Component, OnInit } from '@angular/core';

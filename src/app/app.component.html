@@ -9,6 +9,7 @@
 
         <li *ngIf="!user"><a class="clickable" class="active" (click)=loginWithGoogle() >Connexion</a></li>
 
+        <li *ngIf="user"><a class="clickable" routerLink="/commandeAction" >Commander</a></li>
 
         <li *ngIf="user"><a class="clickable" class="active" (click)=logoutWithGoogle() >Déconnexion</a></li>
 
@@ -25,7 +26,6 @@
   <div class="container spacer" *ngIf="user">
     <button routerLink="/carte" routerLinkActive="active" class="btn btn-info spacer-right2">Carte</button>    
     <button routerLink="/menu" routerLinkActive="active" class="btn btn-info spacer-right2">Menus</button>
-    <button routerLink="/home" routerLinkActive="active" class="btn btn-info spacer-right2">Commandes</button>
     <button routerLink="/myTable" routerLinkActive="active" class="btn btn-info spacer-right2">Tables</button>
     <button routerLink="/test" routerLinkActive="active" class="btn btn-alert spacer-right2">Test</button>
     </div>

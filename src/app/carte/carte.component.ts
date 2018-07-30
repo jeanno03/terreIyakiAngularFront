@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Product } from '../../interfaces/product';
 
 import { ProductService } from '../../services/product.service';
@@ -20,16 +21,18 @@ export class CarteComponent implements OnInit {
 
   categories: Array<any>;
   products: Array<Product>;
-  productsReturn : Array<Product>;
-  category: Category=null;
+  productsReturn: Array<Product>;
+  category: Category = null;
   products2: any;
-  id:number=0;
-  currentPage:string;
- 
+  id: number = 0;
+  currentPage: string;
+
   product: Product;
 
+  testProduct: Product;
 
-  constructor(public productService: ProductService) { }
+
+  constructor(public productService: ProductService, public router: Router) { }
 
   ngOnInit() {
     this.productService.findAllCategories()
@@ -40,19 +43,19 @@ export class CarteComponent implements OnInit {
       })
   }
 
-  getPlatsByCategory(name: string){
-    this.currentPage=name;
-  this.getCategoryByName(name);
+  getPlatsByCategory(name: string) {
+    this.currentPage = name;
+    this.getCategoryByName(name);
   }
 
-  getCategoryByName(name: string){
-//je réinitilialise le produit a chaque clik
-this.product=null;
+  getCategoryByName(name: string) {
+    //je réinitilialise le produit a chaque clik
+    this.product = null;
 
     this.productService.getCategoryByName(name).subscribe(data => {
-    this.category=data;
-    this.id= this.category[0].id;
-    this.productsReturn = this.getProductsById(this.id);
+      this.category = data;
+      this.id = this.category[0].id;
+      this.productsReturn = this.getProductsById(this.id);
 
     }, err => {
       console.log(err);
@@ -64,23 +67,31 @@ this.product=null;
     this.productService.findProductById(id)
       .subscribe(data => {
         this.products = data;
-  })
-return this.products;
-}
+      })
+    return this.products;
+  }
 
 
-selectProduct(theId:number){
-this.product=null;
-  this.products.forEach(element=>{
-    if(element.theId==theId){
-      this.product=element;
-    }
-  })
+  selectProduct(theId: number) {
+    this.product = null;
+    this.products.forEach(element => {
+      if (element.theId == theId) {
+        this.product = element;
+        //test j essai @input
+        this.testProduct= this.product;
+      }
+    })
 
-return this.product;
-  
-}
+    return this.product;
 
+  }
 
+  productTheIdOnCommande(theId:number){
+    this.router.navigate(['commande',theId]);
+  }
+
+  test() {
+
+  }
 
 }

@@ -34,16 +34,60 @@
 .nav-pills>li>a {
     color: green;
     background-color: white;
-    }
+}
     
-    .nav-pills > li > a:hover, .x-nav-tabs > .active > a, .x-nav-tabs > .active > a:hover {
+.nav-pills > li > a:hover, .x-nav-tabs > .active > a, .x-nav-tabs > .active > a:hover {
     color: white;
     background: green;
-    }
+}
 
-    .image {
-        display:block;
-        width:100px;
-        height:100px;
-        background-position:50% 50%;
-        }
+.image {
+    width:100px;
+    height:100px;
+    background-position:50% 50%;
+}
+
+.divParent{
+    box-sizing: content-box;
+    width: 75%;
+}
+
+.divEnfantPhoto{
+    margin-right: 10px;
+} 
+
+.divEnfantDescription{
+    max-width: 50%;
+    min-width: 50%;
+    margin-right: 10px;
+}      
+
+.row{
+    width: 65%;
+}
+
+.col-sm-2{
+    margin-right: 10px;
+
+
+.col-sm-8{
+    min-width: 50%;
+    margin-right: 10px;
+}
+
+.panierButton{
+    
+    background-color: #9bb ;
+    margin:auto;
+}
+
+.panierLetter{
+    color:red; 
+    margin:auto;
+}
+
+#panierLetter{
+    color:red; 
+    margin:auto;
+}
+}

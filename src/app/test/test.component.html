@@ -12,3 +12,94 @@
 <p>
     <a class="clickable" (click)=getHashValue(3)>test hash 3</a>
 </p>
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <table class="table-striped">
+            <tr>
+                <td>
+                    <div class="col-lg-2">
+                        imge
+                    </div>
+                </td>
+                <td>
+                    <div class="col-lg-8">
+                        produits
+                    </div>
+                </td>
+                <td>
+                    <div class="col-lg-2">
+                        prix
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-lg-2">
+                        <img class="image" src="assets/images/sushiSaumonx2.jpeg" />
+                    </div>
+                </td>
+                <td>
+                    <div class="col-lg-8">
+                        Du bon saumon
+                    </div>
+                </td>
+
+                <td>
+                    <div class="col-lg-2">
+                        <div class="panierButton">
+                            <p class="panierLetter">
+                                15.99€
+                            </p>
+                            <p>
+                                <button class="btn btn-info spacer-right2">Acheter</button>
+                            </p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="col-lg-2">
+                        <img class="image" src="assets/images/sushiSaumonx2.jpeg" />
+                    </div>
+                </td>
+                <td>
+                    <div class="col-lg-8">
+                        Sushi saumon x2 Plat japonais composé d'un riz vinaigré appelé shari combiné avec du saumon cru de l'Atlantique
+                    </div>
+                </td>
+
+                <td>
+                    <div class="col-lg-2">
+                        <div class="panierButton">
+                            <p id="panierLetter">
+                              <span color="red" >15.99€</span> 
+                            </p>
+                            <p>
+                                <button class="btn btn-info spacer-right2">Acheter</button>
+                            </p>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div>Test de la hashmap</div>
+<div>
+    <button class="btn btn-info spacer-right2" (click)="testHashMap('un')">un</button>
+</div>
+<div>
+    <button class="btn btn-info spacer-right2" (click)="testHashMap('deux')">deux</button>
+</div>
+<div>
+    <button class="btn btn-info spacer-right2" (click)="testHashMap('trois')">trois</button>
+</div>

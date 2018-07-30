@@ -22,11 +22,14 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ProfilComponent } from './profil/profil.component';
+import { TestService } from '../services/test.service';
+import { CommandeActionComponent } from './commande-action/commande-action.component';
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profil/:email', component: ProfilComponent },
+  { path: 'commandeAction', component: CommandeActionComponent },
   { path: 'carte', component: CarteComponent },
   { path: 'menu', component: MenuComponent },
   { path:'myTable',component:MyTableComponent},
@@ -42,7 +45,8 @@ const appRoutes: Routes = [
     HomeComponent,
     MyTableComponent,
     TestComponent,
-    ProfilComponent
+    ProfilComponent,
+    CommandeActionComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,8 @@ const appRoutes: Routes = [
     ProductService,
     ComboService,
     MyTableService,
-    AuthService
+    AuthService,
+    TestService
   ],
   bootstrap: [AppComponent]
 })

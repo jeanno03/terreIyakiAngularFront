@@ -19,57 +19,70 @@
 
       <div class="container spacer">
 
-        <div *ngIf="product">
+        <div class="divParent" *ngIf="product">
           <table class="table-striped">
             <tr>
-              <!-- <th>
-                <span class="spacer-right">
-                  {{product.name}}
-                  <br/> {{product.description}}
-                </span>
-              </th> -->
-
               <th>
-                <span class="spacer-right">
                   choisir {{product.vatPrice | currency:'EUR':true:'1.1-1'}}
-                </span>
               </th>
             </tr>
           </table>
-          <br/>
         </div>
 
+
+        <div class="container">
+            <div class="row">
+                      
         <table class="table-striped">
+      
+               
           <tr>
             <th>
-              <span class="spacer-right">nom</span>
+                <div class="col-sm-2">photo</div>
             </th>
             <th>
-              <span class="spacer-right">prix</span>
+                <div class="col-sm-8">Produit</div>
             </th>
             <th>
-              <span class="spacer-right">photo</span>
+                <div class="col-sm-2">prix</div>
             </th>
           </tr>
+          
           <tr *ngFor="let p of products">
-            <td>
-              <span class="spacer-right">
-                <a class="clickable" (click)=selectProduct(p.theId)>
-                  {{p.name}}
-                </a>
-              </span>
-            </td>
-            <td>
-              <span class="spacer-right">{{p.vatPrice | currency:'EUR':true:'1.1-1'}}</span>
-            </td>
-            <td>
-              <span class="spacer-right">
-                <img class="image" src={{p.picture}} />
-              </span>
-            </td>
+              
+              <td>
+                  <div class="col-sm-2">
+                  <img class="image" src={{p.picture}} />
+                </div>
+              </td> 
+            
+              <td>
+                  <div class="col-sm-8">
+                  <a class="clickable" (click)=selectProduct(p.theId)>
+                    <strong>{{p.name}}</strong>
+                    <br/> {{p.description}}
+                  </a>
+                </div>
+              </td>
+            
+              <td>
+                  <div class="col-sm-2">
+                  {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
+                  <br/>  
+                  <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId)>Ajouter</button>
+                </div>
+              </td>
+
           </tr>
+
+  
+
         </table>
       </div>
     </div>
+    </div>
+
+
   </div>
+</div>
 </div>

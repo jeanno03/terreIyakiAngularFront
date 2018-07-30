@@ -1,3 +1,4 @@
+import { TestService } from './../../services/test.service';
 import { MyTableModel } from '../../models/myTableModel';
 import { Component, OnInit } from '@angular/core';
 
@@ -22,16 +23,14 @@ export class TestComponent implements OnInit {
   i: number;
   j: number;
 
-  hashExemple: Map<number,string>;
-
-  retourHash:string;
-  
+  hashExemple: Map<number, string>;
+  hashExemple2: Map<string, number>;
 
   // tableNumber:number;
   // statut:string;
   // theId:any;
 
-  constructor() { }
+  constructor(public testService:TestService) { }
 
   ngOnInit() {
     this.myTableModelArray01 = [];
@@ -46,10 +45,10 @@ export class TestComponent implements OnInit {
       this.myExemple03,
       this.myExemple04, )
 
-     this.hashExemple= new Map();
-     this.hashExemple.set(1,"un");
-     this.hashExemple.set(2,"deux");
-     this.hashExemple.set(3,"trois");
+    this.hashExemple = new Map();
+    this.hashExemple.set(1, "un");
+    this.hashExemple.set(2, "deux");
+    this.hashExemple.set(3, "trois");
 
   }
 
@@ -75,7 +74,7 @@ export class TestComponent implements OnInit {
     return this.myTableModelArray01;
   }
 
-  testComponent(){
+  testComponent() {
     this.myTableModelArray01 = [];
 
     this.myExemple01 = 9;
@@ -96,10 +95,21 @@ export class TestComponent implements OnInit {
 
   }
 
-  getHashValue(id:number){
-this.retourHash=this.hashExemple.get(id);
-console.log(" this.retourHash : "+ this.retourHash);
-return this.retourHash;
+
+
+
+  testHashMap(name: string) {
+   // this.hashExemple2 = new Map()
+    console.log("name : " + name)
+    // this.hashExemple2.set(name,name);
+    this.hashExemple2=  this.testService.testHashMap(name);
+    console.log("this.hashExemple2.size : " + this.hashExemple2.size); 
+    console.log("this.hashExemple2.keys[0]  : " + this.hashExemple2.keys[0]); 
+    console.log("on retourne la valeure : ");
+    console.log("this.hashExemple2.get(name)  : " + this.hashExemple2.get(name) ); 
+
   }
+
+
 
 }
