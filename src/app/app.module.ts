@@ -1,3 +1,5 @@
+import { MessageService } from './../services/message.service';
+import { CommandeService } from './../services/commande.service';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../environments/environment.prod';
 import { MyTableService } from '../services/my-table.service';
@@ -24,18 +26,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { ProfilComponent } from './profil/profil.component';
 import { TestService } from '../services/test.service';
 import { CommandeActionComponent } from './commande-action/commande-action.component';
-
+import { PanierComponent } from './panier/panier.component';
+import { ProfilService } from '../services/profil.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'homeMessage/:message', component: HomeComponent },
   { path: 'profil/:email', component: ProfilComponent },
-  { path: 'commandeAction', component: CommandeActionComponent },
+  { path: 'commandeAction/:email/:userId', component: CommandeActionComponent },
+  { path: 'panier/:data{lastOrder}', component: PanierComponent },
   { path: 'carte', component: CarteComponent },
   { path: 'menu', component: MenuComponent },
   { path:'myTable',component:MyTableComponent},
   { path:'test',component:TestComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
+
 
 @NgModule({
   declarations: [
@@ -46,7 +52,8 @@ const appRoutes: Routes = [
     MyTableComponent,
     TestComponent,
     ProfilComponent,
-    CommandeActionComponent
+    CommandeActionComponent,
+    PanierComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +61,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    RouterModule.forChild(appRoutes),
     OrderModule,
     AngularFireModule.initializeApp(environment.firebase, 'letslearn-dev'),
     AngularFireDatabaseModule,
@@ -64,7 +72,10 @@ const appRoutes: Routes = [
     ComboService,
     MyTableService,
     AuthService,
-    TestService
+    TestService,
+    CommandeService,
+    MessageService,
+    ProfilService
   ],
   bootstrap: [AppComponent]
 })

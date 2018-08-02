@@ -1,4 +1,4 @@
-import { TestService } from './../../services/test.service';
+import { TestService } from '../../services/test.service';
 import { MyTableModel } from '../../models/myTableModel';
 import { Component, OnInit } from '@angular/core';
 

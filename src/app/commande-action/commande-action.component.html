@@ -1,3 +1,34 @@
-<p>
-  commande-action works!
-</p>
+<div class="container spacer">
+<div class="panel panel-info">
+<div class="panel-body">
+
+  <ul class="nav nav-pills">
+<li *ngFor="let o of orderType">
+  <a class="clickable" class="active" (click)=getOrderType(o.name)>{{o.name}}</a>
+    <!-- <button class="btn btn-info spacer-right2" (click)=enCours()>
+    {{o.name}}
+    </button> -->
+</li>
+  </ul>
+</div>
+</div>
+</div>
+
+
+<p *ngIf="message">{{message.theMessage}}</p>
+
+{{email}} - {{userId}}
+<!-- <div *ngIf="orderType">
+    <p>Choississez :</p>
+    <ul *ngFor="let o of orderType">
+      <li>
+        {{o.name}}
+      </li>
+    </ul>
+  </div> -->
+
+  <ul>
+    <li *ngFor="let m of myUserOrders">
+{{m.orderDate}}
+    </li>
+  </ul>
