@@ -23,6 +23,7 @@
 
       <li *ngIf="user">
         <a class="clickable" class="active" (click)=allerPanier(user.email)>Panier</a>
+        <!-- <a routerLink="/panier" routerLinkActive="active">Panier</a> -->
       </li>
 
     </ul>
@@ -46,3 +47,15 @@
 
 <router-outlet>
 </router-outlet>
+<h3>Test page parent app - panier</h3>
+<br/>
+{{panier.theId}}
+<br/>
+{{panier.theDate}}
+<br/>
+{{panier.type}}
+<br/>
+{{panier.statut}}
+
+
+

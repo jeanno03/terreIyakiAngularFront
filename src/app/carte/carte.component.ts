@@ -1,3 +1,4 @@
+import { PanierService } from './../../services/panier.service';
 import { Router } from '@angular/router';
 import { Product } from '../../interfaces/product';
 
@@ -30,9 +31,15 @@ export class CarteComponent implements OnInit {
   product: Product;
 
   testProduct: Product;
+  panier:any;
 
-
-  constructor(public productService: ProductService, public router: Router) { }
+  constructor(
+    public productService: ProductService, 
+    public router: Router,
+    public panierService:PanierService
+  ) { 
+    this.panier = panierService.getPanier();
+  }
 
   ngOnInit() {
     this.productService.findAllCategories()

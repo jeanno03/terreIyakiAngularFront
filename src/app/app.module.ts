@@ -1,3 +1,4 @@
+import { PanierService } from './../services/panier.service';
 import { MessageService } from './../services/message.service';
 import { CommandeService } from './../services/commande.service';
 import { AuthService } from '../services/auth.service';
@@ -34,7 +35,7 @@ const appRoutes: Routes = [
   { path: 'homeMessage/:message', component: HomeComponent },
   { path: 'profil/:email', component: ProfilComponent },
   { path: 'commandeAction/:email/:userId', component: CommandeActionComponent },
-  { path: 'panier/:data{lastOrder}', component: PanierComponent },
+  { path: 'panier/:userId', component: PanierComponent },
   { path: 'carte', component: CarteComponent },
   { path: 'menu', component: MenuComponent },
   { path:'myTable',component:MyTableComponent},
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     TestService,
     CommandeService,
     MessageService,
-    ProfilService
+    ProfilService,
+    PanierService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,4 @@
+import { PanierService } from './../services/panier.service';
 import { CommandeService } from './../services/commande.service';
 import { ProfilService } from './../services/profil.service';
 import { AuthService } from '../services/auth.service';
@@ -13,13 +14,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  //test
+  public panier;
+  public header = [];
 
   user = null;
   topics: FirebaseListObservable<any[]>;
   orderType: any;
   orderTypeChoice: any;
   userFromAp: any = null;
-  // userId: number = 0;
   message: string = null;
   lastOrder: any;
 
@@ -28,8 +31,11 @@ export class AppComponent {
     public db: AngularFireDatabase,
     public router: Router,
     public profilService: ProfilService,
-    public commandeService: CommandeService
-  ) { }
+    public commandeService: CommandeService,
+    public panierService:PanierService
+  ) { 
+this.panier = panierService.getPanier();
+  }
 
   loginWithGoogle() {
     this.auth.getAuthState().subscribe(
@@ -86,16 +92,18 @@ export class AppComponent {
     })
   }
 
+
   allerPanier(email: string) {
 console.log("on va au panier");
-    //on va chercher l'id de l'user
-    // this.userFromAp = this.getUserByEmail(email);
+    // on va chercher l'id de l'user
+    this.profilService.getUserByEmail(email).subscribe(data => {
+      this.userFromAp = data;
    
-      this.commandeService.selectLastMyOrderByUser(1).subscribe(data => {
-        this.lastOrder = data;
+      // this.commandeService.selectLastMyOrderByUser(this.userFromAp.theId).subscribe(data => {
+      //   this.lastOrder = data;
         //on envoie en paramètre la last commande de l user
-        this.router.navigate(['panier', this.lastOrder]);
-
+        this.router.navigate(['panier',this.userFromAp.theId]);
+    })
       //si userFromAp is true on execute la route sinon on invite l'utilisateur a s'enregistrer
       
       // if (this.userFromAp) {
@@ -112,13 +120,15 @@ console.log("on va au panier");
 
       // }
     
-      })
+      // })
     
 
 
-  }
+  // })
 
 
 
+
+}
 
 }

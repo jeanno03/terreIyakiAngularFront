@@ -35,7 +35,7 @@ map((result:any)=>{
 }
 
 selectLastMyOrderByUser(id:number){
-return this.http.get<any[]>(this.API+'selectLastMyOrderByUser?userId='+id);
+return this.http.get(this.API+'/selectLastMyOrderByUser?userId='+id);
 }
 
 
