@@ -23,7 +23,7 @@
           <table class="table-striped">
             <tr>
               <th>
-                  choisir {{product.vatPrice | currency:'EUR':true:'1.1-1'}}
+                choisir {{product.vatPrice | currency:'EUR':true:'1.1-1'}}
               </th>
             </tr>
           </table>
@@ -31,60 +31,62 @@
 
 
         <div class="container">
-            <div class="row">
-                      
-        <table class="table-striped">
-      
-               
-          <tr>
-            <th>
-                <div class="col-sm-2">photo</div>
-            </th>
-            <th>
-                <div class="col-sm-8">Produit</div>
-            </th>
-            <th>
-                <div class="col-sm-2">prix</div>
-            </th>
-          </tr>
-          
-          <tr *ngFor="let p of products">
-              
-              <td>
+          <div class="row">
+
+            <table class="table-striped">
+
+
+              <tr>
+                <th>
+                  <div class="col-sm-2">photo</div>
+                </th>
+                <th>
+                  <div class="col-sm-8">Produit</div>
+                </th>
+                <th>
+                  <div class="col-sm-2">prix</div>
+                </th>
+              </tr>
+
+              <tr *ngFor="let p of products">
+
+                <td>
                   <div class="col-sm-2">
-                  <img class="image" src={{p.picture}} />
-                </div>
-              </td> 
-            
-              <td>
+                    <img class="image" src={{p.picture}} />
+                  </div>
+                </td>
+
+                <td>
                   <div class="col-sm-8">
-                  <a class="clickable" (click)=selectProduct(p.theId)>
-                    <strong>{{p.name}}</strong>
-                    <br/> {{p.description}}
-                  </a>
-                </div>
-              </td>
-            
-              <td>
+                    <a class="clickable" (click)=selectProduct(p.theId)>
+                      <strong>{{p.name}}</strong>
+                      <br/> {{p.description}}
+                    </a>
+                  </div>
+                </td>
+
+                <td>
                   <div class="col-sm-2">
-                  {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
-                  <br/>  
-                  <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId)>Ajouter</button>
-                </div>
-              </td>
+                    {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
+                    <br/>
+                    <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId)>Ajouter</button>
+                  </div>
+                </td>
 
-          </tr>
+              </tr>
 
-  
 
-        </table>
+
+            </table>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
 
 
+    </div>
   </div>
-</div>
 </div>
 
 <p>test page carte - panier id {{panier.theId}}</p>
+
+<br/> {{message.theMessage}}

@@ -18,12 +18,12 @@
       </li>
 
       <li *ngIf="user">
-        <a class="clickable" class="active" (click)=logoutWithGoogle()>Déconnexion</a>
+        <a class="clickable" class="active" (click)=allerPanier(user.email)>Panier</a>
+        <!-- <a routerLink="/panier" routerLinkActive="active">Panier</a> -->
       </li>
 
       <li *ngIf="user">
-        <a class="clickable" class="active" (click)=allerPanier(user.email)>Panier</a>
-        <!-- <a routerLink="/panier" routerLinkActive="active">Panier</a> -->
+        <a class="clickable" class="active" (click)=logoutWithGoogle()>Déconnexion</a>
       </li>
 
     </ul>

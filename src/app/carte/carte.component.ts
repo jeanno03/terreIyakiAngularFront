@@ -1,6 +1,7 @@
+import { CommandeService } from './../../services/commande.service';
 import { PanierService } from './../../services/panier.service';
 import { Router } from '@angular/router';
-import { Product } from '../../interfaces/product';
+// import { Product } from '../../interfaces/product';
 
 import { ProductService } from '../../services/product.service';
 import { Component, OnInit } from '@angular/core';
@@ -21,23 +22,24 @@ import 'rxjs/add/operator/mergeMap';
 export class CarteComponent implements OnInit {
 
   categories: Array<any>;
-  products: Array<Product>;
-  productsReturn: Array<Product>;
+  products: Array<any>;
+  productsReturn: Array<any>;
   category: Category = null;
   products2: any;
   id: number = 0;
   currentPage: string;
-
-  product: Product;
-
-  testProduct: Product;
-  panier:any;
+  product: any;
+  panier: any;
+  commentAchat: string = "produit ajouté";
+  orderItem: any;
+  message: any;
 
   constructor(
-    public productService: ProductService, 
+    public productService: ProductService,
     public router: Router,
-    public panierService:PanierService
-  ) { 
+    public panierService: PanierService,
+    public commandeService: CommandeService
+  ) {
     this.panier = panierService.getPanier();
   }
 
@@ -78,14 +80,20 @@ export class CarteComponent implements OnInit {
     return this.products;
   }
 
-
+  //this.product est la key les infos vont servir pour etre enregistrer a orderItem
   selectProduct(theId: number) {
     this.product = null;
     this.products.forEach(element => {
       if (element.theId == theId) {
+        //****************************key*************
         this.product = element;
-        //test j essai @input
-        this.testProduct= this.product;
+        //cette méthode fonctionne ne sera plus utilisé car pas adapté
+        // this.newOrderItem(this.product.price, this.product.tax, this.commentAchat);
+
+        //pour le test j'ai mit userId = 1
+        this.createOrderItem(this.product.theId, 1);
+
+        //****************************key*************
       }
     })
 
@@ -93,12 +101,32 @@ export class CarteComponent implements OnInit {
 
   }
 
-  productTheIdOnCommande(theId:number){
-    this.router.navigate(['commande',theId]);
+  productTheIdOnCommande(theId: number) {
+    this.router.navigate(['commande', theId]);
   }
 
   test() {
 
+  }
+
+  newOrderItem(price: number, tax: number, comment: string) {
+    this.commandeService.newOrderItem(price, tax, comment).subscribe(data => {
+      alert("produit choisi");
+      this.orderItem = data;
+    }, err => {
+      console.log(err);
+    })
+  }
+
+
+  createOrderItem(productId: number, userId: number) {
+
+    this.commandeService.createOrderItem(productId, userId).subscribe(data => {
+      alert("produit choisi");
+      this.message = data;
+    }, err => {
+      console.log(err);
+    })
   }
 
 }
