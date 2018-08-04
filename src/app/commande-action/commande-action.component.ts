@@ -75,9 +75,7 @@ export class CommandeActionComponent implements OnInit {
         //on va rechercher la derniere commande
         //je dois chercher l id de l user puis je met l objet dans panier
         this.selectLastMyOrderByUser();
-
         this.router.navigate(['homeMessage', this.message.theMessage]);
-
       }, err => {
         console.log(err);
       })
@@ -95,6 +93,7 @@ export class CommandeActionComponent implements OnInit {
 
 
   //on va rechercher la derniere commande de l user
+  //on la met dans le panier.service pour la transferer vers d autre ts
   selectLastMyOrderByUser() {
     this.commandeService.selectLastMyOrderByUser(this.userId).subscribe(data => {
       this.lastOrder = data;

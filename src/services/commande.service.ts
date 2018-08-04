@@ -1,4 +1,4 @@
-import { OrderItemModel } from './../models/orderItemModel';
+import { OrderItemModel } from '../models/orderItemModel';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -34,7 +34,6 @@ export class CommandeService {
       map((result: any) => {
         return result._embedded.myOrders;
       })
-
   }
 
   selectLastMyOrderByUser(id: number) {
@@ -51,5 +50,12 @@ export class CommandeService {
 
   createOrderItem(productId: number, userId: number) {
     return this.http.get<any>(this.API + '/createOrderItem?productId=' + productId + '&userId=' + userId);
+  }
+
+  returnOrderItemByOrder(idOrder:number){
+return this.http.get(this.API+'/myOrders/'+idOrder+'/orderItems').
+map((result:any)=>{
+  return result._embedded.orderItems;
+})
   }
 }

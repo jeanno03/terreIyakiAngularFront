@@ -1,6 +1,7 @@
-import { PanierService } from './../services/panier.service';
-import { CommandeService } from './../services/commande.service';
-import { ProfilService } from './../services/profil.service';
+import { PanierVatPriceService } from '../services/panier-vat-price.service';
+import { PanierService } from '../services/panier.service';
+import { CommandeService } from '../services/commande.service';
+import { ProfilService } from '../services/profil.service';
 import { AuthService } from '../services/auth.service';
 import { Component } from '@angular/core';
 import * as firebase from 'firebase';
@@ -18,6 +19,8 @@ export class AppComponent {
   public panier;
   public header = [];
 
+public panierVatprice;
+
   user = null;
   topics: FirebaseListObservable<any[]>;
   orderType: any;
@@ -25,6 +28,7 @@ export class AppComponent {
   userFromAp: any = null;
   message: string = null;
   lastOrder: any;
+  
 
   constructor(
     private auth: AuthService,
@@ -32,9 +36,15 @@ export class AppComponent {
     public router: Router,
     public profilService: ProfilService,
     public commandeService: CommandeService,
-    public panierService:PanierService
+    public panierService:PanierService,
+    public panierVatPriceService:PanierVatPriceService
   ) { 
 this.panier = panierService.getPanier();
+this.panierVatprice = panierVatPriceService.getPanierVatPrice();
+// <h3>{{panierVatprice.vatPriceTotal}}</h3
+// if(this.panierItem[0]!=null){
+//   console.log("this.panierItem.orderItems[0].vatPrice : "+this.panierItem.orderItems[0].vatPrice);
+// }
   }
 
   loginWithGoogle() {

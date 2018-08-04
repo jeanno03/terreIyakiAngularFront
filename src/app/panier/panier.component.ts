@@ -1,4 +1,4 @@
-import { PanierService } from './../../services/panier.service';
+import { PanierService } from '../../services/panier.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 

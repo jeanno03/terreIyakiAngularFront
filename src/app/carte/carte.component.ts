@@ -1,5 +1,6 @@
-import { CommandeService } from './../../services/commande.service';
-import { PanierService } from './../../services/panier.service';
+import { PanierVatPriceService } from './../../services/panier-vat-price.service';
+import { CommandeService } from '../../services/commande.service';
+import { PanierService } from '../../services/panier.service';
 import { Router } from '@angular/router';
 // import { Product } from '../../interfaces/product';
 
@@ -33,12 +34,16 @@ export class CarteComponent implements OnInit {
   commentAchat: string = "produit ajouté";
   orderItem: any;
   message: any;
+  returnOrderItem: Array<any>;
+  i:number;
+  retourVatpriceTotal:number;
 
   constructor(
     public productService: ProductService,
     public router: Router,
     public panierService: PanierService,
-    public commandeService: CommandeService
+    public commandeService: CommandeService,
+    public panierVatPriceService: PanierVatPriceService
   ) {
     this.panier = panierService.getPanier();
   }
@@ -65,7 +70,6 @@ export class CarteComponent implements OnInit {
       this.category = data;
       this.id = this.category[0].id;
       this.productsReturn = this.getProductsById(this.id);
-
     }, err => {
       console.log(err);
     })
@@ -91,14 +95,30 @@ export class CarteComponent implements OnInit {
         // this.newOrderItem(this.product.price, this.product.tax, this.commentAchat);
 
         //pour le test j'ai mit userId = 1
+        //on ajoute le produit a order item qu'on ajoute a myOrder
         this.createOrderItem(this.product.theId, 1);
-
+        //panier.theId ==> id de la commande 
+        //on va récupérer toutes les orderItem de la commande
+        //on va les envoyer à panierItemService
+        this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
+          this.returnOrderItem=data;
+          //on doit trouver le montant total de vatPrice de la list returnOrderItem
+          this.retourVatpriceTotal=0;
+          console.log("avant ********* this.retourVatpriceTotal : "+this.retourVatpriceTotal);
+          for(this.i=0;this.i<this.returnOrderItem.length;this.i++){
+            this.retourVatpriceTotal=this.retourVatpriceTotal+this.returnOrderItem[this.i].vatPrice;
+          }
+          console.log("après ********* this.retourVatpriceTotal : "+this.retourVatpriceTotal);
+          this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
+          // <h3>{{panierVatprice.vatPriceTotal}}</h3>
+          //celui qui recoit doit tester this.panierItem.orderItems[0].vatPrice ==> par exemple
+        },err=>{
+          console.log(err);
+        })
         //****************************key*************
       }
     })
-
     return this.product;
-
   }
 
   productTheIdOnCommande(theId: number) {
@@ -106,7 +126,6 @@ export class CarteComponent implements OnInit {
   }
 
   test() {
-
   }
 
   newOrderItem(price: number, tax: number, comment: string) {
@@ -120,7 +139,7 @@ export class CarteComponent implements OnInit {
 
 
   createOrderItem(productId: number, userId: number) {
-
+    
     this.commandeService.createOrderItem(productId, userId).subscribe(data => {
       alert("produit choisi");
       this.message = data;

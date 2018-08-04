@@ -1,6 +1,7 @@
-import { PanierService } from './../services/panier.service';
-import { MessageService } from './../services/message.service';
-import { CommandeService } from './../services/commande.service';
+import { PanierVatPriceService } from '../services/panier-vat-price.service';
+import { PanierService } from '../services/panier.service';
+import { MessageService } from '../services/message.service';
+import { CommandeService } from '../services/commande.service';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../environments/environment.prod';
 import { MyTableService } from '../services/my-table.service';
@@ -77,7 +78,8 @@ const appRoutes: Routes = [
     CommandeService,
     MessageService,
     ProfilService,
-    PanierService
+    PanierService,
+    PanierVatPriceService
   ],
   bootstrap: [AppComponent]
 })
