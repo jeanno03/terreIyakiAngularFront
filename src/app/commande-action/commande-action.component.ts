@@ -1,4 +1,5 @@
-import { PanierService } from './../../services/panier.service';
+import { UserFromAppService } from './../../services/user-from-app.service';
+import { PanierService } from '../../services/panier.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommandeService } from '../../services/commande.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,17 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommandeActionComponent implements OnInit {
 
-  //test
-  public size: number;
-  public square: number;
+  userFromAp:any;
 
   orderType: any;
   orderTypeChoice: any;
   message: any = null;
-
-  //propriété provenant du composant mere
-  email: string;
-  userId: number;
 
   //objet quon va envoyer au panier.service
   lastOrder: any;
@@ -30,20 +25,11 @@ export class CommandeActionComponent implements OnInit {
 
   constructor(
     public commandeService: CommandeService,
-    public activatedRoute: ActivatedRoute,
     public router: Router,
-    public panierService: PanierService
+    public panierService: PanierService,
+    public userFromAppService:UserFromAppService
   ) {
-    this.email = activatedRoute.snapshot.params['email'];
-    this.userId = activatedRoute.snapshot.params['userId'];
-
-    //test
-    // this.size = 16;
-    // this.square = Math.sqrt(this.size);
-
-    // Here I call the service to put my data ==> test
-    // panierService.setOption('size', this.size);
-    // panierService.setOption('square', this.square);
+    this.userFromAp=userFromAppService.getFirebaseUser();
   }
 
   ngOnInit() {
@@ -62,14 +48,13 @@ export class CommandeActionComponent implements OnInit {
 
 
   enCours() {
-
   }
 
   getOrderType(name: string) {
 
 
 
-    this.commandeService.selectOrder(name, this.email)
+    this.commandeService.selectOrder(name, this.userFromAp.email)
       .subscribe(data => {
         this.message = data;
         //on va rechercher la derniere commande
@@ -84,7 +69,7 @@ export class CommandeActionComponent implements OnInit {
 
   //on va rechercher toutes les commandes de l user
   getMyOrderByMyUser() {
-    this.commandeService.getMyOrdersByMyUser(this.userId).subscribe(data => {
+    this.commandeService.getMyOrdersByMyUser(this.userFromAp.id).subscribe(data => {
       this.myUserOrder = data;
     }, err => {
       console.log(err);
@@ -93,9 +78,9 @@ export class CommandeActionComponent implements OnInit {
 
 
   //on va rechercher la derniere commande de l user
-  //on la met dans le panier.service pour la transferer vers d autre ts
+  //on la met dans le panier.service pour partage
   selectLastMyOrderByUser() {
-    this.commandeService.selectLastMyOrderByUser(this.userId).subscribe(data => {
+    this.commandeService.selectLastMyOrderByUser(this.userFromAp.id).subscribe(data => {
       this.lastOrder = data;
       this.panierService.setOption('theId', this.lastOrder.theId);
       this.panierService.setOption('theDate', this.lastOrder.orderDate);

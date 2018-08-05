@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { Router } from '@angular/router';
+import { Alert } from 'selenium-webdriver';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AppComponent {
 
 public panierVatprice;
 
-  user = null;
+  user:firebase.User = null;
   topics: FirebaseListObservable<any[]>;
   orderType: any;
   orderTypeChoice: any;
@@ -37,7 +38,7 @@ public panierVatprice;
     public profilService: ProfilService,
     public commandeService: CommandeService,
     public panierService:PanierService,
-    public panierVatPriceService:PanierVatPriceService
+    public panierVatPriceService:PanierVatPriceService,
   ) { 
 this.panier = panierService.getPanier();
 this.panierVatprice = panierVatPriceService.getPanierVatPrice();
@@ -51,7 +52,6 @@ this.panierVatprice = panierVatPriceService.getPanierVatPrice();
     this.auth.getAuthState().subscribe(
       (user) => this.user = user);
     this.topics = this.db.list('/topics');
-
     this.auth.loginWithGoogle();
   }
 
@@ -68,7 +68,6 @@ this.panierVatprice = panierVatPriceService.getPanierVatPrice();
   getUserByEmail(email: string) {
     this.profilService.getUserByEmail(email).subscribe(data => {
       this.userFromAp = data;
-      console.log("this.userFromAp.theId : " + this.userFromAp.theId);
     }, err => {
       console.log(err);
     })
@@ -77,19 +76,12 @@ this.panierVatprice = panierVatPriceService.getPanierVatPrice();
 
 
   allerCommander(email: string) {
-
     //on va chercher l'id de l'user
     this.profilService.getUserByEmail(email).subscribe(data => {
       this.userFromAp = data;
-      // this.router.navigate(['commandeAction', email, this.userFromAp.theId]);
-      //console.log("this.userFromAp.theId : " + this.userFromAp.theId);
-
-      //si userFromAp is true on execute la route sinon on invite l'utilisateur a s'enregistrer
-
 
       if (this.userFromAp) {
-        //on envoie en paramètre le mail de l'user et l'id de l'user
-        this.router.navigate(['commandeAction', email, this.userFromAp.theId]);
+        this.router.navigateByUrl('/commandeAction');
       }
       else {
         this.message = "veuillez d'abord vous enregistrer dans profil"
@@ -105,40 +97,8 @@ this.panierVatprice = panierVatPriceService.getPanierVatPrice();
 
   allerPanier(email: string) {
 console.log("on va au panier");
-    // on va chercher l'id de l'user
-    this.profilService.getUserByEmail(email).subscribe(data => {
-      this.userFromAp = data;
-   
-      // this.commandeService.selectLastMyOrderByUser(this.userFromAp.theId).subscribe(data => {
-      //   this.lastOrder = data;
-        //on envoie en paramètre la last commande de l user
-        this.router.navigate(['panier',this.userFromAp.theId]);
-    })
-      //si userFromAp is true on execute la route sinon on invite l'utilisateur a s'enregistrer
-      
-      // if (this.userFromAp) {
-      //   this.commandeService.selectLastMyOrderByUser(this.userFromAp.theId).subscribe(data => {
-      //     this.lastOrder = data;
-      //     //on envoie en paramètre la last commande de l user
-      //     this.router.navigate(['panier', this.lastOrder]);
-      //   })
-
-      // }
-      // else {
-      //   this.message = "veuillez d'abord choisir un type de commande"
-      //   this.router.navigate(['homeMessage', this.message]);
-
-      // }
-    
-      // })
-    
-
-
-  // })
-
-
-
+        this.router.navigateByUrl('panier');
+    }
 
 }
 
-}

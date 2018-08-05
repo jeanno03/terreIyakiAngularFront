@@ -10,7 +10,10 @@ export class HomeComponent implements OnInit {
 
 message:any;
 
-  constructor(public activatedRoute: ActivatedRoute,public router:Router) { 
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    public router:Router,
+  ) { 
     this.message=activatedRoute.snapshot.params['message'];
   }
 

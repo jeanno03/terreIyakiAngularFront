@@ -26,11 +26,27 @@
         <a class="clickable" class="active" (click)=logoutWithGoogle()>Déconnexion</a>
       </li>
 
+
+
+      <li *ngIf="user">
+        <strong>Vos identifiants gmail</strong>
+        <br/>{{user.email}}
+        <br/>{{user.displayName}}
+      </li>
+
+      <li *ngIf="user">
+        <strong>Votre panier</strong>
+        <br/>Commande n°{{panier.theId}}
+        <br/>Montant : {{panierVatprice.vatPriceTotal}}€
+      </li>
+
+
     </ul>
-    <span *ngIf="user">
+
+    <!-- <span *ngIf="user">
       <strong>Votre identifiant gmail</strong>
-      <br/>{{user.email}}
-    </span>
+      <br/>{{user.email}} - {{user.displayName}}
+    </span> -->
   </div>
 </nav>
 
@@ -47,16 +63,6 @@
 
 <router-outlet>
 </router-outlet>
-<h3>Test page parent app - panier</h3>
-<br/>
-{{panier.theId}}
-<br/>
-{{panier.theDate}}
-<br/>
-{{panier.type}}
-<br/>
-{{panier.statut}}
 
-<h3>montant panier : {{panierVatprice.vatPriceTotal}}</h3>
 
 

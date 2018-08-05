@@ -1,4 +1,4 @@
-import { PanierVatPriceService } from './../../services/panier-vat-price.service';
+import { PanierVatPriceService } from '../../services/panier-vat-price.service';
 import { CommandeService } from '../../services/commande.service';
 import { PanierService } from '../../services/panier.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,8 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/mergeMap';
+import { UserFromAppService } from '../../services/user-from-app.service';
+
 
 
 
@@ -22,6 +24,7 @@ import 'rxjs/add/operator/mergeMap';
 })
 export class CarteComponent implements OnInit {
 
+  userFromAp:any;
   categories: Array<any>;
   products: Array<any>;
   productsReturn: Array<any>;
@@ -43,9 +46,11 @@ export class CarteComponent implements OnInit {
     public router: Router,
     public panierService: PanierService,
     public commandeService: CommandeService,
-    public panierVatPriceService: PanierVatPriceService
+    public panierVatPriceService: PanierVatPriceService,
+    public userFromAppService: UserFromAppService
   ) {
     this.panier = panierService.getPanier();
+    this.userFromAp = userFromAppService.getFirebaseUser();
   }
 
   ngOnInit() {
@@ -84,19 +89,19 @@ export class CarteComponent implements OnInit {
     return this.products;
   }
 
-  //this.product est la key les infos vont servir pour etre enregistrer a orderItem
+  //this.product est la key ==> les infos vont servir pour etre enregistrer a orderItem
   selectProduct(theId: number) {
     this.product = null;
     this.products.forEach(element => {
       if (element.theId == theId) {
-        //****************************key*************
+  
         this.product = element;
         //cette méthode fonctionne ne sera plus utilisé car pas adapté
         // this.newOrderItem(this.product.price, this.product.tax, this.commentAchat);
 
-        //pour le test j'ai mit userId = 1
+   
         //on ajoute le produit a order item qu'on ajoute a myOrder
-        this.createOrderItem(this.product.theId, 1);
+        this.createOrderItem(this.product.theId, this.userFromAp.id);
         //panier.theId ==> id de la commande 
         //on va récupérer toutes les orderItem de la commande
         //on va les envoyer à panierItemService
@@ -110,12 +115,10 @@ export class CarteComponent implements OnInit {
           }
           console.log("après ********* this.retourVatpriceTotal : "+this.retourVatpriceTotal);
           this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
-          // <h3>{{panierVatprice.vatPriceTotal}}</h3>
-          //celui qui recoit doit tester this.panierItem.orderItems[0].vatPrice ==> par exemple
         },err=>{
           console.log(err);
         })
-        //****************************key*************
+
       }
     })
     return this.product;
