@@ -1,3 +1,4 @@
+import { PanierVatPriceService } from './../../services/panier-vat-price.service';
 import { UserFromAppService } from './../../services/user-from-app.service';
 import { PanierService } from '../../services/panier.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommandeActionComponent implements OnInit {
 
-  userFromAp:any;
+  userFromAp: any;
 
   orderType: any;
   orderTypeChoice: any;
@@ -20,21 +21,40 @@ export class CommandeActionComponent implements OnInit {
   //objet quon va envoyer au panier.service
   lastOrder: any;
 
-
   myUserOrder: any;
+  panier: any = null;
+  returnOrderItem: Array<any>;
+  retourVatpriceTotal: number;
+  i: number;
 
   constructor(
     public commandeService: CommandeService,
     public router: Router,
     public panierService: PanierService,
-    public userFromAppService:UserFromAppService
+    public userFromAppService: UserFromAppService,
+    public panierVatPriceService: PanierVatPriceService
   ) {
-    this.userFromAp=userFromAppService.getFirebaseUser();
+    this.userFromAp = userFromAppService.getFirebaseUser();
+    this.panier = panierService.getPanier();
+
+    //on récupère tous les orderItems de la derniere commade
+    this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
+      this.returnOrderItem = data;
+      //on récupère le montant total du panier
+      this.retourVatpriceTotal = 0;
+      for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
+        this.retourVatpriceTotal = this.retourVatpriceTotal + this.returnOrderItem[this.i].vatPrice;
+      }
+
+    }, err => {
+      console.log(err);
+    })
+
   }
 
   ngOnInit() {
     this.chooseOrderType();
-    this.getMyOrderByMyUser();
+    // this.getMyOrderByMyUser();
   }
 
   chooseOrderType() {
@@ -52,8 +72,6 @@ export class CommandeActionComponent implements OnInit {
 
   getOrderType(name: string) {
 
-
-
     this.commandeService.selectOrder(name, this.userFromAp.email)
       .subscribe(data => {
         this.message = data;
@@ -68,6 +86,7 @@ export class CommandeActionComponent implements OnInit {
   }
 
   //on va rechercher toutes les commandes de l user
+  //pas utilisé
   getMyOrderByMyUser() {
     this.commandeService.getMyOrdersByMyUser(this.userFromAp.id).subscribe(data => {
       this.myUserOrder = data;

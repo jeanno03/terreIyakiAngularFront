@@ -102,22 +102,10 @@ export class CarteComponent implements OnInit {
    
         //on ajoute le produit a order item qu'on ajoute a myOrder
         this.createOrderItem(this.product.theId, this.userFromAp.id);
-        //panier.theId ==> id de la commande 
-        //on va récupérer toutes les orderItem de la commande
-        //on va les envoyer à panierItemService
-        this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
-          this.returnOrderItem=data;
-          //on doit trouver le montant total de vatPrice de la list returnOrderItem
-          this.retourVatpriceTotal=0;
-          console.log("avant ********* this.retourVatpriceTotal : "+this.retourVatpriceTotal);
-          for(this.i=0;this.i<this.returnOrderItem.length;this.i++){
-            this.retourVatpriceTotal=this.retourVatpriceTotal+this.returnOrderItem[this.i].vatPrice;
-          }
-          console.log("après ********* this.retourVatpriceTotal : "+this.retourVatpriceTotal);
-          this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
-        },err=>{
-          console.log(err);
-        })
+
+
+//retiré ici
+
 
       }
     })
@@ -146,6 +134,36 @@ export class CarteComponent implements OnInit {
     this.commandeService.createOrderItem(productId, userId).subscribe(data => {
       alert("produit choisi");
       this.message = data;
+
+
+
+
+//bloc qui va calculer mt panier en fonction de tous les orderItem de la commande
+{
+        //panier.theId ==> id de la commande 
+        //on va récupérer toutes les orderItem de la commande
+        //on va les envoyer à panierItemService
+        this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
+          this.returnOrderItem=data;
+          //on doit trouver le montant total de vatPrice de la list returnOrderItem
+          this.retourVatpriceTotal=0;
+          for(this.i=0;this.i<this.returnOrderItem.length;this.i++){
+            this.retourVatpriceTotal=this.retourVatpriceTotal+this.returnOrderItem[this.i].vatPrice;
+          }
+          this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
+        },err=>{
+          console.log(err);
+        })
+
+
+
+      }
+
+
+
+
+
+      this.router.navigateByUrl('carte');
     }, err => {
       console.log(err);
     })

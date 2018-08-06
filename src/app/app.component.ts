@@ -40,12 +40,9 @@ public panierVatprice;
     public panierService:PanierService,
     public panierVatPriceService:PanierVatPriceService,
   ) { 
+    //on récupère le dernier panier commande en cours et son montant
 this.panier = panierService.getPanier();
 this.panierVatprice = panierVatPriceService.getPanierVatPrice();
-// <h3>{{panierVatprice.vatPriceTotal}}</h3
-// if(this.panierItem[0]!=null){
-//   console.log("this.panierItem.orderItems[0].vatPrice : "+this.panierItem.orderItems[0].vatPrice);
-// }
   }
 
   loginWithGoogle() {

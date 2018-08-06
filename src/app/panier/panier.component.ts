@@ -10,11 +10,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PanierComponent implements OnInit {
 
-  // userId:any;
-
-//test
-// public panier;
-// public header = [];
 userFromAp:any=null;
 
   constructor(
@@ -23,16 +18,10 @@ userFromAp:any=null;
     public router: Router,
     public userFromAppService:UserFromAppService
   ) { 
-    // issue is here, the _configService.getConfig() get an empty object 
-    // but I had filled it just before
-// this.panier = panierService.getPanier();
-// this.userId=activatedRoute.snapshot.params['userId'];
 this.userFromAp=userFromAppService.getFirebaseUser();
   }
 
   ngOnInit() {
-    // console.log(this.panier);
-    // console.log(this.userId);
   }
 
 }

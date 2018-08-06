@@ -1,3 +1,4 @@
+import { UserFromAppService } from './../../services/user-from-app.service';
 import { MessageService } from '../../services/message.service';
 import { MyUserModel } from '../../models/myUserModel';
 import { ProfilService } from '../../services/profil.service';
@@ -14,6 +15,7 @@ export class ProfilComponent implements OnInit {
 
   email: string;
   userFromAp: any;
+  userFromApCreer: any;
   myUserModel: MyUserModel = new MyUserModel(null, null, null, null);
   newMyUserModel: MyUserModel;
 
@@ -26,7 +28,8 @@ export class ProfilComponent implements OnInit {
   constructor(public activatedRoute: ActivatedRoute,
     public router: Router,
     public profilService: ProfilService,
-    public messageService: MessageService
+    public messageService: MessageService,
+    public userFromAppService: UserFromAppService
   ) {
     this.email = activatedRoute.snapshot.params['email'];
   }
@@ -42,11 +45,10 @@ export class ProfilComponent implements OnInit {
   getUserByEmail(email: string) {
     this.profilService.getUserByEmail(email).subscribe(data => {
       this.userFromAp = data;
-      // console.log("this.userFromAp.login : "+this.userFromAp.login);
-      // console.log("this.userFromAp.firstName : "+this.userFromAp.firstName);
     }, err => {
       console.log(err);
     })
+
   }
 
   creerProfil() {
@@ -55,10 +57,10 @@ export class ProfilComponent implements OnInit {
 
   modifierProfil() {
     this.modifier = "true";
-//on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
- this.getUserByEmail(this.email);
+    //on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
+    this.getUserByEmail(this.email);
 
- 
+
 
   }
 
@@ -78,38 +80,79 @@ export class ProfilComponent implements OnInit {
     ).subscribe(data => {
       this.theMessage = data;
       //on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
-      this.getUserByEmail(this.email);
+
+
+      //on envoie l'user en partage s'il existe
+      //si categoryMessageName = succès
+      if (this.theMessage.categoryMessage.name == "succès") {
+
+        this.profilService.getUserByEmail(this.myUserModel.getEmail()).subscribe(data => {
+
+          this.userFromApCreer = data;
+
+          this.userFromAppService.setOption("id", this.userFromApCreer.theId);
+          this.userFromAppService.setOption("email", this.userFromApCreer.email);
+          this.userFromAppService.setOption("login", this.userFromApCreer.login);
+          this.userFromAppService.setOption("firstName", this.userFromApCreer.firstName);
+          this.userFromAppService.setOption("lastName", this.userFromApCreer.lastName);
+
+          //on charge userFromAp pour MAJ page profile
+          //puis on recharge la page
+          this.profilService.getUserByEmail(this.email).subscribe(data => {
+            this.userFromAp = data;
+            this.router.navigate(['profil', this.email]);
+          }, err => {
+            console.log(err);
+          })
+
+
+        }, err => {
+          console.log(err);
+        })
+      }
+
+
+
+
+
+
+
+
+
+
     }, err => {
       console.log(err);
     })
+
+
   }
 
-  modifierUserFromAp(){
+  modifierUserFromAp() {
 
     this.messageService.getMessageEditUser(this.userFromAp.email,
-    this.userFromAp.login,
-    this.userFromAp.firstName,
-    this.userFromAp.lastName
+      this.userFromAp.login,
+      this.userFromAp.firstName,
+      this.userFromAp.lastName
     ).subscribe(data => {
       this.theMessage = data;
-      console.log("this.theMessage.number : "+this.theMessage.number);
+      console.log("this.theMessage.number : " + this.theMessage.number);
 
       //en cas de reussite on retire le formulaire
       //number==3 ==> succès
-      if(this.theMessage.number==3){
-        this.modifier='done';
+      if (this.theMessage.number == 3) {
+        this.modifier = 'done';
       }
 
       //en cas d'échec on remet le formulaire
       //number==4 ==> echec
-      if(this.theMessage.number==4){
-        this.modifier='true';
+      if (this.theMessage.number == 4) {
+        this.modifier = 'true';
       }
 
       //en cas d'échec on remet le formulaire
       //number==2 ==> echec
-      if(this.theMessage.number==2){
-        this.modifier='true';
+      if (this.theMessage.number == 2) {
+        this.modifier = 'true';
       }
 
     }, err => {

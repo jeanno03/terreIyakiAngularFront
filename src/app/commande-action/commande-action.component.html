@@ -1,19 +1,29 @@
 <div class="container spacer">
-<div class="panel panel-info">
-<div class="panel-body">
+  <div class="panel panel-info">
+    <div class="panel-body">
 
-  <ul class="nav nav-pills">
-<li *ngFor="let o of orderType">
-  <a class="clickable" class="active" (click)=getOrderType(o.name)>{{o.name}}</a>
-    <!-- <button class="btn btn-info spacer-right2" (click)=enCours()>
-    {{o.name}}
-    </button> -->
-</li>
-  </ul>
-</div>
-</div>
+      <ul class="nav nav-pills" *ngIf="panier.theId==null">
+        <li *ngFor="let o of orderType">
+          <a class="clickable" class="active" (click)=getOrderType(o.name)>{{o.name}}</a>
+        </li>
+      </ul>
+      <ul *ngIf="panier.theId!=null">
+        <li>
+          Veuillez choisir vos produits
+        </li>
+        <li *ngIf="retourVatpriceTotal">
+          montant panier : {{retourVatpriceTotal}} €
+        </li>
+      </ul>
+      <ul *ngIf="returnOrderItem">
+        <li *ngFor="let r of returnOrderItem">
+          id : {{r.theId}} - {{r.productName}} : {{r.vatPrice}} €
+          <br/> 
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 
 <p *ngIf="message">{{message.theMessage}}</p>
-
