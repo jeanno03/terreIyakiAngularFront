@@ -1,4 +1,5 @@
 <div class="container spacer">
+
   <div class="panel panel-infos">
     <div class="panel-body">
       <ul class="nav nav-pills">
@@ -8,73 +9,106 @@
       </ul>
     </div>
   </div>
+
   <div class="container spacer" *ngIf="combo">
     <table class="table-striped">
       <tr>
         <th>
-          <span class="spacer-right">prix</span>
+          <span class="spacer-right">photo</span>
         </th>
         <th>
           <span class="spacer-right">description</span>
         </th>
         <th>
-          <span class="spacer-right">photo</span>
+          <span class="spacer-right">prix</span>
         </th>
       </tr>
-
       <tr>
         <td>
-          <span class="spacer-right">
-            <a class="clickable" (click)=selectCombo(combo.id)>{{combo.vatPrice | currency:'EUR':true:'1.1-1'}}</a>
-          </span>
+          <div class="col-sm-2">
+            <img class="image" src={{combo.picture}} />
+          </div>
         </td>
         <td>
-          <span class="spacer-right">
-            <a class="clickable" (click)=selectCombo(combo.id)>{{combo.description}}</a>
-          </span>
+          <div class="col-sm-8">
+            {{combo.description}}
+          </div>
         </td>
         <td>
-          <span class="spacer-right">
-            <a class="clickable" (click)=selectCombo(combo.id)>
-              <img class="image" src={{combo.picture}} />
-            </a>
-          </span>
+          <div class="col-sm-2">
+            <button class="btn btn-info spacer-right2" (click)=selectCombo(combo.id)>{{combo.vatPrice | currency:'EUR':true:'1.1-1'}}
+              <br/>Ajouter</button>
+          </div>
         </td>
       </tr>
-
-
     </table>
   </div>
-
- 
-  
 
 
   <div *ngIf="category">
-    <table class="table-striped">
-        <th>
-            <span class="spacer-right">
-              Choisir
-            </span>
-          </th>
-      <tr *ngFor="let c of this.category">
 
-        <th>
-          <span class="spacer-right">
-            <a class="clickable" (click)=getProductsFromComboCat(c.parentComboCategoryId)>
-              {{c.name}}
-            </a>
-          </span>
-        </th>
-      </tr>
-      <tr *ngFor="let p of this.productsMap">
-        <td>
-          <span class="spacer-right">{{p.name}}</span>
-        </td>
-      </tr>
-    </table>
-  </div>
+      <div class="panel-body">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
+            <a class="clickable" class="active" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</a>
+          </li>
+          <li *ngIf="menuAValider==1">
+<button class="btn btn-info spacer-right2" click="validerMenu()">Valider</button>
+          </li>
+        </ul>
+    
+      <div class="container spacer">
+        <div class="row">
+          <table class="table-striped">
+    
+            <tr>
+              <th>
+                <span class="spacer-right">photo</span>
+              </th>
+              <th>
+                <span class="spacer-right">Produits</span>
+              </th>
+              <th>
+                <span class="spacer-right"></span>
+              </th>
+            </tr>
+    
+            <tr *ngFor="let p of this.productsMap">
+
+              <td>
+                <div class="col-sm-2">
+                  <img class="image" src={{p.picture}} />
+                </div>
+              </td>
+    
+              <td>
+                <div class="col-sm-8">
+                  {{p.description}}
+                </div>
+              </td>
+    
+              <td>
+                <div class="col-sm-2">
+                  <button class="btn btn-info spacer-right2" (click)="productOnHashMenu(p.id)">
+                    <br/>Choisir</button>
+                </div>
+              </td>
+    
+            </tr>
+    
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+
 </div>
+
+
+
+
 
 
 

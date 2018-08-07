@@ -32,8 +32,14 @@ export class MenuComponent implements OnInit {
   productMap: Map<number, Array<Product>>;
   //conversion de la HashMap en ArrayList pour l'affichage
   productsMap: any;
-  currentPage:string;
+  currentPage: string;
 
+  currentCat: number;
+
+  //va comporter le menu avant valiation commande
+  hashMenu: Map<number, number>;
+  menuAValider: number;
+  productTest:any;
 
   constructor(public comboService: ComboService) { }
 
@@ -52,7 +58,7 @@ export class MenuComponent implements OnInit {
     //je réinitiliase le choix des produits
     this.productsMap = null;
 
-    this.currentPage=name;
+    this.currentPage = name;
 
     this.comboService.getComboByName(name).subscribe(data => {
       this.combo = data;
@@ -104,6 +110,14 @@ export class MenuComponent implements OnInit {
 
         })
       })
+
+      // on met a 0 la condition pour valider le menu
+      //on initialise la hashMap contenant le menu
+      this.menuAValider = 0;
+      this.hashMenu = new Map();
+
+
+
     }, err => {
       console.log(err);
     })
@@ -111,10 +125,34 @@ export class MenuComponent implements OnInit {
 
   getProductsFromComboCat(id: number) {
     this.productsMap = this.getProductsFromMap(id);
+    //idParent ==> key
+    this.currentCat = id;
   }
 
   //return la list de produit en fonction de l id parent
   getProductsFromMap(id: number) {
     return Array.from(this.productMap.get(id));
+  }
+
+  //on met les produits dans hashmap avant validation du menu
+  productOnHashMenu(idProduct: number) {
+
+    //key idParent de comboCategory
+    //this.currentCat reste enfoncé voir méthode getProductsFromComboCat(id: number)
+    //value => id du produit
+    this.hashMenu.set(this.currentCat, idProduct);
+
+    //on va parcourir la hashmap et si taille this.category = taille productMap alors on propose de valider
+    if (this.category.length == this.hashMenu.size) {
+      this.menuAValider = 1;
+    }
+    //méthode pour voir contenu de la map si plusieurs clik ==> test ok
+    console.log("key : " + this.currentCat + " value  : "+ this.hashMenu.get(this.currentCat)) ;
+  }
+
+
+
+  validerMenu(){
+    //métier a faire
   }
 }
