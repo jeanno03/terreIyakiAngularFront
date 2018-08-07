@@ -26,6 +26,7 @@ export class CommandeActionComponent implements OnInit {
   returnOrderItem: Array<any>;
   retourVatpriceTotal: number;
   i: number;
+  hashOrderItem:Map<number, number>;
 
   constructor(
     public commandeService: CommandeService,
@@ -43,7 +44,7 @@ export class CommandeActionComponent implements OnInit {
       //on récupère le montant total du panier
       this.retourVatpriceTotal = 0;
       for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
-        this.retourVatpriceTotal = this.retourVatpriceTotal + this.returnOrderItem[this.i].vatPrice;
+        this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
       }
 
     }, err => {

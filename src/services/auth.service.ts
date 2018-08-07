@@ -66,7 +66,7 @@ export class AuthService {
 
               this.lastOrder = null;
               this.lastOrder = data;
-              if (this.lastOrder = null) {
+              if (this.lastOrder != null) {
                 this.panierService.setOption('theId', this.lastOrder.theId);
                 this.panierService.setOption('theDate', this.lastOrder.orderDate);
                 this.panierService.setOption('type', this.lastOrder.orderType.name);
@@ -79,7 +79,7 @@ export class AuthService {
                   //on doit trouver le montant total de vatPrice de la list returnOrderItem
                   this.retourVatpriceTotal = 0;
                   for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
-                    this.retourVatpriceTotal = this.retourVatpriceTotal + this.returnOrderItem[this.i].vatPrice;
+                    this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
                   }
                   this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
                 }, err => {

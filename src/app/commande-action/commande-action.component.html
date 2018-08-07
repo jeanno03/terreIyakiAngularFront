@@ -7,22 +7,60 @@
           <a class="clickable" class="active" (click)=getOrderType(o.name)>{{o.name}}</a>
         </li>
       </ul>
-      <ul *ngIf="panier.theId!=null">
-        <li>
+      <ul class="nav nav-pills">
+        <li *ngIf="panier.theId!=null&&retourVatpriceTotal==0">
           Veuillez choisir vos produits
         </li>
-        <li *ngIf="retourVatpriceTotal">
+        <li *ngIf="retourVatpriceTotal>0">
           montant panier : {{retourVatpriceTotal}} €
         </li>
       </ul>
-      <ul *ngIf="returnOrderItem">
-        <li *ngFor="let r of returnOrderItem">
-          id : {{r.theId}} - {{r.productName}} : {{r.vatPrice}} €
-          <br/> 
-        </li>
-      </ul>
+
     </div>
   </div>
+  <div class="container spacer" *ngIf="returnOrderItem!=null">
+    <table class="table-striped" >
+      <tr>
+        <th>
+          <span class="spacer-right">nom</span>
+        </th>
+        <th>
+          <span class="spacer-right">quantité</span>
+        </th>
+        <th>
+          <span class="spacer-right">prix</span>
+        </th>
+      </tr>
+    
+
+    <tr  *ngFor="let r of returnOrderItem">
+      <td>
+        <span class="spacer-right">
+          {{r.productName}}
+        </span>
+      </td>
+      <td>
+        <span class="spacer-right">
+          {{r.quantite}}
+        </span>
+      </td>
+      <td>
+        <span class="spacer-right">
+          {{r.vatPrice}} €
+        </span>
+      </td>
+    </tr>
+  </table>
+  </div>
+
+  <!-- <ul *ngIf="returnOrderItem!=null">
+    <li *ngFor="let r of returnOrderItem">
+      id : {{r.theId}} - {{r.productName}} : {{r.vatPrice}} €
+      <br/>
+    </li>
+  </ul> -->
+
+
 </div>
 
 
