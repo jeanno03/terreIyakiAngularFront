@@ -36,8 +36,8 @@
 
       <li *ngIf="user">
         <strong>Votre panier</strong>
-        <br/>Commande n°{{panier.theId}}
-        <br/>Montant : {{panierVatprice.vatPriceTotal}}€
+        <br/>N°{{panier.theId}} - {{panier.type}}
+        <br/>Montant : {{panierVatprice.vatPriceTotal}}€ <span *ngIf="panier.myTable!=null">table n°{{panier.myTable}}</span>
       </li>
 
 

@@ -20,17 +20,17 @@ export class AppComponent {
   public panier;
   public header = [];
 
-public panierVatprice;
+  public panierVatprice;
 
-  user:firebase.User = null;
+  user: firebase.User = null;
   topics: FirebaseListObservable<any[]>;
   orderType: any;
   orderTypeChoice: any;
   userFromAp: any = null;
   message: string = null;
   lastOrder: any;
- 
-  
+
+
 
   constructor(
     private auth: AuthService,
@@ -38,12 +38,12 @@ public panierVatprice;
     public router: Router,
     public profilService: ProfilService,
     public commandeService: CommandeService,
-    public panierService:PanierService,
-    public panierVatPriceService:PanierVatPriceService,
-  ) { 
+    public panierService: PanierService,
+    public panierVatPriceService: PanierVatPriceService,
+  ) {
     //on récupère le dernier panier commande en cours et son montant
-this.panier = panierService.getPanier();
-this.panierVatprice = panierVatPriceService.getPanierVatPrice();
+    this.panier = panierService.getPanier();
+    this.panierVatprice = panierVatPriceService.getPanierVatPrice();
   }
 
   loginWithGoogle() {
@@ -94,9 +94,9 @@ this.panierVatprice = panierVatPriceService.getPanierVatPrice();
 
 
   allerPanier(email: string) {
-console.log("on va au panier");
-        this.router.navigateByUrl('panier');
-    }
+    console.log("on va au panier");
+    this.router.navigateByUrl('panier');
+  }
 
 }
 

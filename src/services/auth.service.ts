@@ -71,6 +71,10 @@ export class AuthService {
                 this.panierService.setOption('theDate', this.lastOrder.orderDate);
                 this.panierService.setOption('type', this.lastOrder.orderType.name);
                 this.panierService.setOption('statut', this.lastOrder.statut.name);
+                //si table existe je l'envo pour partage
+                if(this.lastOrder.myTable.theId!=null){
+                  this.panierService.setOption('myTable', this.lastOrder.myTable.theId);
+                }
 
                 //on va récupérer toutes les orderItem de la commande
                 //on va les envoyer à panierItemService

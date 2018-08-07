@@ -52,16 +52,31 @@ export class CommandeService {
     return this.http.get<any>(this.API + '/createOrderItem?productId=' + productId + '&userId=' + userId);
   }
 
-  returnOrderItemByOrder(idOrder:number){
-return this.http.get(this.API+'/myOrders/'+idOrder+'/orderItems').
-map((result:any)=>{
-  return result._embedded.orderItems;
-})
+  returnOrderItemByOrder(idOrder: number) {
+    return this.http.get(this.API + '/myOrders/' + idOrder + '/orderItems').
+      map((result: any) => {
+        return result._embedded.orderItems;
+      })
   }
 
   //on enregistre le numero de table a la commande et on retourne un message de succès
-  chooseTable(tableId:number, userId:number){
-return this.http.get(this.API+'/chooseTable?tableId='+tableId+'&userId='+userId);
+  chooseTable(tableId: number, userId: number) {
+    return this.http.get(this.API + '/chooseTable?tableId=' + tableId + '&userId=' + userId);
   }
+
+  //on incremente un produit
+  incrementeOrderItem(productId: number, userId: number) {
+    return this.http.get(this.API + '/incrementeOrderItem?productId=' + productId + '&userId=' + userId);
+  }
+  //on decremente un produit
+  decrementeOrderItem(productId: number, userId: number) {
+    return this.http.get(this.API + '/decrementeOrderItem?productId=' + productId + '&userId=' + userId);
+  }
+
+  // on supprime la ligne de commande
+  deleteOrderItem(productId: number, userId: number) {
+    return this.http.get(this.API + '/deleteOrderItem?productId=' + productId + '&userId=' + userId);
+  }
+
 
 }

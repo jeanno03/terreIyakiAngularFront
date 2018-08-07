@@ -148,7 +148,7 @@ export class CarteComponent implements OnInit {
           //on doit trouver le montant total de vatPrice de la list returnOrderItem
           this.retourVatpriceTotal=0;
           for(this.i=0;this.i<this.returnOrderItem.length;this.i++){
-            this.retourVatpriceTotal=this.retourVatpriceTotal+this.returnOrderItem[this.i].vatPrice;
+            this.retourVatpriceTotal=this.retourVatpriceTotal+(this.returnOrderItem[this.i].vatPrice*this.returnOrderItem[this.i].quantite);
           }
           this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
         },err=>{

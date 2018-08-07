@@ -26,7 +26,7 @@
           <button type="button" 
           class="btn btn-primary spacer-right-top" 
           *ngFor="let m of myTables | orderBy tableNumber"
-          (click)=tableDejaChoisi(m.theId)>
+          (click)=tableDejaChoisi()>
             N°{{m.tableNumber}}
             <span class="badge">
               {{m.statutName}}

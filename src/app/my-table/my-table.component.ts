@@ -1,3 +1,4 @@
+import { PanierService } from './../../services/panier.service';
 import { CommandeService } from './../../services/commande.service';
 import { UserFromAppService } from './../../services/user-from-app.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,27 +26,46 @@ export class MyTableComponent implements OnInit {
   mode: number;
   errMessage: string;
   tablePersiter: number;
+  panier: any;
+
 
   constructor(
     public myTableService: MyTableService,
     public activatedRoute: ActivatedRoute,
     public userFromAppService: UserFromAppService,
     public commandeService: CommandeService,
-    public router: Router
+    public router: Router,
+    public panierService: PanierService
   ) {
     this.message = activatedRoute.snapshot.params['message'];
-    console.log("message message message : " + this.message);
     this.userFromAp = userFromAppService.getFirebaseUser();
+    {
+      this.panier = panierService.getPanier();
+
+    }
+
+
+
   }
 
   ngOnInit() {
     //je met mode = 1 ==> possibilité de choisir une table
     this.mode = 1;
+    // je met les conditions pour autoriser l user a ouvrir table ou non
+    if (this.panier.myTable != null) {
+      console.log("table non null ***** table non null *****");
+      this.mode = 2;
+      console.log("this.mode ***** this.mode ***** :" + this.mode);
+    }
+    else {
+      this.mode = 1;
+    }
     //je récupère tous les n° de tables déjà trié par springBoot (asc)
     this.myTableService.getAllTables()
       .subscribe(data => {
         this.myTables = data;
         // this.myTableList = this.getAllTableStatut(this.myTables);
+
       }, err => {
         console.log(err);
       })
@@ -64,25 +84,28 @@ export class MyTableComponent implements OnInit {
         this.tablePersiter = tableId;
         //on doit rafraichir la page
         this.myTableService.getAllTables()
-        .subscribe(data => {
+          .subscribe(data => {
             this.myTables = data;
             //une fois la table choisi ==> impossibilité de choisir une table
             this.mode = 2;
-            console.log("mode mode mode : " + this.mode);
-
-        }, err => {
-          console.log(err);
-        })
-    }, err => {
+            //
+            this.panierService.setOption('myTable', tableId);
+          }, err => {
+            console.log(err);
+          })
+      }, err => {
         console.log(err)
-    })
+      })
 
   }
 
   //la table est déjà choisi ==> mess d erreur
   tableDejaChoisi() {
-    this.errMessage = ("Vous avez déjà choisie la table n°" + this.tablePersiter + " ,veuillez choisir vos produits"))
-    this.theMessage.theMessage = this.errMessage;
+    // this.errMessage = ("Vous avez déjà choisie une table");
+    // this.theMessage.theMessage =[];
+    // this.theMessage.theMessage = this.errMessage;
+    this.theMessage = null;
+    this.message = ("Vous avez déjà choisie une table");
   }
 
 }
