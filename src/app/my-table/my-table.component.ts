@@ -1,3 +1,6 @@
+import { CommandeService } from './../../services/commande.service';
+import { UserFromAppService } from './../../services/user-from-app.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MyTableModel } from '../../models/myTableModel';
 import { MyTableService } from '../../services/my-table.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,68 +19,70 @@ import 'rxjs/add/operator/mergeMap';
 export class MyTableComponent implements OnInit {
 
   myTables: any;
-  statut: any;
-  myTableModel: MyTableModel;
-  myTableList: Array<MyTableModel>;
-  myTableListProvisoire: Array<MyTableModel>;
-  i: number;
-  j: number;
-  myTableModelProvisoire: MyTableModel = null;
+  message: any
+  userFromAp: any = null;
+  theMessage: any;
+  mode: number;
+  errMessage: string;
+  tablePersiter: number;
 
-  constructor(public myTableService: MyTableService) { }
+  constructor(
+    public myTableService: MyTableService,
+    public activatedRoute: ActivatedRoute,
+    public userFromAppService: UserFromAppService,
+    public commandeService: CommandeService,
+    public router: Router
+  ) {
+    this.message = activatedRoute.snapshot.params['message'];
+    console.log("message message message : " + this.message);
+    this.userFromAp = userFromAppService.getFirebaseUser();
+  }
 
   ngOnInit() {
-    //je récupère tous les n° de tables
+    //je met mode = 1 ==> possibilité de choisir une table
+    this.mode = 1;
+    //je récupère tous les n° de tables déjà trié par springBoot (asc)
     this.myTableService.getAllTables()
       .subscribe(data => {
         this.myTables = data;
-        this.myTableList = this.getAllTableStatut(this.myTables);
+        // this.myTableList = this.getAllTableStatut(this.myTables);
       }, err => {
         console.log(err);
       })
 
   }
 
+  //la table est sélectionné je l'ajoute a la commande
+  tableChoisi(tableId: number) {
 
-  getAllTableStatut(myTables: any) {
-    this.myTableListProvisoire = [];
+    this.commandeService.chooseTable(tableId, this.userFromAp.id)
 
-
-    myTables.forEach(element => {
-      //  en fonction de l'id de la table je récupère son statut
-      this.myTableService.getTableStatut(element.theId)
+      .subscribe(data => {
+        this.theMessage = data;
+        this.message = null;
+        //on récupère l id de la table
+        this.tablePersiter = tableId;
+        //on doit rafraichir la page
+        this.myTableService.getAllTables()
         .subscribe(data => {
-          this.statut = data;
-          this.myTableModel = new MyTableModel(element.tableNumber, this.statut.name, element.theId);
-          this.myTableListProvisoire.push(this.myTableModel);
+            this.myTables = data;
+            //une fois la table choisi ==> impossibilité de choisir une table
+            this.mode = 2;
+            console.log("mode mode mode : " + this.mode);
 
-          //faire un tri croissant en fonction du numéro de table
-          //1ere boucle si n<n+1 ne rien faire si n>n+1 alors on permut
-          //2eme boucle tant que n>n+1 au moin une fois on recommande 1ere boucle
-          //Cet algo ne correspond pas a celle annoncé et consomme de la ressource
-          //Elle permet de réaliser le trie et reste provisoire
-          for (this.j = 0; this.j < this.myTableListProvisoire.length; this.j++) {
-
-            for (this.i = 0; this.i < this.myTableListProvisoire.length - 1; this.i++) {
-
-              if (this.myTableListProvisoire[this.i].getTableNumber() > this.myTableListProvisoire[(this.i + 1)].getTableNumber()) {
-
-                this.myTableModelProvisoire = this.myTableListProvisoire[this.i];
-                this.myTableListProvisoire[this.i] = this.myTableListProvisoire[(this.i + 1)];
-                this.myTableListProvisoire[(this.i + 1)] = this.myTableModelProvisoire;
-              }
-
-            }
-          }
         }, err => {
           console.log(err);
         })
-
     }, err => {
-      console.log(err);
+        console.log(err)
     })
 
-    return this.myTableListProvisoire;
+  }
+
+  //la table est déjà choisi ==> mess d erreur
+  tableDejaChoisi() {
+    this.errMessage = ("Vous avez déjà choisie la table n°" + this.tablePersiter + " ,veuillez choisir vos produits"))
+    this.theMessage.theMessage = this.errMessage;
   }
 
 }

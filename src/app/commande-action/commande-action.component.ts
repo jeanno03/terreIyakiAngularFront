@@ -71,15 +71,45 @@ export class CommandeActionComponent implements OnInit {
   enCours() {
   }
 
+  //on choisi le type de la commande
   getOrderType(name: string) {
 
     this.commandeService.selectOrder(name, this.userFromAp.email)
       .subscribe(data => {
+        //on créé la commande
+        //on renvoi le message du type de commande choisi
         this.message = data;
         //on va rechercher la derniere commande
         //je dois chercher l id de l user puis je met l objet dans panier
-        this.selectLastMyOrderByUser();
-        this.router.navigate(['homeMessage', this.message.theMessage]);
+      
+
+//si numero du message = 5 on renvoie vers home
+if(this.message.number==5){
+  this.router.navigate(['homeMessage', this.message.theMessage]);
+}
+else if(this.message.number==6){
+  this.router.navigate(['myTable', this.message.theMessage]);
+}
+
+
+//si numero du message = 6 on renvoie vers table pour choix
+
+        this.commandeService.selectLastMyOrderByUser(this.userFromAp.id).subscribe(data => {
+          this.lastOrder = data;
+          this.panierService.setOption('theId', this.lastOrder.theId);
+          this.panierService.setOption('theDate', this.lastOrder.orderDate);
+          this.panierService.setOption('type', this.lastOrder.orderType.name);
+          this.panierService.setOption('statut', this.lastOrder.statut.name);
+
+
+          
+
+        }, err => {
+          console.log(err);
+        })
+
+
+        
       }, err => {
         console.log(err);
       })

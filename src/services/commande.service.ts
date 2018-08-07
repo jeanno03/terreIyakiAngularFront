@@ -58,4 +58,10 @@ map((result:any)=>{
   return result._embedded.orderItems;
 })
   }
+
+  //on enregistre le numero de table a la commande et on retourne un message de succès
+  chooseTable(tableId:number, userId:number){
+return this.http.get(this.API+'/chooseTable?tableId='+tableId+'&userId='+userId);
+  }
+
 }

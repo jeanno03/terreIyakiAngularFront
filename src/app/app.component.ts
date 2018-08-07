@@ -29,6 +29,7 @@ public panierVatprice;
   userFromAp: any = null;
   message: string = null;
   lastOrder: any;
+ 
   
 
   constructor(
