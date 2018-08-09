@@ -47,20 +47,20 @@
 
   <div *ngIf="category">
 
-      <div class="panel-body">
-        <ul class="nav nav-pills">
-          <li [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
-            <a class="clickable" class="active" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</a>
-          </li>
-          <li *ngIf="menuAValider==1">
-<button class="btn btn-info spacer-right2" click="validerMenu()">Valider</button>
-          </li>
-        </ul>
-    
+    <div class="panel-body">
+      <ul class="nav nav-pills">
+        <li [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
+          <a class="clickable" class="active" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</a>
+        </li>
+        <li *ngIf="menuAValider==1">
+          <button class="btn btn-info spacer-right2" (click)=createComboOrderItems()>Valider</button>
+        </li>
+      </ul>
+
       <div class="container spacer">
         <div class="row">
           <table class="table-striped">
-    
+
             <tr>
               <th>
                 <span class="spacer-right">photo</span>
@@ -72,7 +72,7 @@
                 <span class="spacer-right"></span>
               </th>
             </tr>
-    
+
             <tr *ngFor="let p of this.productsMap">
 
               <td>
@@ -80,36 +80,40 @@
                   <img class="image" src={{p.picture}} />
                 </div>
               </td>
-    
+
               <td>
                 <div class="col-sm-8">
                   {{p.description}}
                 </div>
               </td>
-    
+
               <td>
                 <div class="col-sm-2">
                   <button class="btn btn-info spacer-right2" (click)="productOnHashMenu(p.id)">
                     <br/>Choisir</button>
                 </div>
               </td>
-    
+
             </tr>
-    
+
           </table>
         </div>
       </div>
     </div>
-    
-    </div>
+
+  </div>
 
 
 </div>
 
+<br/>
+Votre séléection : <strong>{{productChoose.name}}</strong>
+<br/> Les produits :
+<br/>
+<ul>
+  <li *ngFor="let a of arrayDeHashMenu">
+    {{a.name}}
+  </li>
+</ul>
 
-
-
-
-
-
-
+{{message.theMessage}}

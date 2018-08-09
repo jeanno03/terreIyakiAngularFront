@@ -31,6 +31,8 @@ getCategoryByName(name:string){
   return this.http.get<Category>(this.API+'/getCategoryByName?name='+name);
 }
 
+//nom de méthode pouvant porter a confusion
+//elle va retrouver les products en fonction de l'id de categories
 findProductById(id:number){
   return this.http.get(this.API+'/categories/'+id+'/products').
   map((result:any)=>{

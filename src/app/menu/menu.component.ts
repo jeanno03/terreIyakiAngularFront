@@ -1,3 +1,6 @@
+import { LongClassModel } from './../../models/longClassModel';
+import { UserFromAppService } from './../../services/user-from-app.service';
+import { ProductService } from './../../services/product.service';
 import { CategoryModel } from '../../models/categoryModel';
 import { Combo } from '../../interfaces/combo';
 import { ComboService } from '../../services/combo.service';
@@ -18,7 +21,7 @@ export class MenuComponent implements OnInit {
   id: number;
   comboCat: any;
   comboCategory: any = null;
-  products: any;
+  // products: any;
   comboCategoryId: number;
   productList: Array<any> = [];
   category: Array<CategoryModel>;
@@ -36,12 +39,25 @@ export class MenuComponent implements OnInit {
 
   currentCat: number;
 
+  //le produit que l'user va choisir
+  productChoose: any;
   //va comporter le menu avant valiation commande
-  hashMenu: Map<number, number>;
+  hashMenu: Map<number, any>;
   menuAValider: number;
-  productTest:any;
+  ProductDeHashMenu: any;
+  arrayDeHashMenu:Array <any>;
+  arrayLongClassModel: Array<LongClassModel>;
+  longClassModel:LongClassModel;
+  userFromAp: any;
 
-  constructor(public comboService: ComboService) { }
+  message: any;
+
+  constructor(
+    public comboService: ComboService,
+    userFromAppService: UserFromAppService,
+  ) {
+    this.userFromAp = userFromAppService.getFirebaseUser();
+  }
 
   ngOnInit() {
     this.comboService.getComboProducts()
@@ -53,10 +69,16 @@ export class MenuComponent implements OnInit {
   }
 
   getComboByName(name: string) {
+
     //je reinitilise le choix des categories
-    this.category = [];
+    this.category = null;
     //je réinitiliase le choix des produits
     this.productsMap = null;
+    //je réinitialise le produit choisi
+    this.productChoose = null
+    //je réinitiliase l'arrayList de la map
+    this.arrayDeHashMenu = null;
+
 
     this.currentPage = name;
 
@@ -71,7 +93,9 @@ export class MenuComponent implements OnInit {
 
   selectCombo(id: number) {
 
+    //cette méthode va donner le choix de la catégorie déjà trié par SpringBoot
     this.comboService.getComboCategoryByComboId(id).subscribe(data => {
+
       this.comboCat = data;
       this.parentComboCategoryId = null;
       this.category = [];
@@ -116,8 +140,6 @@ export class MenuComponent implements OnInit {
       this.menuAValider = 0;
       this.hashMenu = new Map();
 
-
-
     }, err => {
       console.log(err);
     })
@@ -137,22 +159,63 @@ export class MenuComponent implements OnInit {
   //on met les produits dans hashmap avant validation du menu
   productOnHashMenu(idProduct: number) {
 
-    //key idParent de comboCategory
-    //this.currentCat reste enfoncé voir méthode getProductsFromComboCat(id: number)
-    //value => id du produit
-    this.hashMenu.set(this.currentCat, idProduct);
+    //puis a partir de l id on va recréé le produit choisi
+    this.comboService.findProductById(idProduct).subscribe(
+      data => {
+        this.productChoose = data;
 
-    //on va parcourir la hashmap et si taille this.category = taille productMap alors on propose de valider
-    if (this.category.length == this.hashMenu.size) {
-      this.menuAValider = 1;
-    }
-    //méthode pour voir contenu de la map si plusieurs clik ==> test ok
-    console.log("key : " + this.currentCat + " value  : "+ this.hashMenu.get(this.currentCat)) ;
+        {
+          //key idParent de comboCategory
+          //this.currentCat reste enfoncé voir méthode getProductsFromComboCat(id: number)
+          //value => le produit choisi
+          this.hashMenu.set(this.currentCat, this.productChoose);
+            //je créé l 'arrayList de toutes les valeures de la HashMap pour affichage
+            
+            this.arrayDeHashMenu = this.getValues(this.hashMenu);
+
+
+          //on va parcourir la hashmap et si taille this.category = taille productMap alors on propose de valider
+          if (this.category.length == this.hashMenu.size) {
+            this.menuAValider = 1;
+            //je récupre que les theId une fois l'array complete
+            this.arrayLongClassModel =[];
+            
+            //je créé l'array de longClassModel
+            this.arrayDeHashMenu.forEach((element=>{
+              this.longClassModel=new LongClassModel(element.theId);
+              this.arrayLongClassModel.push(this.longClassModel);
+            }))
+       
+          }
+
+        }
+
+      }, err => {
+        console.log(err);
+      })
+
   }
 
 
+  createComboOrderItems() {
+    //J'appel la méthode put qui va sauvegarger le combo dans commade et retourner mess de succes
+    this.comboService.createComboOrderItems(this.userFromAp.id, this.combo.id, this.arrayLongClassModel)
+      .subscribe(data => {
+        this.message = data;
 
-  validerMenu(){
-    //métier a faire
+        // // this.arrayLongClassModel =[];
+        // this.arrayLongClassModel.forEach((element=>{
+          // this.arrayLongClassModel.push(element.theId);
+
+        // }))
+
+
+      }, err => {
+        console.log(err);
+      })
+  }
+
+  getValues(map) {
+    return Array.from(map.values());
   }
 }

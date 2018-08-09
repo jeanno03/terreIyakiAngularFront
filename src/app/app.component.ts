@@ -41,6 +41,9 @@ export class AppComponent {
     public panierService: PanierService,
     public panierVatPriceService: PanierVatPriceService,
   ) {
+    // //j'initialise
+    // this.panier =null;
+    // this.panierVatprice=null;
     //on récupère le dernier panier commande en cours et son montant
     this.panier = panierService.getPanier();
     this.panierVatprice = panierVatPriceService.getPanierVatPrice();
@@ -94,7 +97,7 @@ export class AppComponent {
 
 
   allerPanier(email: string) {
-    console.log("on va au panier");
+    // console.log("on va au panier");
     this.router.navigateByUrl('panier');
   }
 
