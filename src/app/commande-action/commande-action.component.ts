@@ -1,3 +1,4 @@
+import { LongClassModel } from './../../models/longClassModel';
 import { PanierVatPriceService } from './../../services/panier-vat-price.service';
 import { UserFromAppService } from './../../services/user-from-app.service';
 import { PanierService } from '../../services/panier.service';
@@ -27,6 +28,13 @@ export class CommandeActionComponent implements OnInit {
   retourVatpriceTotal: number;
   i: number;
   hashOrderItem: Map<number, number>;
+  histo: any;
+  orderItemsToErase: any;
+
+  longClassModel: LongClassModel;
+  arrayLongClassModel: Array<LongClassModel>;
+
+
 
   constructor(
     public commandeService: CommandeService,
@@ -54,7 +62,7 @@ export class CommandeActionComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.chooseOrderType();
+    this.chooseOrderType();
     // this.getMyOrderByMyUser();
   }
 
@@ -186,23 +194,66 @@ export class CommandeActionComponent implements OnInit {
 
   deleteOrderItem(idProduct) {
     this.commandeService.deleteOrderItem(idProduct, this.userFromAp.id)
-    .subscribe(data => {
-      this.message = data;
-      //on doit rafraichir page
+      .subscribe(data => {
+        this.message = data;
+        //on doit rafraichir page
 
-      //on récupère tous les orderItems de la derniere commade
-      this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
-        this.returnOrderItem = data;
-        //on récupère le montant total du panier
-        this.retourVatpriceTotal = 0;
-        for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
-          this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
-        }
-        //on remet a jour le montant total du panier
-        this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
+        //on récupère tous les orderItems de la derniere commade
+        this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
+          this.returnOrderItem = data;
+          //on récupère le montant total du panier
+          this.retourVatpriceTotal = 0;
+          for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
+            this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
+          }
+          //on remet a jour le montant total du panier
+          this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
+        }, err => {
+          console.log(err);
+        })
       }, err => {
         console.log(err);
       })
+
+  }
+
+  deleteOrderItemCombo(idChose: number) {
+    console.log("Numéro 0 idChose : " + idChose);
+    //on récupère l'historisation à partir de l id de l orderItem du combo
+    this.commandeService.getHistorisationFromOrderItem(idChose).subscribe(data => {
+      this.histo = data;
+      //historisation contient une liste de orderItem
+      //on cherche l indice 0
+      console.log("Numéro 1-1 ==> this.histo : " + this.histo);
+      console.log("Numéro 1-2 ==> this.histo.theId : " + this.histo[0].theId);
+
+      //puis on récupère tous les ordersItems à supprimer
+      this.commandeService.getOrderItemsFromHistorisation(this.histo[0].theId).
+        subscribe(data => {
+          this.orderItemsToErase = data;
+          console.log("Numéro 2 ids de la list de orderItem : " + this.orderItemsToErase[0].theId + " - " + this.orderItemsToErase[1].theId);
+          //je créé l'array de LongClassModel de orderItemsToErase
+          this.arrayLongClassModel = [];
+          //je créé l'array de longClassModel
+
+          this.orderItemsToErase.forEach(element => {
+            this.longClassModel = new LongClassModel(element.theId)
+            this.arrayLongClassModel.push(this.longClassModel);
+            console.log("Numéro 3 foreach de longClassModel : " + this.longClassModel.getIdLong());
+          });
+
+          this.commandeService.deleteComboOrderItem(this.arrayLongClassModel).
+            subscribe(data => {
+              this.message = data;
+
+            }, err => {
+              console.log(err);
+            })
+
+        }, err => {
+          console.log(err);
+        })
+
     }, err => {
       console.log(err);
     })

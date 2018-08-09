@@ -107,7 +107,7 @@
 </div>
 
 <br/>
-Votre séléection : <strong>{{productChoose.name}}</strong>
+Votre sélection : <strong>{{productChoose.name}}</strong>
 <br/> Les produits :
 <br/>
 <ul>
@@ -115,5 +115,4 @@ Votre séléection : <strong>{{productChoose.name}}</strong>
     {{a.name}}
   </li>
 </ul>
-
-{{message.theMessage}}
+<p *ngIf="message">{{message.theMessage}}</p>

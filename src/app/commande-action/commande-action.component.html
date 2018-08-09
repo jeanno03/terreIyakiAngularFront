@@ -37,36 +37,49 @@
         </th>
       </tr>
 
+      <!-- concernant les conditions des bouttons, 
+s'il s'agit d'un product a la carte 
+*ngIf="r.quantite>0&&r.productName!='menu'&&r.vatPrice!=0"
+s'il s'agit d'un menu on affiche que le menu
+*ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice!=0" -->
 
       <tr *ngFor="let r of returnOrderItem">
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0">
+          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.vatPrice!=0">
             {{r.productName}}
+          </span>
+
+          <span class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice!=0">
+            {{r.comboName}}
           </span>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0">
+          <span class="spacer-right" *ngIf="r.quantite>0&&r.vatPrice!=0">
             {{r.quantite}}
           </span>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0">
+          <span class="spacer-right" *ngIf="r.quantite>0&&r.vatPrice!=0">
             {{r.vatPrice}} €
           </span>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0">
+          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.vatPrice!=0">
             <button (click)="incrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2">+</button>
           </span>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0">
+          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.vatPrice!=0">
             <button (click)="decrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2">-</button>
           </span>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0">
+          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.vatPrice!=0">
             <button (click)="deleteOrderItem(r.idProduct)" class="btn btn-info spacer-right2">X</button>
+          </span>
+
+          <span class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice!=0">
+            <button (click)="deleteOrderItemCombo(r.theId)" class="btn btn-info spacer-right2">X</button>
           </span>
         </td>
       </tr>

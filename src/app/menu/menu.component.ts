@@ -1,3 +1,9 @@
+// menu.component.ts
+
+
+import { Router } from '@angular/router';
+import { PanierVatPriceService } from './../../services/panier-vat-price.service';
+import { CommandeService } from './../../services/commande.service';
 import { LongClassModel } from './../../models/longClassModel';
 import { UserFromAppService } from './../../services/user-from-app.service';
 import { ProductService } from './../../services/product.service';
@@ -8,6 +14,9 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { map } from 'rxjs-compat/operator/map';
 
+//vatPrice calulé dans app et commande action
+//a l'initialisation
+//calul a supprimer ici
 
 @Component({
   selector: 'app-menu',
@@ -45,21 +54,29 @@ export class MenuComponent implements OnInit {
   hashMenu: Map<number, any>;
   menuAValider: number;
   ProductDeHashMenu: any;
-  arrayDeHashMenu:Array <any>;
+  arrayDeHashMenu: Array<any>;
   arrayLongClassModel: Array<LongClassModel>;
-  longClassModel:LongClassModel;
+  longClassModel: LongClassModel;
   userFromAp: any;
 
   message: any;
 
+  panier:any;
+  returnOrderItem:any;
+  retourVatpriceTotal:number;
+
   constructor(
     public comboService: ComboService,
-    userFromAppService: UserFromAppService,
+    public router: Router,
+    public userFromAppService: UserFromAppService,
+    public commandeService:CommandeService,
+    public panierVatPriceService :PanierVatPriceService
   ) {
     this.userFromAp = userFromAppService.getFirebaseUser();
   }
 
   ngOnInit() {
+
     this.comboService.getComboProducts()
       .subscribe(data => {
         this.comboes = data;
@@ -78,7 +95,11 @@ export class MenuComponent implements OnInit {
     this.productChoose = null
     //je réinitiliase l'arrayList de la map
     this.arrayDeHashMenu = null;
+    //je reinitiliase les boutons enfoncés
 
+    this.currentCat = null;
+    //je reinitialise le produit choisi
+    this.productChoose = null;
 
     this.currentPage = name;
 
@@ -169,23 +190,23 @@ export class MenuComponent implements OnInit {
           //this.currentCat reste enfoncé voir méthode getProductsFromComboCat(id: number)
           //value => le produit choisi
           this.hashMenu.set(this.currentCat, this.productChoose);
-            //je créé l 'arrayList de toutes les valeures de la HashMap pour affichage
-            
-            this.arrayDeHashMenu = this.getValues(this.hashMenu);
+          //je créé l 'arrayList de toutes les valeures de la HashMap pour affichage
+
+          this.arrayDeHashMenu = this.getValues(this.hashMenu);
 
 
           //on va parcourir la hashmap et si taille this.category = taille productMap alors on propose de valider
           if (this.category.length == this.hashMenu.size) {
             this.menuAValider = 1;
             //je récupre que les theId une fois l'array complete
-            this.arrayLongClassModel =[];
-            
+            this.arrayLongClassModel = [];
+
             //je créé l'array de longClassModel
-            this.arrayDeHashMenu.forEach((element=>{
-              this.longClassModel=new LongClassModel(element.theId);
+            this.arrayDeHashMenu.forEach((element => {
+              this.longClassModel = new LongClassModel(element.theId);
               this.arrayLongClassModel.push(this.longClassModel);
             }))
-       
+
           }
 
         }
@@ -203,11 +224,52 @@ export class MenuComponent implements OnInit {
       .subscribe(data => {
         this.message = data;
 
-        // // this.arrayLongClassModel =[];
-        // this.arrayLongClassModel.forEach((element=>{
-          // this.arrayLongClassModel.push(element.theId);
 
-        // }))
+
+
+
+//bloc qui va calculer mt panier en fonction de tous les orderItem de la commande
+{
+  //panier.theId ==> id de la commande 
+  //on va récupérer toutes les orderItem de la commande
+  //on va les envoyer à panierItemService
+  this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
+    this.returnOrderItem=data;
+    //on doit trouver le montant total de vatPrice de la list returnOrderItem
+    this.retourVatpriceTotal=0;
+    for(this.i=0;this.i<this.returnOrderItem.length;this.i++){
+      this.retourVatpriceTotal=this.retourVatpriceTotal+(this.returnOrderItem[this.i].vatPrice*this.returnOrderItem[this.i].quantite);
+    }
+    this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
+  
+
+            //je reinitilise le choix des categories
+            this.category = null;
+            //je réinitiliase le choix des produits
+            this.productsMap = null;
+            //je réinitialise le produit choisi
+            this.productChoose = null
+            //je réinitiliase l'arrayList de la map
+            this.arrayDeHashMenu = null;
+            //je reinitiliase les boutons enfoncés
+            this.currentPage = null;
+            this.currentCat = null;
+            //je reinitialise le produit choisi
+            this.productChoose = null;
+
+            //on rafraichit la page pour MAJ du mt du panier
+            this.router.navigateByUrl('menu');
+
+
+
+    }, err => {
+      console.log(err);
+    })
+
+  }
+
+
+
 
 
       }, err => {
@@ -217,5 +279,10 @@ export class MenuComponent implements OnInit {
 
   getValues(map) {
     return Array.from(map.values());
+  }
+
+  //a definir
+  deleteOrderItemCombo(){
+
   }
 }

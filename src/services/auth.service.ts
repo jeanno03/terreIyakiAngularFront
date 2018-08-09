@@ -47,6 +47,7 @@ export class AuthService {
           this.panierService.setOption('theDate', null);
           this.panierService.setOption('type', null);
           this.panierService.setOption('statut', null);
+          this.panierService.setOption('myTable', null);
           this.panierVatPriceService.setOption('vatPriceTotal', null);
 
           this.userFromAp = null;

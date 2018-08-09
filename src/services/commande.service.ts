@@ -1,3 +1,4 @@
+import { LongClassModel } from './../models/longClassModel';
 import { OrderItemModel } from '../models/orderItemModel';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
@@ -78,5 +79,26 @@ export class CommandeService {
     return this.http.get(this.API + '/deleteOrderItem?productId=' + productId + '&userId=' + userId);
   }
 
+  //A partir de ces 2 méthodes on va trouver tous les ordersItem du combo commandés
+  //on recherche l'id de historisation
+  getHistorisationFromOrderItem(orderItemId:number){
+return this.http.get(this.API+'/orderItems/'+orderItemId+'/historisations').
+map((result:any)=>{
+  return result._embedded.historisations;
+})
+  }
+
+  //on recherche les orderItems de historisation
+  getOrderItemsFromHistorisation(historisationId:number){
+    return this.http.get(this.API+'/historisations/'+historisationId+'/orderItems').
+    map((result:any)=>{
+      return result._embedded.orderItems;
+  })
+}
+
+//on supprime tous les orders items du menu
+deleteComboOrderItem(arrayLongClassModel :Array<LongClassModel> ){
+  return this.http.post(this.API+'/deleteComboOrderItem',arrayLongClassModel);
+}
 
 }
