@@ -15,7 +15,9 @@ import 'rxjs/add/operator/mergeMap';
 import { UserFromAppService } from '../../services/user-from-app.service';
 
 
-
+//vatPrice calulé dans app et commande action
+//a l'initialisation
+//calul a supprimer ici
 
 @Component({
   selector: 'app-carte',
@@ -104,24 +106,21 @@ export class CarteComponent implements OnInit {
         this.createOrderItem(this.product.theId, this.userFromAp.id);
 
 
-//retiré ici
-
-
       }
     })
     return this.product;
   }
 
-  productTheIdOnCommande(theId: number) {
-    this.router.navigate(['commande', theId]);
-  }
+  // productTheIdOnCommande(theId: number) {
+  //   this.router.navigate(['commande', theId]);
+  // }
 
   test() {
   }
 
   newOrderItem(price: number, tax: number, comment: string) {
     this.commandeService.newOrderItem(price, tax, comment).subscribe(data => {
-      alert("produit choisi");
+      // alert("produit choisi");
       this.orderItem = data;
     }, err => {
       console.log(err);
@@ -132,7 +131,7 @@ export class CarteComponent implements OnInit {
   createOrderItem(productId: number, userId: number) {
     
     this.commandeService.createOrderItem(productId, userId).subscribe(data => {
-      alert("produit choisi");
+      // alert("produit choisi");
       this.message = data;
 
 
@@ -162,7 +161,7 @@ export class CarteComponent implements OnInit {
 
 
 
-
+//on rafraichit la page pour MAJ du mt du panier
       this.router.navigateByUrl('carte');
     }, err => {
       console.log(err);

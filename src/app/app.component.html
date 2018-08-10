@@ -28,16 +28,15 @@
 
 
 
-      <li *ngIf="user">
-        <strong>Vos identifiants gmail</strong>
-        <br/>{{user.email}}
+      <li *ngIf="user" class="spacer-right2">
+        <strong>Bienvenue</strong>
         <br/>{{user.displayName}}
       </li>
 
-      <li *ngIf="user">
-        <strong>Votre panier</strong>
-        <br/>N°{{panier.theId}} - {{panier.type}}
-        <br/>Montant : {{panierVatprice.vatPriceTotal}}€ <span *ngIf="panier.myTable!=null">table n°{{panier.myTable}}</span>
+      <li *ngIf="user" class="spacer-right2">
+        <strong>Commande n°{{panier.theId}}</strong>
+        <br/>{{panier.type}}<span *ngIf="panier.myTable!=null"> - Table n°{{panier.myTable}}</span>
+        <br/>Montant : {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}} 
       </li>
 
 

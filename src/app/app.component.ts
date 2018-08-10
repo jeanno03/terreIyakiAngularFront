@@ -28,8 +28,6 @@ export class AppComponent {
   orderTypeChoice: any;
   userFromAp: any = null;
   message: string = null;
-  lastOrder: any;
-
 
 
   constructor(
@@ -41,10 +39,6 @@ export class AppComponent {
     public panierService: PanierService,
     public panierVatPriceService: PanierVatPriceService,
   ) {
-    // //j'initialise
-    // this.panier =null;
-    // this.panierVatprice=null;
-    //on récupère le dernier panier commande en cours et son montant
     this.panier = panierService.getPanier();
     this.panierVatprice = panierVatPriceService.getPanierVatPrice();
   }

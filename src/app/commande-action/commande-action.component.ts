@@ -49,6 +49,7 @@ export class CommandeActionComponent implements OnInit {
     //on récupère tous les orderItems de la derniere commade
     this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
       this.returnOrderItem = data;
+      
       //on récupère le montant total du panier
       this.retourVatpriceTotal = 0;
       for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
@@ -88,25 +89,24 @@ export class CommandeActionComponent implements OnInit {
         //on créé la commande
         //on renvoi le message du type de commande choisi
         this.message = data;
-        //on va rechercher la derniere commande
-        //je dois chercher l id de l user puis je met l objet dans panier
 
-        //si numero du message = 5 on renvoie vers home
-        if (this.message.number == 5) {
-          this.router.navigate(['homeMessage', this.message.theMessage]);
-        }
-        else if (this.message.number == 6) {
-          this.router.navigate(['myTable', this.message.theMessage]);
-        }
-
-        //si numero du message = 6 on renvoie vers table pour choix
-
+        //je met d'abord le panier a jour avant routage vers page table pour initialisation du mode
         this.commandeService.selectLastMyOrderByUser(this.userFromAp.id).subscribe(data => {
           this.lastOrder = data;
           this.panierService.setOption('theId', this.lastOrder.theId);
           this.panierService.setOption('theDate', this.lastOrder.orderDate);
           this.panierService.setOption('type', this.lastOrder.orderType.name);
           this.panierService.setOption('statut', this.lastOrder.statut.name);
+
+          //puis je route en fonction de la demande
+          //si numero du message = 5 on renvoie vers home
+          if (this.message.number == 5) {
+            this.router.navigate(['homeMessage', this.message.theMessage]);
+          }
+          //si numero du message = 6 on renvoie vers table pour choix
+          else if (this.message.number == 6) {
+            this.router.navigate(['myTable', this.message.theMessage]);
+          }
 
         }, err => {
           console.log(err);
@@ -245,6 +245,29 @@ export class CommandeActionComponent implements OnInit {
           this.commandeService.deleteComboOrderItem(this.arrayLongClassModel).
             subscribe(data => {
               this.message = data;
+
+
+              //on doit rafraichir page
+
+              //on récupère tous les orderItems de la derniere commade
+              this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
+                this.returnOrderItem = data;
+                //on récupère le montant total du panier
+                this.retourVatpriceTotal = 0;
+                for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
+                  this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
+                }
+                //on remet a jour le montant total du panier
+                this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
+              }, err => {
+                console.log(err);
+              })
+
+
+
+
+
+
 
             }, err => {
               console.log(err);

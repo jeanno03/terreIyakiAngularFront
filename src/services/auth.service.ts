@@ -73,7 +73,7 @@ export class AuthService {
                 this.panierService.setOption('type', this.lastOrder.orderType.name);
                 this.panierService.setOption('statut', this.lastOrder.statut.name);
                 //si table existe je l'envo pour partage
-                if(this.lastOrder.myTable.theId!=null){
+                if(this.lastOrder.myTable!=null){
                   this.panierService.setOption('myTable', this.lastOrder.myTable.theId);
                 }
 
@@ -87,6 +87,7 @@ export class AuthService {
                     this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
                   }
                   this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
+
                 }, err => {
                   console.log(err);
                 })

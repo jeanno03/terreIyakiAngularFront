@@ -6,9 +6,39 @@
         <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of comboes">
           <a class="clickable" class="active" (click)=getComboByName(c.name)>{{c.name}}</a>
         </li>
+
+        <ul *ngIf="arrayDeHashMenu&&menuAValider!=1">
+          <button class="btn btn-danger spacer-right2" (click)=createComboOrderItems()>
+            <li>
+              Choisissez
+            </li>
+            <li *ngFor="let a of arrayDeHashMenu">
+              {{a.name}}
+            </li>
+          </button>
+        </ul>
+
+        <ul *ngIf="menuAValider==1">
+          <button class="btn btn-info spacer-right2" (click)=createComboOrderItems()>
+            <li>
+              <strong>Valider Menu</strong>
+            </li>
+            <li *ngFor="let a of arrayDeHashMenu">
+              {{a.name}}
+            </li>
+
+          </button>
+        </ul>
       </ul>
     </div>
   </div>
+
+  <span *ngIf="productChoose">
+    Votre sélection :
+    <strong>{{productChoose.name}}</strong>
+  </span>
+
+  <span *ngIf="message"><strong>{{message.theMessage}}</strong></span>
 
   <div class="container spacer" *ngIf="combo">
     <table class="table-striped">
@@ -44,7 +74,6 @@
     </table>
   </div>
 
-
   <div *ngIf="category">
 
     <div class="panel-body">
@@ -52,9 +81,7 @@
         <li [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
           <a class="clickable" class="active" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</a>
         </li>
-        <li *ngIf="menuAValider==1">
-          <button class="btn btn-info spacer-right2" (click)=createComboOrderItems()>Valider</button>
-        </li>
+
       </ul>
 
       <div class="container spacer">
@@ -106,13 +133,4 @@
 
 </div>
 
-<br/>
-Votre sélection : <strong>{{productChoose.name}}</strong>
-<br/> Les produits :
-<br/>
-<ul>
-  <li *ngFor="let a of arrayDeHashMenu">
-    {{a.name}}
-  </li>
-</ul>
-<p *ngIf="message">{{message.theMessage}}</p>
+

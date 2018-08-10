@@ -17,7 +17,7 @@
           Veuillez choisir vos produits
         </li>
         <li *ngIf="retourVatpriceTotal>0">
-          montant panier : {{retourVatpriceTotal}} €
+          Montant : {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}
         </li>
       </ul>
 
@@ -27,13 +27,13 @@
     <table class="table-striped">
       <tr>
         <th>
-          <span class="spacer-right">nom</span>
+          <span class="spacer-right">Choix</span>
         </th>
         <th>
-          <span class="spacer-right">quantité</span>
+          <span class="spacer-right">Qté</span>
         </th>
         <th>
-          <span class="spacer-right">prix</span>
+          <span class="spacer-right">Prix/unité</span>
         </th>
       </tr>
 
@@ -60,7 +60,7 @@ s'il s'agit d'un menu on affiche que le menu
         </td>
         <td>
           <span class="spacer-right" *ngIf="r.quantite>0&&r.vatPrice!=0">
-            {{r.vatPrice}} €
+            {{r.vatPrice | currency:'EUR':true:'1.1-1'}} 
           </span>
         </td>
         <td>

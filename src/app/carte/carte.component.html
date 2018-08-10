@@ -67,9 +67,11 @@
 
                 <td>
                   <div class="col-sm-2">
-                    {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
-                    <br/>
-                    <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId)>Ajouter</button>
+                    <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId)>
+                        {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
+                        <br/>
+                      Ajouter
+                    </button>
                   </div>
                 </td>
 

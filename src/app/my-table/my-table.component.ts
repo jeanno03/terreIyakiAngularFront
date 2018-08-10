@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs-compat/operator/map';
 import { Observable } from 'rxjs/Observable';
 
-
 import 'rxjs/Rx';
 import 'rxjs/add/operator/mergeMap';
 
@@ -23,7 +22,7 @@ export class MyTableComponent implements OnInit {
   message: any
   userFromAp: any = null;
   theMessage: any;
-  mode: number;
+  mode: number=0;
   errMessage: string;
   tablePersiter: number;
   panier: any;
@@ -39,26 +38,26 @@ export class MyTableComponent implements OnInit {
   ) {
     this.message = activatedRoute.snapshot.params['message'];
     this.userFromAp = userFromAppService.getFirebaseUser();
-    {
-      this.panier = panierService.getPanier();
-
-    }
-
-
-
+    this.panier = panierService.getPanier();
   }
 
   ngOnInit() {
-    //je met mode = 1 ==> possibilité de choisir une table
-    this.mode = 1;
-    // je met les conditions pour autoriser l user a ouvrir table ou non
-    if (this.panier.myTable != null) {
-      console.log("table non null ***** table non null *****");
-      this.mode = 2;
-      console.log("this.mode ***** this.mode ***** :" + this.mode);
+   
+    //si pas de commande ou si a choisi a emporter 
+    //pas de possibilité d'ouvrir une table
+    if (this.panier.theId == null || this.panier.type == "A emporter") {
+      this.mode = 0;
     }
-    else {
+
+    // si l'user a commandé sur place mais pas choisi de table
+    //table ouverte
+    else if (this.panier.type == "Sur place" && this.panier.myTable == null) {
       this.mode = 1;
+    }
+    // si l'user a commandé sur place et choisi de table
+    //table fermé
+    else if (this.panier.type == "Sur place" && this.panier.myTable != null) {
+      this.mode = 2;
     }
     //je récupère tous les n° de tables déjà trié par springBoot (asc)
     this.myTableService.getAllTables()
@@ -108,4 +107,12 @@ export class MyTableComponent implements OnInit {
     this.message = ("Vous avez déjà choisie une table");
   }
 
+  //le client na pas commandé ou a choisi a emporter
+  //renvoie un mess d err
+  tableFerme() {
+    this.theMessage = null;
+    this.message = ("Veuillez ouvrir une commande sur place");
+  }
+
 }
+
