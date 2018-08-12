@@ -10,7 +10,7 @@
         <ul *ngIf="arrayDeHashMenu&&menuAValider!=1">
           <button class="btn btn-danger spacer-right2" (click)=createComboOrderItems()>
             <li>
-              Choisissez
+              Complétez votre sélection
             </li>
             <li *ngFor="let a of arrayDeHashMenu">
               {{a.name}}
@@ -21,7 +21,7 @@
         <ul *ngIf="menuAValider==1">
           <button class="btn btn-info spacer-right2" (click)=createComboOrderItems()>
             <li>
-              <strong>Valider Menu</strong>
+              <strong>Valider votre sélection</strong>
             </li>
             <li *ngFor="let a of arrayDeHashMenu">
               {{a.name}}

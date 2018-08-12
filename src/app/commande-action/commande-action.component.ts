@@ -84,8 +84,9 @@ export class CommandeActionComponent implements OnInit {
   //on choisi le type de la commande
   getOrderType(name: string) {
 
-    this.commandeService.selectOrder(name, this.userFromAp.email)
-      .subscribe(data => {
+    this.commandeService.selectOrder(name, this.userFromAp.email).
+    finally(this.message).
+      subscribe(data => {
         //on créé la commande
         //on renvoi le message du type de commande choisi
         this.message = data;
@@ -112,9 +113,19 @@ export class CommandeActionComponent implements OnInit {
           console.log(err);
         })
 
+        // console.log("test pour voiri si cest synchrone : "+ this.message.theMessage);
+
       }, err => {
         console.log(err);
       })
+
+
+
+
+
+
+
+      
 
   }
 
@@ -282,4 +293,60 @@ export class CommandeActionComponent implements OnInit {
     })
 
   }
+
+
+  confirmOrder(userId:number){
+this.commandeService.confirmOrder(this.userFromAp.id).
+finally(this.message).
+subscribe(data=>{
+  this.message=data;
+
+  // on refraichit le panier et cette page
+
+  this.panierService.setOption('theId', null);
+  this.panierService.setOption('theDate', null);
+  this.panierService.setOption('type', null);
+  this.panierService.setOption('statut', null);
+  this.panierService.setOption('myTable', null);
+  this.panierVatPriceService.setOption('vatPriceTotal', null);
+  this.retourVatpriceTotal=null;
+
+this.returnOrderItem=null;
+this.router.navigateByUrl('commandeAction');
+
+
+}, err => {
+  console.log(err);
+})
+
+    
+  }
+
+
+  deleteOrder(userId:number){
+    this.commandeService.deleteOrder(this.userFromAp.id).
+    finally(this.message).
+    subscribe(data=>{
+      this.message=data;
+    
+      // on refraichit le panier et cette page
+    
+      this.panierService.setOption('theId', null);
+      this.panierService.setOption('theDate', null);
+      this.panierService.setOption('type', null);
+      this.panierService.setOption('statut', null);
+      this.panierService.setOption('myTable', null);
+      this.panierVatPriceService.setOption('vatPriceTotal', null);
+      this.retourVatpriceTotal=null;
+    
+    this.returnOrderItem=null;
+    this.router.navigateByUrl('commandeAction');
+    
+    
+    }, err => {
+      console.log(err);
+    })
+    
+        
+      }
 }

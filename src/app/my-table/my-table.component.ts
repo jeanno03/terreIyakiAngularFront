@@ -98,6 +98,10 @@ export class MyTableComponent implements OnInit {
 
   }
 
+ impossibleTableReserve(){
+  this.message = "veillez choisir une table disponible";
+ }
+
   //la table est déjà choisi ==> mess d erreur
   tableDejaChoisi() {
     // this.errMessage = ("Vous avez déjà choisie une table");

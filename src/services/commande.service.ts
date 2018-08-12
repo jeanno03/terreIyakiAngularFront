@@ -101,4 +101,14 @@ deleteComboOrderItem(arrayLongClassModel :Array<LongClassModel> ){
   return this.http.post(this.API+'/deleteComboOrderItem',arrayLongClassModel);
 }
 
+
+//on valide la commande
+confirmOrder(userId:number){
+  return this.http.get(this.API+'/confirmOrder?userId='+userId)
+}
+
+//on delete la commande et ses dépendances
+deleteOrder(userId:number){
+  return this.http.get(this.API+'/deleteOrder?userId='+userId)
+}
 }
