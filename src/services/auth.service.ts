@@ -34,7 +34,7 @@ export class AuthService {
       if (user) {
         this.currentUser = user;
 
-        window.alert("bienvenue " + this.currentUser.displayName);
+        // window.alert("bienvenue " + this.currentUser.displayName);
         this.profilService.getUserByEmail(this.currentUser.email).subscribe(data => {
 
           //on initialise tous les objets partagés
@@ -73,7 +73,7 @@ export class AuthService {
                 this.panierService.setOption('type', this.lastOrder.orderType.name);
                 this.panierService.setOption('statut', this.lastOrder.statut.name);
                 //si table existe je l'envo pour partage
-                if(this.lastOrder.myTable!=null){
+                if (this.lastOrder.myTable != null) {
                   this.panierService.setOption('myTable', this.lastOrder.myTable.theId);
                 }
 

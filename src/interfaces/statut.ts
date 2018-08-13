@@ -1,4 +1,4 @@
 export interface Statut {
-    name : string;
-    theId : any;
+    name: string;
+    theId: any;
 }

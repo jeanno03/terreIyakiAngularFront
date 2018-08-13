@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class PanierService{
+export class PanierService {
 
     private panier = {};
 
     constructor() { }
 
-    setOption(option, value){
-        this.panier[option]=value;
+    setOption(option, value) {
+        this.panier[option] = value;
     }
 
-    getPanier(){
+    getPanier() {
         return this.panier;
     }
 }

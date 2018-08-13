@@ -22,7 +22,7 @@ export class MyTableComponent implements OnInit {
   message: any
   userFromAp: any = null;
   theMessage: any;
-  mode: number=0;
+  mode: number = 0;
   errMessage: string;
   tablePersiter: number;
   panier: any;
@@ -42,7 +42,7 @@ export class MyTableComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
     //si pas de commande ou si a choisi a emporter 
     //pas de possibilité d'ouvrir une table
     if (this.panier.theId == null || this.panier.type == "A emporter") {
@@ -98,9 +98,9 @@ export class MyTableComponent implements OnInit {
 
   }
 
- impossibleTableReserve(){
-  this.message = "veillez choisir une table disponible";
- }
+  impossibleTableReserve() {
+    this.message = "veillez choisir une table disponible";
+  }
 
   //la table est déjà choisi ==> mess d erreur
   tableDejaChoisi() {

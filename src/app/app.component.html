@@ -17,10 +17,10 @@
         <a class="clickable" class="active" (click)=allerCommander(user.email)>Commander</a>
       </li>
 
-      <li *ngIf="user">
+      <!-- <li *ngIf="user">
         <a class="clickable" class="active" (click)=allerPanier(user.email)>Panier</a>
-        <!-- <a routerLink="/panier" routerLinkActive="active">Panier</a> -->
-      </li>
+      </li> -->
+      <!-- <a routerLink="/panier" routerLinkActive="active">Panier</a> -->
 
       <li *ngIf="user">
         <a class="clickable" class="active" (click)=logoutWithGoogle()>Déconnexion</a>
@@ -35,8 +35,9 @@
 
       <li *ngIf="user" class="spacer-right2">
         <strong>Commande n°{{panier.theId}}</strong>
-        <br/>{{panier.type}}<span *ngIf="panier.myTable!=null"> - Table n°{{panier.myTable}}</span>
-        <br/>Montant : {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}} 
+        <br/>{{panier.type}}
+        <span *ngIf="panier.myTable!=null"> - Table n°{{panier.myTable}}</span>
+        <br/>Montant : {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
       </li>
 
 
@@ -55,13 +56,10 @@
   <!-- <button class="btn btn-info spacer-right2" (click)=allerCommander(user.email)>Commander</button> -->
   <button routerLink="/carte" routerLinkActive="active" class="btn btn-info spacer-right2">Carte</button>
   <button routerLink="/menu" routerLinkActive="active" class="btn btn-info spacer-right2">Menus</button>
-  <button routerLink="/myTable/ " routerLinkActive="active" class="btn btn-info spacer-right2">Tables</button>
-  <button routerLink="/test" routerLinkActive="active" class="btn btn-alert spacer-right2">Test</button>
+  <button routerLink="/myTable/Nos tables" routerLinkActive="active" class="btn btn-info spacer-right2">Tables</button>
+  <!-- <button routerLink="/test" routerLinkActive="active" class="btn btn-alert spacer-right2">Test</button> -->
 </div>
 
 
 <router-outlet>
 </router-outlet>
-
-
-

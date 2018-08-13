@@ -49,7 +49,7 @@ export class CommandeActionComponent implements OnInit {
     //on récupère tous les orderItems de la derniere commade
     this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
       this.returnOrderItem = data;
-      
+
       //on récupère le montant total du panier
       this.retourVatpriceTotal = 0;
       for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
@@ -85,7 +85,7 @@ export class CommandeActionComponent implements OnInit {
   getOrderType(name: string) {
 
     this.commandeService.selectOrder(name, this.userFromAp.email).
-    finally(this.message).
+      finally(this.message).
       subscribe(data => {
         //on créé la commande
         //on renvoi le message du type de commande choisi
@@ -125,7 +125,7 @@ export class CommandeActionComponent implements OnInit {
 
 
 
-      
+
 
   }
 
@@ -235,14 +235,14 @@ export class CommandeActionComponent implements OnInit {
       this.histo = data;
       //historisation contient une liste de orderItem
       //on cherche l indice 0
-      console.log("Numéro 1-1 ==> this.histo : " + this.histo);
-      console.log("Numéro 1-2 ==> this.histo.theId : " + this.histo[0].theId);
+      // console.log("Numéro 1-1 ==> this.histo : " + this.histo);
+      // console.log("Numéro 1-2 ==> this.histo.theId : " + this.histo[0].theId);
 
       //puis on récupère tous les ordersItems à supprimer
       this.commandeService.getOrderItemsFromHistorisation(this.histo[0].theId).
         subscribe(data => {
           this.orderItemsToErase = data;
-          console.log("Numéro 2 ids de la list de orderItem : " + this.orderItemsToErase[0].theId + " - " + this.orderItemsToErase[1].theId);
+          // console.log("Numéro 2 ids de la list de orderItem : " + this.orderItemsToErase[0].theId + " - " + this.orderItemsToErase[1].theId);
           //je créé l'array de LongClassModel de orderItemsToErase
           this.arrayLongClassModel = [];
           //je créé l'array de longClassModel
@@ -250,13 +250,12 @@ export class CommandeActionComponent implements OnInit {
           this.orderItemsToErase.forEach(element => {
             this.longClassModel = new LongClassModel(element.theId)
             this.arrayLongClassModel.push(this.longClassModel);
-            console.log("Numéro 3 foreach de longClassModel : " + this.longClassModel.getIdLong());
+            // console.log("Numéro 3 foreach de longClassModel : " + this.longClassModel.getIdLong());
           });
 
           this.commandeService.deleteComboOrderItem(this.arrayLongClassModel).
             subscribe(data => {
               this.message = data;
-
 
               //on doit rafraichir page
 
@@ -274,12 +273,6 @@ export class CommandeActionComponent implements OnInit {
                 console.log(err);
               })
 
-
-
-
-
-
-
             }, err => {
               console.log(err);
             })
@@ -295,58 +288,53 @@ export class CommandeActionComponent implements OnInit {
   }
 
 
-  confirmOrder(userId:number){
-this.commandeService.confirmOrder(this.userFromAp.id).
-finally(this.message).
-subscribe(data=>{
-  this.message=data;
+  confirmOrder(userId: number) {
+    this.commandeService.confirmOrder(this.userFromAp.id).
+      finally(this.message).
+      subscribe(data => {
+        this.message = data;
 
-  // on refraichit le panier et cette page
+        // on refraichit le panier et cette page
 
-  this.panierService.setOption('theId', null);
-  this.panierService.setOption('theDate', null);
-  this.panierService.setOption('type', null);
-  this.panierService.setOption('statut', null);
-  this.panierService.setOption('myTable', null);
-  this.panierVatPriceService.setOption('vatPriceTotal', null);
-  this.retourVatpriceTotal=null;
+        this.panierService.setOption('theId', null);
+        this.panierService.setOption('theDate', null);
+        this.panierService.setOption('type', null);
+        this.panierService.setOption('statut', null);
+        this.panierService.setOption('myTable', null);
+        this.panierVatPriceService.setOption('vatPriceTotal', null);
+        this.retourVatpriceTotal = null;
 
-this.returnOrderItem=null;
-this.router.navigateByUrl('commandeAction');
+        this.returnOrderItem = null;
+        this.router.navigateByUrl('commandeAction');
 
+      }, err => {
+        console.log(err);
+      })
 
-}, err => {
-  console.log(err);
-})
-
-    
   }
 
 
-  deleteOrder(userId:number){
+  deleteOrder(userId: number) {
     this.commandeService.deleteOrder(this.userFromAp.id).
-    finally(this.message).
-    subscribe(data=>{
-      this.message=data;
-    
-      // on refraichit le panier et cette page
-    
-      this.panierService.setOption('theId', null);
-      this.panierService.setOption('theDate', null);
-      this.panierService.setOption('type', null);
-      this.panierService.setOption('statut', null);
-      this.panierService.setOption('myTable', null);
-      this.panierVatPriceService.setOption('vatPriceTotal', null);
-      this.retourVatpriceTotal=null;
-    
-    this.returnOrderItem=null;
-    this.router.navigateByUrl('commandeAction');
-    
-    
-    }, err => {
-      console.log(err);
-    })
-    
-        
-      }
+      finally(this.message).
+      subscribe(data => {
+        this.message = data;
+
+        // on refraichit le panier et cette page
+
+        this.panierService.setOption('theId', null);
+        this.panierService.setOption('theDate', null);
+        this.panierService.setOption('type', null);
+        this.panierService.setOption('statut', null);
+        this.panierService.setOption('myTable', null);
+        this.panierVatPriceService.setOption('vatPriceTotal', null);
+        this.retourVatpriceTotal = null;
+
+        this.returnOrderItem = null;
+        this.router.navigateByUrl('commandeAction');
+
+      }, err => {
+        console.log(err);
+      })
+  }
 }

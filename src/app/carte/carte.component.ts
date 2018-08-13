@@ -26,7 +26,7 @@ import { UserFromAppService } from '../../services/user-from-app.service';
 })
 export class CarteComponent implements OnInit {
 
-  userFromAp:any;
+  userFromAp: any;
   categories: Array<any>;
   products: Array<any>;
   productsReturn: Array<any>;
@@ -40,8 +40,8 @@ export class CarteComponent implements OnInit {
   orderItem: any;
   message: any;
   returnOrderItem: Array<any>;
-  i:number;
-  retourVatpriceTotal:number;
+  i: number;
+  retourVatpriceTotal: number;
 
   constructor(
     public productService: ProductService,
@@ -87,6 +87,8 @@ export class CarteComponent implements OnInit {
     this.productService.findProductById(id)
       .subscribe(data => {
         this.products = data;
+      }, err => {
+        console.log(err);
       })
     return this.products;
   }
@@ -96,17 +98,19 @@ export class CarteComponent implements OnInit {
     this.product = null;
     this.products.forEach(element => {
       if (element.theId == theId) {
-  
+
         this.product = element;
         //cette méthode fonctionne ne sera plus utilisé car pas adapté
         // this.newOrderItem(this.product.price, this.product.tax, this.commentAchat);
 
-   
+
         //on ajoute le produit a order item qu'on ajoute a myOrder
         this.createOrderItem(this.product.theId, this.userFromAp.id);
 
 
       }
+    }, err => {
+      console.log(err);
     })
     return this.product;
   }
@@ -129,7 +133,7 @@ export class CarteComponent implements OnInit {
 
 
   createOrderItem(productId: number, userId: number) {
-    
+
     this.commandeService.createOrderItem(productId, userId).subscribe(data => {
       // alert("produit choisi");
       this.message = data;
@@ -137,35 +141,34 @@ export class CarteComponent implements OnInit {
 
 
 
-//bloc qui va calculer mt panier en fonction de tous les orderItem de la commande
-{
+      //bloc qui va calculer mt panier en fonction de tous les orderItem de la commande
+      {
         //panier.theId ==> id de la commande 
         //on va récupérer toutes les orderItem de la commande
         //on va les envoyer à panierItemService
         this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
-          this.returnOrderItem=data;
+          this.returnOrderItem = data;
           //on doit trouver le montant total de vatPrice de la list returnOrderItem
-          this.retourVatpriceTotal=0;
-          for(this.i=0;this.i<this.returnOrderItem.length;this.i++){
-            this.retourVatpriceTotal=this.retourVatpriceTotal+(this.returnOrderItem[this.i].vatPrice*this.returnOrderItem[this.i].quantite);
+          this.retourVatpriceTotal = 0;
+          for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
+            this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
           }
           this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
-        },err=>{
+        }, err => {
           console.log(err);
         })
 
-
-
       }
 
-
-
-
-//on rafraichit la page pour MAJ du mt du panier
+      //on rafraichit la page pour MAJ du mt du panier
       this.router.navigateByUrl('carte');
     }, err => {
       console.log(err);
     })
+  }
+
+  veuillezCommander() {
+    console.log("Veuillez commander");
   }
 
 }

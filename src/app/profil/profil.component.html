@@ -11,48 +11,50 @@
 
 
           <div *ngIf="userFromAp">
-           <div><h3>Vos identifiants terreIyaki</h3></div> 
-          <table class="table-striped">
+            <div>
+              <h3>Vos identifiants terreIyaki</h3>
+            </div>
+            <table class="table-striped">
 
-            <tr>
-              <th>
-                <span class="spacer-right">
-                  Login
-                </span>
-              </th>
-              <th>
-                <span class="spacer-right">
-                  Prénom
-                </span>
-              </th>
-              <th>
-                <span class="spacer-right">
-                  Nom
-                </span>
-              </th>
-            </tr>
+              <tr>
+                <th>
+                  <span class="spacer-right">
+                    Login
+                  </span>
+                </th>
+                <th>
+                  <span class="spacer-right">
+                    Prénom
+                  </span>
+                </th>
+                <th>
+                  <span class="spacer-right">
+                    Nom
+                  </span>
+                </th>
+              </tr>
 
-            <tr>
-              <td>
-                <span class="spacer-right">
-                  {{userFromAp.login}}
-                </span>
-              </td>
-              <td>
+              <tr>
+                <td>
+                  <span class="spacer-right">
+                    {{userFromAp.login}}
+                  </span>
+                </td>
+                <td>
                   <span class="spacer-right">
                     {{userFromAp.firstName}}
                   </span>
                 </td>
                 <td>
-                    <span class="spacer-right">
-                      {{userFromAp.lastName}}
-                    </span>
-                  </td>
-            </tr>
-          </table>
-        </div>
+                  <span class="spacer-right">
+                    {{userFromAp.lastName}}
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </div>
 
-        <ul class="nav nav-pills">
+          <ul class="nav nav-pills">
 
             <!-- si utilisateur enregistré a terreIyaki -->
             <li *ngIf="userFromAp&&modifier!='true'">

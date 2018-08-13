@@ -81,34 +81,34 @@ export class CommandeService {
 
   //A partir de ces 2 méthodes on va trouver tous les ordersItem du combo commandés
   //on recherche l'id de historisation
-  getHistorisationFromOrderItem(orderItemId:number){
-return this.http.get(this.API+'/orderItems/'+orderItemId+'/historisations').
-map((result:any)=>{
-  return result._embedded.historisations;
-})
+  getHistorisationFromOrderItem(orderItemId: number) {
+    return this.http.get(this.API + '/orderItems/' + orderItemId + '/historisations').
+      map((result: any) => {
+        return result._embedded.historisations;
+      })
   }
 
   //on recherche les orderItems de historisation
-  getOrderItemsFromHistorisation(historisationId:number){
-    return this.http.get(this.API+'/historisations/'+historisationId+'/orderItems').
-    map((result:any)=>{
-      return result._embedded.orderItems;
-  })
-}
+  getOrderItemsFromHistorisation(historisationId: number) {
+    return this.http.get(this.API + '/historisations/' + historisationId + '/orderItems').
+      map((result: any) => {
+        return result._embedded.orderItems;
+      })
+  }
 
-//on supprime tous les orders items du menu
-deleteComboOrderItem(arrayLongClassModel :Array<LongClassModel> ){
-  return this.http.post(this.API+'/deleteComboOrderItem',arrayLongClassModel);
-}
+  //on supprime tous les orders items du menu
+  deleteComboOrderItem(arrayLongClassModel: Array<LongClassModel>) {
+    return this.http.post(this.API + '/deleteComboOrderItem', arrayLongClassModel);
+  }
 
 
-//on valide la commande
-confirmOrder(userId:number){
-  return this.http.get(this.API+'/confirmOrder?userId='+userId)
-}
+  //on valide la commande
+  confirmOrder(userId: number) {
+    return this.http.get(this.API + '/confirmOrder?userId=' + userId)
+  }
 
-//on delete la commande et ses dépendances
-deleteOrder(userId:number){
-  return this.http.get(this.API+'/deleteOrder?userId='+userId)
-}
+  //on delete la commande et ses dépendances
+  deleteOrder(userId: number) {
+    return this.http.get(this.API + '/deleteOrder?userId=' + userId)
+  }
 }

@@ -8,13 +8,13 @@ export class ProfilService {
 
   public API = '//localhost:8080';
 
-  constructor(public http:HttpClient) { }
+  constructor(public http: HttpClient) { }
 
-  getUserByEmail(email:string){
-    return this.http.get<any>(this.API+'/getUserByEmail?email='+email);
+  getUserByEmail(email: string) {
+    return this.http.get<any>(this.API + '/getUserByEmail?email=' + email);
   }
 
-  tryAndSaveMyUser(email :string, login :string, lastName :string, firstName :string){
-    return this.http.get<any>(this.API+'/tryAndSaveMyUser?email='+email+'&login='+login+'&lastName='+lastName+'&firstName='+firstName);
+  tryAndSaveMyUser(email: string, login: string, lastName: string, firstName: string) {
+    return this.http.get<any>(this.API + '/tryAndSaveMyUser?email=' + email + '&login=' + login + '&lastName=' + lastName + '&firstName=' + firstName);
   }
 }

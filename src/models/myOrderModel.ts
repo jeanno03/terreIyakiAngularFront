@@ -1,18 +1,18 @@
-export class MyOrderModel{
+export class MyOrderModel {
 
-    private orderDate:Date;
-    private theId:any;
+    private orderDate: Date;
+    private theId: any;
 
-    constructor(orderDate:Date, theId:any){
+    constructor(orderDate: Date, theId: any) {
         this.orderDate = orderDate;
         this.theId = theId;
     }
 
-    public getOrderDate(){
+    public getOrderDate() {
         return this.orderDate;
     }
 
-    public setOrderDate(value){
+    public setOrderDate(value) {
         this.orderDate = value;
     }
 

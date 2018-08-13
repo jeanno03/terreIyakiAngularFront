@@ -74,8 +74,8 @@ export class MenuComponent implements OnInit {
     public panierVatPriceService: PanierVatPriceService,
     public panierService: PanierService
   ) {
-    this.userFromAp = userFromAppService.getFirebaseUser();
     this.panier = panierService.getPanier();
+    this.userFromAp = userFromAppService.getFirebaseUser();
   }
 
   ngOnInit() {
@@ -149,13 +149,14 @@ export class MenuComponent implements OnInit {
                 this.categoryModelProvisoire = this.category[this.i];
                 this.category[this.i] = this.category[(this.i + 1)];
                 this.category[(this.i + 1)] = this.categoryModelProvisoire;
-
               }
             }
           }
 
           this.productMap.set(this.parentComboCategoryId, this.comboCategory.products);
 
+        }, err => {
+          console.log(err);
         })
       })
 
@@ -209,11 +210,8 @@ export class MenuComponent implements OnInit {
               this.longClassModel = new LongClassModel(element.theId);
               this.arrayLongClassModel.push(this.longClassModel);
             }))
-
           }
-
         }
-
       }, err => {
         console.log(err);
       })
@@ -260,20 +258,13 @@ export class MenuComponent implements OnInit {
           //on rafraichit la page pour MAJ du mt du panier
           this.router.navigateByUrl('menu');
 
-
-
         }, err => {
           console.log(err);
         })
 
-
-
       }, err => {
         console.log(err);
       })
-
-
-
 
   }
 
@@ -284,5 +275,9 @@ export class MenuComponent implements OnInit {
   //a definir
   deleteOrderItemCombo() {
 
+  }
+
+  veuillezCommander() {
+    console.log("Veuillez commander");
   }
 }

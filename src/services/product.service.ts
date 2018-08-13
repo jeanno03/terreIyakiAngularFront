@@ -10,34 +10,34 @@ import 'rxjs/add/operator/map'
   providedIn: 'root'
 })
 export class ProductService {
-  product :Product;
+  product: Product;
   products: Array<Product>;
   productsWithVat: Array<Product>;
-  productTest:any;
-  productsTest :Array<any>;
+  productTest: any;
+  productsTest: Array<any>;
 
   public API = '//localhost:8080';
 
-  constructor(public http:HttpClient) { }
+  constructor(public http: HttpClient) { }
 
-findAllCategories(): Observable<any[]>{
-  return this.http.get<any[]>(this.API+'/categories').
-  map((result:any)=>{
-    return result._embedded.categories;
-})
-}
+  findAllCategories(): Observable<any[]> {
+    return this.http.get<any[]>(this.API + '/categories').
+      map((result: any) => {
+        return result._embedded.categories;
+      })
+  }
 
-getCategoryByName(name:string){
-  return this.http.get<Category>(this.API+'/getCategoryByName?name='+name);
-}
+  getCategoryByName(name: string) {
+    return this.http.get<Category>(this.API + '/getCategoryByName?name=' + name);
+  }
 
-//nom de méthode pouvant porter a confusion
-//elle va retrouver les products en fonction de l'id de categories
-findProductById(id:number){
-  return this.http.get(this.API+'/categories/'+id+'/products').
-  map((result:any)=>{
-    return result._embedded.products;
-})
-}
+  //nom de méthode pouvant porter a confusion
+  //elle va retrouver les products en fonction de l'id de categories
+  findProductById(id: number) {
+    return this.http.get(this.API + '/categories/' + id + '/products').
+      map((result: any) => {
+        return result._embedded.products;
+      })
+  }
 
 }

@@ -19,17 +19,6 @@
 
       <div class="container spacer">
 
-        <!-- <div class="divParent" *ngIf="product">
-          <table class="table-striped">
-            <tr>
-              <th>
-                choisir {{product.vatPrice | currency:'EUR':true:'1.1-1'}}
-              </th>
-            </tr>
-          </table>
-        </div> -->
-
-
         <div class="container">
           <div class="row">
 
@@ -58,20 +47,23 @@
 
                 <td>
                   <div class="col-sm-8">
-                    <a class="clickable" (click)=selectProduct(p.theId)>
+                    <!-- <a class="clickable" (click)=selectProduct(p.theId)> -->
                       <strong>{{p.name}}</strong>
                       <br/> {{p.description}}
-                    </a>
+                    <!-- </a> -->
                   </div>
                 </td>
 
                 <td>
                   <div class="col-sm-2">
-                    <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId)>
+                    <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId) *ngIf="panier.theId!=null">
                         {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
                         <br/>
                       Ajouter
                     </button>
+                    <button class="btn btn-info spacer-right2" (click)=veuillezCommander() *ngIf="panier.theId==null">
+                    {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
+                </button>
                   </div>
                 </td>
 

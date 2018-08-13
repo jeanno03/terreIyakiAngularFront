@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class PanierVatPriceService{
+export class PanierVatPriceService {
 
     private panierVatPrice = {};
 
     constructor() { }
 
-    setOption(option, value){
-        this.panierVatPrice[option]=value;
+    setOption(option, value) {
+        this.panierVatPrice[option] = value;
     }
 
-    getPanierVatPrice(){
+    getPanierVatPrice() {
         return this.panierVatPrice;
     }
 }

@@ -17,18 +17,18 @@
           Veuillez choisir vos produits
         </li>
         <li *ngIf="retourVatpriceTotal>0">
-            <button class="btn btn-info spacer-right2">Montant : {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}</button> 
+          <button class="btn btn-info spacer-right2">Montant : {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}</button>
         </li>
         <li *ngIf="retourVatpriceTotal>0">
-            <button class="btn btn-info spacer-right2" (click)=confirmOrder()>
-              confirmer
-            </button>
+          <button class="btn btn-info spacer-right2" (click)=confirmOrder()>
+            confirmer
+          </button>
         </li>
         <li *ngIf="retourVatpriceTotal>0">
           <button class="btn btn-danger spacer-right2" (click)=deleteOrder()>
             Supprimer
           </button>
-      </li>
+        </li>
       </ul>
 
 

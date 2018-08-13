@@ -47,8 +47,8 @@ export class ComboService {
     return this.http.get<any>(this.API + '/products/' + id);
   }
 
-  createComboOrderItems(userId:number,comboId:number, arrayLongClassModel :Array<LongClassModel> ){
-    return this.http.put(this.API+'/createComboOrderItems/'+userId+'/'+comboId,arrayLongClassModel);
+  createComboOrderItems(userId: number, comboId: number, arrayLongClassModel: Array<LongClassModel>) {
+    return this.http.put(this.API + '/createComboOrderItems/' + userId + '/' + comboId, arrayLongClassModel);
   }
 
 }

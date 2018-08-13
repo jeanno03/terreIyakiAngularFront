@@ -14,8 +14,7 @@
       <!-- si commande non choisi ou si commande a emporter 
         ==> pas de possibilité d'ouvrir une table -->
       <div class="panel-body" *ngIf="mode==0">
-        <button type="button" class="btn btn-primary spacer-right-top" 
-        *ngFor="let m of myTables | orderBy tableNumber" (click)=tableFerme()>
+        <button type="button" class="btn btn-primary spacer-right-top" *ngFor="let m of myTables | orderBy tableNumber" (click)=tableFerme()>
           N°{{m.tableNumber}}
           <span class="badge">
             {{m.statutName}}
@@ -25,34 +24,31 @@
       <!-- si commande choisi avec type sur place 
             ==> possiblité d'ouvrir une table non réservé-->
       <div class="panel-body" *ngIf="mode==1">
-        
-        <span *ngFor="let m of myTables | orderBy tableNumber">
-        <button *ngIf="m.statutName!='réservé'" type="button" class="btn btn-primary spacer-right-top" 
-         (click)=tableChoisi(m.theId)>
-          N°{{m.tableNumber}}
-          <span class="badge">
-            {{m.statutName}}
-          </span>
-        </button>
-      </span>
 
-      <span *ngFor="let m of myTables | orderBy tableNumber">
-        <button *ngIf="m.statutName=='réservé'" type="button" class="btn btn-primary spacer-right-top" 
-        (click)=impossibleTableReserve()>
-         N°{{m.tableNumber}}
-         <span class="badge">
-           {{m.statutName}}
-         </span>
-       </button>
-      </span>
+        <span *ngFor="let m of myTables | orderBy tableNumber">
+          <button *ngIf="m.statutName!='réservé'" type="button" class="btn btn-primary spacer-right-top" (click)=tableChoisi(m.theId)>
+            N°{{m.tableNumber}}
+            <span class="badge">
+              {{m.statutName}}
+            </span>
+          </button>
+        </span>
+
+        <span *ngFor="let m of myTables | orderBy tableNumber">
+          <button *ngIf="m.statutName=='réservé'" type="button" class="btn btn-primary spacer-right-top" (click)=impossibleTableReserve()>
+            N°{{m.tableNumber}}
+            <span class="badge">
+              {{m.statutName}}
+            </span>
+          </button>
+        </span>
 
       </div>
 
       <!-- si table déjà ouverte 
       ==> pas la possibilité d'ouvrir une nouvelle table -->
       <div class="panel-body" *ngIf="mode==2">
-        <button type="button" class="btn btn-primary spacer-right-top" 
-        *ngFor="let m of myTables | orderBy tableNumber" (click)=tableDejaChoisi()>
+        <button type="button" class="btn btn-primary spacer-right-top" *ngFor="let m of myTables | orderBy tableNumber" (click)=tableDejaChoisi()>
           N°{{m.tableNumber}}
           <span class="badge">
             {{m.statutName}}

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class UserFromAppService{
+export class UserFromAppService {
 
     private userFromApp = {};
 
     constructor() { }
 
-    setOption(option, value){
-        this.userFromApp[option]=value;
+    setOption(option, value) {
+        this.userFromApp[option] = value;
     }
 
-    getFirebaseUser(){
+    getFirebaseUser() {
         return this.userFromApp;
     }
 }

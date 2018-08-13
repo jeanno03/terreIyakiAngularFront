@@ -38,7 +38,9 @@
     <strong>{{productChoose.name}}</strong>
   </span>
 
-  <span *ngIf="message"><strong>{{message.theMessage}}</strong></span>
+  <span *ngIf="message">
+    <strong>{{message.theMessage}}</strong>
+  </span>
 
   <div class="container spacer" *ngIf="combo">
     <table class="table-striped">
@@ -66,8 +68,12 @@
         </td>
         <td>
           <div class="col-sm-2">
-            <button class="btn btn-info spacer-right2" (click)=selectCombo(combo.id)>{{combo.vatPrice | currency:'EUR':true:'1.1-1'}}
+            <button class="btn btn-info spacer-right2" (click)=selectCombo(combo.id) *ngIf="panier.theId!=null">
+              {{combo.vatPrice | currency:'EUR':true:'1.1-1'}}
               <br/>Ajouter</button>
+            <button class="btn btn-info spacer-right2" (click)=veuillezCommander() *ngIf="panier.theId==null">
+              {{combo.vatPrice | currency:'EUR':true:'1.1-1'}}
+            </button>
           </div>
         </td>
       </tr>
@@ -132,5 +138,3 @@
 
 
 </div>
-
-

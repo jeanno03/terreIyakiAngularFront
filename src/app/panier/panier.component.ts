@@ -10,15 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PanierComponent implements OnInit {
 
-userFromAp:any=null;
+  userFromAp: any = null;
 
   constructor(
-    panierService:PanierService,
+    panierService: PanierService,
     public activatedRoute: ActivatedRoute,
     public router: Router,
-    public userFromAppService:UserFromAppService
-  ) { 
-this.userFromAp=userFromAppService.getFirebaseUser();
+    public userFromAppService: UserFromAppService
+  ) {
+    this.userFromAp = userFromAppService.getFirebaseUser();
   }
 
   ngOnInit() {

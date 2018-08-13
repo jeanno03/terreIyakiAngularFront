@@ -59,13 +59,9 @@ export class ProfilComponent implements OnInit {
     this.modifier = "true";
     //on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
     this.getUserByEmail(this.email);
-
-
-
   }
 
   enCours() {
-
   }
 
 
@@ -80,7 +76,6 @@ export class ProfilComponent implements OnInit {
     ).subscribe(data => {
       this.theMessage = data;
       //on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
-
 
       //on envoie l'user en partage s'il existe
       //si categoryMessageName = succès
@@ -105,20 +100,10 @@ export class ProfilComponent implements OnInit {
             console.log(err);
           })
 
-
         }, err => {
           console.log(err);
         })
       }
-
-
-
-
-
-
-
-
-
 
     }, err => {
       console.log(err);
