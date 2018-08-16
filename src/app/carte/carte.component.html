@@ -4,11 +4,15 @@
 
       <ul class="nav nav-pills">
         <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
-          <a class="clickable" class="active" (click)=getPlatsByCategory(c.name)>
-            <span *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'">
-              {{c.name}}
-            </span>
+          <a class="clickable" class="active" (click)=getPlatsByCategory(c.name) *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'">
+            {{c.name}}
           </a>
+        </li>
+
+        <li *ngIf="message">
+            <div class="alert alert-success" role="alert">
+            {{message.theMessage}}
+          </div>
         </li>
       </ul>
 
@@ -23,7 +27,6 @@
           <div class="row">
 
             <table class="table-striped">
-
 
               <tr>
                 <th>
@@ -47,44 +50,30 @@
 
                 <td>
                   <div class="col-sm-8">
-                    <!-- <a class="clickable" (click)=selectProduct(p.theId)> -->
-                      <strong>{{p.name}}</strong>
-                      <br/> {{p.description}}
-                    <!-- </a> -->
+                    <strong>{{p.name}}</strong>
+                    <br/> {{p.description}}
                   </div>
                 </td>
 
                 <td>
                   <div class="col-sm-2">
                     <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId) *ngIf="panier.theId!=null">
-                        {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
-                        <br/>
-                      Ajouter
+                      {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
+                      <br/> Ajouter
                     </button>
                     <button class="btn btn-info spacer-right2" (click)=veuillezCommander() *ngIf="panier.theId==null">
-                    {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
-                </button>
+                      {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
+                    </button>
                   </div>
                 </td>
 
               </tr>
-
-
 
             </table>
           </div>
         </div>
       </div>
 
-
     </div>
   </div>
 </div>
-
-<!-- message d erreur :  -->
-<!-- 'theMessage' of undefined -->
-<!-- <br/> {{message.theMessage}} -->
-<!-- je me souviens plus ce que fait {{message.theMessage}}
-je traiterai cette erreur plus tard -->
-
-

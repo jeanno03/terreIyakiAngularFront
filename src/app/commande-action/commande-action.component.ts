@@ -33,6 +33,7 @@ export class CommandeActionComponent implements OnInit {
 
   longClassModel: LongClassModel;
   arrayLongClassModel: Array<LongClassModel>;
+  // panierVatprice:any;
 
 
 
@@ -45,6 +46,7 @@ export class CommandeActionComponent implements OnInit {
   ) {
     this.userFromAp = userFromAppService.getFirebaseUser();
     this.panier = panierService.getPanier();
+    // this.panierVatprice = panierVatPriceService.getPanierVatPrice();
 
     //on récupère tous les orderItems de la derniere commade
     this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {

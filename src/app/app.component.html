@@ -34,12 +34,13 @@
       </li>
 
       <li *ngIf="user" class="spacer-right2">
-        <strong>Commande n°{{panier.theId}}</strong>
+        <strong *ngIf="panier.theId!=null">Commande n°{{panier.theId}}</strong>
         <br/>{{panier.type}}
         <span *ngIf="panier.myTable!=null"> - Table n°{{panier.myTable}}</span>
-        <br/>Montant : {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+        <span *ngIf="panierVatprice.vatPriceTotal!=null">
+          <br/>Montant : {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+        </span>
       </li>
-
 
     </ul>
 

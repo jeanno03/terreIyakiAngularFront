@@ -56,6 +56,7 @@ export class CarteComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.message=null;
     this.productService.findAllCategories()
       .subscribe(data => {
         this.categories = data;
@@ -65,11 +66,13 @@ export class CarteComponent implements OnInit {
   }
 
   getPlatsByCategory(name: string) {
+    this.message=null;
     this.currentPage = name;
     this.getCategoryByName(name);
   }
 
   getCategoryByName(name: string) {
+    this.message=null;
     //je réinitilialise le produit a chaque clik
     this.product = null;
 
@@ -84,6 +87,7 @@ export class CarteComponent implements OnInit {
   }
 
   getProductsById(id: number) {
+    this.message=null;
     this.productService.findProductById(id)
       .subscribe(data => {
         this.products = data;
@@ -95,6 +99,7 @@ export class CarteComponent implements OnInit {
 
   //this.product est la key ==> les infos vont servir pour etre enregistrer a orderItem
   selectProduct(theId: number) {
+    this.message=null;
     this.product = null;
     this.products.forEach(element => {
       if (element.theId == theId) {
@@ -123,6 +128,7 @@ export class CarteComponent implements OnInit {
   }
 
   newOrderItem(price: number, tax: number, comment: string) {
+    this.message=null;
     this.commandeService.newOrderItem(price, tax, comment).subscribe(data => {
       // alert("produit choisi");
       this.orderItem = data;
@@ -133,7 +139,7 @@ export class CarteComponent implements OnInit {
 
 
   createOrderItem(productId: number, userId: number) {
-
+    this.message=null;
     this.commandeService.createOrderItem(productId, userId).subscribe(data => {
       // alert("produit choisi");
       this.message = data;

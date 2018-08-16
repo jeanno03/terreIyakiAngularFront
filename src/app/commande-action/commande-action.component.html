@@ -16,21 +16,20 @@
         <li *ngIf="panier.theId!=null&&retourVatpriceTotal==0">
           Veuillez choisir vos produits
         </li>
-        <li *ngIf="retourVatpriceTotal>0">
+        <!-- <li *ngIf="retourVatpriceTotal>0">
           <button class="btn btn-info spacer-right2">Montant : {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}</button>
-        </li>
-        <li *ngIf="retourVatpriceTotal>0">
+        </li> -->
+        <!-- <li *ngIf="retourVatpriceTotal>0">
           <button class="btn btn-info spacer-right2" (click)=confirmOrder()>
             confirmer
           </button>
         </li>
         <li *ngIf="retourVatpriceTotal>0">
           <button class="btn btn-danger spacer-right2" (click)=deleteOrder()>
-            Supprimer
+            Annuler
           </button>
-        </li>
+        </li> -->
       </ul>
-
 
     </div>
   </div>
@@ -44,8 +43,24 @@
           <span class="spacer-right">Qté</span>
         </th>
         <th>
-          <span class="spacer-right">Prix/unité</span>
+          <span class="spacer-right">Unité</span>
         </th>
+        <th>
+          <span class="spacer-right">Total</span>
+        </th>
+        <!-- <th>
+          <span class="spacer-right"></span>
+        </th>
+        <th>
+          <span class="spacer-right"></span>
+        </th> -->
+        <!-- <th>
+          <span class="spacer-right">
+            <button class="btn btn-danger" (click)=deleteOrder()>
+              Annuler
+            </button>
+          </span>
+        </th> -->
       </tr>
 
       <!-- concernant les conditions des bouttons, 
@@ -54,7 +69,6 @@ s'il s'agit d'un menu on affiche que le menu
 s'il s'agit des produits hors menu
 *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'"
 -->
-
 
       <tr *ngFor="let r of returnOrderItem">
         <td>
@@ -84,6 +98,14 @@ s'il s'agit des produits hors menu
         </td>
         <td>
           <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+            {{r.quantite*r.vatPrice | currency:'EUR':true:'1.1-1'}}
+          </span>
+          <span class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+            {{r.quantite*r.vatComboPrice | currency:'EUR':true:'1.1-1'}}
+          </span>
+        </td>
+        <td>
+          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
             <button (click)="incrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2">+</button>
           </span>
         </td>
@@ -102,7 +124,43 @@ s'il s'agit des produits hors menu
           </span>
         </td>
       </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+          <tr>
+            <td>
+              <strong *ngIf="panier.theId!=null">Total</strong>
+            </td>
+            <td>
+
+            </td>
+            <td>
+            </td>
+            <td>
+              <strong *ngIf="panier.theId!=null">
+                {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}
+              </strong>
+            </td>
+          </tr>
     </table>
   </div>
 
+  <!-- <div class="panel panel-info spacer-top"> -->
+  <div class="panel-body spacer-top">
+    <ul class="nav nav-pills" *ngIf="retourVatpriceTotal>0">
+      <li>
+        <button class="btn btn-danger spacer-left-right" (click)=deleteOrder()>
+          Annuler
+        </button>
+      </li>
+      <li>
+        <button class="btn btn-info spacer-right2" (click)=confirmOrder()>
+          confirmer
+        </button>
+      </li>
+    </ul>
+  </div>
+  <!-- </div> -->
 </div>

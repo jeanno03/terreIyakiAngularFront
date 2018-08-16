@@ -7,34 +7,12 @@
           <a class="clickable" class="active" (click)=getComboByName(c.name)>{{c.name}}</a>
         </li>
 
-        <ul *ngIf="arrayDeHashMenu&&menuAValider!=1">
-          <button class="btn btn-danger spacer-right2" (click)=createComboOrderItems()>
-            <li>
-              Complétez votre sélection
-            </li>
-            <li *ngFor="let a of arrayDeHashMenu">
-              {{a.name}}
-            </li>
-          </button>
-        </ul>
 
-        <ul *ngIf="menuAValider==1">
-          <button class="btn btn-info spacer-right2" (click)=createComboOrderItems()>
-            <li>
-              <strong>Valider votre sélection</strong>
-            </li>
-            <li *ngFor="let a of arrayDeHashMenu">
-              {{a.name}}
-            </li>
-
-          </button>
-        </ul>
       </ul>
     </div>
   </div>
 
   <span *ngIf="productChoose">
-    Votre sélection :
     <strong>{{productChoose.name}}</strong>
   </span>
 
@@ -42,7 +20,7 @@
     <strong>{{message.theMessage}}</strong>
   </span>
 
-  <div class="container spacer" *ngIf="combo">
+  <div class="container spacer" *ngIf="combo&&vireMenu!=1">
     <table class="table-striped">
       <tr>
         <th>
@@ -82,59 +60,107 @@
 
   <div *ngIf="category">
 
-    <div class="panel-body">
-      <ul class="nav nav-pills">
-        <li [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
-          <a class="clickable" class="active" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</a>
-        </li>
+    <div class="container">
 
-      </ul>
+      <div class="col-md-8">
 
-      <div class="container spacer">
-        <div class="row">
-          <table class="table-striped">
+        <div class="panel-body">
+          <ul class="nav nav-pills">
+            <li [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
+              <a class="clickable" class="active" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</a>
+            </li>
 
-            <tr>
-              <th>
-                <span class="spacer-right">photo</span>
-              </th>
-              <th>
-                <span class="spacer-right">Produits</span>
-              </th>
-              <th>
-                <span class="spacer-right"></span>
-              </th>
-            </tr>
+          </ul>
 
-            <tr *ngFor="let p of this.productsMap">
+          <div class="container spacer">
+            <div class="row">
+              <table class="table-striped">
 
-              <td>
-                <div class="col-sm-2">
-                  <img class="image" src={{p.picture}} />
-                </div>
-              </td>
+                <tr>
+                  <th>
+                    <span class="spacer-right">photo</span>
+                  </th>
+                  <th>
+                    <span class="spacer-right">Produits</span>
+                  </th>
+                  <th>
+                    <span class="spacer-right"></span>
+                  </th>
+                </tr>
 
-              <td>
-                <div class="col-sm-8">
-                  {{p.description}}
-                </div>
-              </td>
+                <tr *ngFor="let p of this.productsMap">
 
-              <td>
-                <div class="col-sm-2">
-                  <button class="btn btn-info spacer-right2" (click)="productOnHashMenu(p.id)">
-                    <br/>Choisir</button>
-                </div>
-              </td>
+                  <td>
+                    <div class="col-sm-2">
+                      <img class="image2" src={{p.picture}} />
+                    </div>
+                  </td>
 
-            </tr>
+                  <td>
+                    <div class="col-sm-8">
+                      {{p.description}}
+                    </div>
+                  </td>
 
-          </table>
+                  <td>
+                    <div class="col-sm-2">
+                      <button class="btn btn-info spacer-right2" (click)="productOnHashMenu(p.id)">
+                        <br/>Choisir</button>
+                    </div>
+                  </td>
+
+                </tr>
+
+              </table>
+            </div>
+          </div>
         </div>
       </div>
+
+
+
+
+
+
+      <div class="col-md-4 alert alert-secondary" *ngIf="arrayDeHashMenu&&menuAValider!=1" role="alert">
+
+          <p>Votre sélection</p>
+          <ul>
+            <li *ngFor="let a of arrayDeHashMenu">
+              {{a.name}}
+            </li>
+          </ul>
+       
+      </div>
+
+        <div class="col-md-4 alert alert-secondary" *ngIf="menuAValider==1">
+            <p>Votre sélection</p>
+          <ul>
+            <li *ngFor="let a of arrayDeHashMenu">
+              {{a.name}}
+            </li>
+            <button class="btn btn-info spacer-right2" (click)=createComboOrderItems()>
+              Valider
+            </button>
+          </ul>
+        </div>
+
+
+
+
+
+  
+      
+
+
+
+
+
+
+
     </div>
 
-  </div>
 
+  </div>
 
 </div>
