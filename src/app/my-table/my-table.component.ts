@@ -72,15 +72,15 @@ export class MyTableComponent implements OnInit {
   }
 
   //la table est sélectionné je l'ajoute a la commande
-  tableChoisi(tableId: number) {
+  tableChoisi(tableNumber: number) {
 
-    this.commandeService.chooseTable(tableId, this.userFromAp.id)
+    this.commandeService.chooseTable(tableNumber, this.userFromAp.id)
 
       .subscribe(data => {
         this.theMessage = data;
         this.message = null;
         //on récupère l id de la table
-        this.tablePersiter = tableId;
+        this.tablePersiter = tableNumber;
         //on doit rafraichir la page
         this.myTableService.getAllTables()
           .subscribe(data => {
@@ -88,7 +88,7 @@ export class MyTableComponent implements OnInit {
             //une fois la table choisi ==> impossibilité de choisir une table
             this.mode = 2;
             //
-            this.panierService.setOption('myTable', tableId);
+            this.panierService.setOption('myTable', tableNumber);
           }, err => {
             console.log(err);
           })

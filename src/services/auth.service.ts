@@ -65,6 +65,7 @@ export class AuthService {
             //et on le partage s'il existe
             this.commandeService.selectLastMyOrderByUser(this.userFromAp.id).subscribe(data => {
 
+              
               this.lastOrder = null;
               this.lastOrder = data;
               if (this.lastOrder != null) {
@@ -74,7 +75,7 @@ export class AuthService {
                 this.panierService.setOption('statut', this.lastOrder.statut.name);
                 //si table existe je l'envo pour partage
                 if (this.lastOrder.myTable != null) {
-                  this.panierService.setOption('myTable', this.lastOrder.myTable.theId);
+                  this.panierService.setOption('myTable', this.lastOrder.myTable.tableNumber);
                 }
 
                 //on va récupérer toutes les orderItem de la commande

@@ -66,7 +66,7 @@ export class MenuComponent implements OnInit {
   returnOrderItem: any;
   retourVatpriceTotal: number;
 
-  vireMenu:any;
+  vireMenu: any;
 
   constructor(
     public comboService: ComboService,
@@ -78,10 +78,12 @@ export class MenuComponent implements OnInit {
   ) {
     this.panier = panierService.getPanier();
     this.userFromAp = userFromAppService.getFirebaseUser();
+    //je réinitialise le menu choisi
+    // this.combo=null;
   }
 
   ngOnInit() {
-    this.vireMenu=0;
+    this.vireMenu = 0;
 
     this.comboService.getComboProducts()
       .subscribe(data => {
@@ -92,7 +94,8 @@ export class MenuComponent implements OnInit {
   }
 
   getComboByName(name: string) {
-    this.message=null;
+
+    this.message = null;
 
     //je reinitilise le choix des categories
     this.category = null;
@@ -111,6 +114,7 @@ export class MenuComponent implements OnInit {
     this.currentPage = name;
 
     this.comboService.getComboByName(name).subscribe(data => {
+      //condition pour afficher le menu choisi
       this.combo = data;
       this.id = this.combo.id;
 
@@ -120,7 +124,7 @@ export class MenuComponent implements OnInit {
   }
 
   selectCombo(id: number) {
-    this.vireMenu=1;
+    this.vireMenu = 1;
 
     //cette méthode va donner le choix de la catégorie déjà trié par SpringBoot
     this.comboService.getComboCategoryByComboId(id).subscribe(data => {
@@ -225,7 +229,7 @@ export class MenuComponent implements OnInit {
 
 
   createComboOrderItems() {
-    this.vireMenu=0;
+    this.vireMenu = 0;
     //J'appel la méthode put qui va sauvegarger le combo dans commade et retourner mess de succes
     this.comboService.createComboOrderItems(this.userFromAp.id, this.combo.id, this.arrayLongClassModel)
       .subscribe(data => {
@@ -245,7 +249,8 @@ export class MenuComponent implements OnInit {
           }
           this.panierVatPriceService.setOption('vatPriceTotal', this.retourVatpriceTotal);
 
-
+          //je réinitialise le menu choisi
+          this.combo = null
           //je reinitilise le choix des categories
           this.category = null;
           //je réinitiliase le choix des produits

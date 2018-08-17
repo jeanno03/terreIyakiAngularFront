@@ -1,6 +1,6 @@
 <div class="container spacer">
 
-  <div class="panel panel-infos">
+  <div class="panel panel-infos" *ngIf="vireMenu!=1">
     <div class="panel-body">
       <ul class="nav nav-pills">
         <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of comboes">
@@ -12,9 +12,13 @@
     </div>
   </div>
 
-  <span *ngIf="productChoose">
+  <!-- <span *ngIf="productChoose">
     <strong>{{productChoose.name}}</strong>
-  </span>
+  </span> -->
+
+
+
+
 
   <span *ngIf="message">
     <strong>{{message.theMessage}}</strong>
@@ -58,13 +62,22 @@
     </table>
   </div>
 
+
+
+
+  <!-- le menu a sélectionner -->
   <div *ngIf="category">
 
     <div class="container">
 
-      <div class="col-md-8">
+        
 
-        <div class="panel-body">
+        <h3>Composez votre menu</h3>
+      <div class="col-md-8 alert alert-secondary">
+      
+          <div class="panel-body">
+     
+              
           <ul class="nav nav-pills">
             <li [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
               <a class="clickable" class="active" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</a>
@@ -91,19 +104,19 @@
                 <tr *ngFor="let p of this.productsMap">
 
                   <td>
-                    <div class="col-sm-2">
+                    <div class="col-md-2">
                       <img class="image2" src={{p.picture}} />
                     </div>
                   </td>
 
                   <td>
-                    <div class="col-sm-8">
+                    <div class="col-md-8">
                       {{p.description}}
                     </div>
                   </td>
 
                   <td>
-                    <div class="col-sm-2">
+                    <div class="col-md-2">
                       <button class="btn btn-info spacer-right2" (click)="productOnHashMenu(p.id)">
                         <br/>Choisir</button>
                     </div>
@@ -115,52 +128,40 @@
             </div>
           </div>
         </div>
-      </div>
-
-
-
-
-
-
-      <div class="col-md-4 alert alert-secondary" *ngIf="arrayDeHashMenu&&menuAValider!=1" role="alert">
-
-          <p>Votre sélection</p>
-          <ul>
-            <li *ngFor="let a of arrayDeHashMenu">
-              {{a.name}}
-            </li>
-          </ul>
        
       </div>
 
-        <div class="col-md-4 alert alert-secondary" *ngIf="menuAValider==1">
-            <p>Votre sélection</p>
-          <ul>
-            <li *ngFor="let a of arrayDeHashMenu">
-              {{a.name}}
-            </li>
-            <button class="btn btn-info spacer-right2" (click)=createComboOrderItems()>
-              Valider
-            </button>
-          </ul>
+      <div class="col-md-4 alert alert-secondary" *ngIf="combo!=null">
+          <div class="panel panel-default">
+              
+            <div class="panel-body">
+                <strong>{{combo.name}}</strong><br/>
+              </div>
+
+              <span *ngIf="arrayDeHashMenu&&menuAValider!=1">
+                <div *ngFor="let a of arrayDeHashMenu">
+                  {{a.name}}<br/>
+                </div>
+              </span>
+            
+
+              <span *ngIf="menuAValider==1">
+                <div *ngFor="let a of arrayDeHashMenu">
+                  {{a.name}}<br/>
+                </div>
+                <div>
+                  <br/>
+                <button class="btn btn-info spacer-right2" (click)=createComboOrderItems()>
+                  Valider
+                </button>
+              </div>
+              </span>
+
+          </div>
         </div>
 
 
-
-
-
-  
-      
-
-
-
-
-
-
-
-    </div>
-
-
+   
   </div>
 
 </div>

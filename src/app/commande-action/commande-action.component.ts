@@ -48,19 +48,22 @@ export class CommandeActionComponent implements OnInit {
     this.panier = panierService.getPanier();
     // this.panierVatprice = panierVatPriceService.getPanierVatPrice();
 
-    //on récupère tous les orderItems de la derniere commade
-    this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
-      this.returnOrderItem = data;
+    //on récupère tous les orderItems de la derniere commade si commande non vide
+    if(this.panier.theId!=null){
+      this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
+        this.returnOrderItem = data;
+  
+        //on récupère le montant total du panier
+        this.retourVatpriceTotal = 0;
+        for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
+          this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
+        }
+  
+      }, err => {
+        console.log(err);
+      })
+    }
 
-      //on récupère le montant total du panier
-      this.retourVatpriceTotal = 0;
-      for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
-        this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
-      }
-
-    }, err => {
-      console.log(err);
-    })
 
   }
 

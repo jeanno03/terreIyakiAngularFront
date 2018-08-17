@@ -61,8 +61,8 @@ export class CommandeService {
   }
 
   //on enregistre le numero de table a la commande et on retourne un message de succès
-  chooseTable(tableId: number, userId: number) {
-    return this.http.get(this.API + '/chooseTable?tableId=' + tableId + '&userId=' + userId);
+  chooseTable(tableNumber: number, userId: number) {
+    return this.http.get(this.API + '/chooseTable?tableNumber=' + tableNumber + '&userId=' + userId);
   }
 
   //on incremente un produit

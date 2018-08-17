@@ -26,7 +26,7 @@
       <div class="panel-body" *ngIf="mode==1">
 
         <span *ngFor="let m of myTables | orderBy tableNumber">
-          <button *ngIf="m.statutName!='réservé'" type="button" class="btn btn-primary spacer-right-top" (click)=tableChoisi(m.theId)>
+          <button *ngIf="m.statutName!='réservé'" type="button" class="btn btn-primary spacer-right-top" (click)=tableChoisi(m.tableNumber)>
             N°{{m.tableNumber}}
             <span class="badge">
               {{m.statutName}}
