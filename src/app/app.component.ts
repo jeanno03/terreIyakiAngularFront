@@ -48,6 +48,7 @@ export class AppComponent {
       (user) => this.user = user);
     this.topics = this.db.list('/topics');
     this.auth.loginWithGoogle();
+    this.router.navigate(['homeMessage','Vous êtes connecté']);
   }
 
   logoutWithGoogle() {

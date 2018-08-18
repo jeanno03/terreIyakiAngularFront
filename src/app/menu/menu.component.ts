@@ -267,7 +267,9 @@ export class MenuComponent implements OnInit {
           this.menuAValider = 0;
 
           //on rafraichit la page pour MAJ du mt du panier
-          this.router.navigateByUrl('menu');
+          // this.router.navigateByUrl('menu');
+
+          this.router.navigate(['homeMessage', this.message.theMessage]);
 
         }, err => {
           console.log(err);
@@ -283,9 +285,27 @@ export class MenuComponent implements OnInit {
     return Array.from(map.values());
   }
 
-  //a definir
-  deleteOrderItemCombo() {
 
+  deleteMenu() {
+    this.message = null;
+
+    //je réinitialise le menu choisi
+    this.combo = null
+    //je reinitilise le choix des categories
+    this.category = null;
+    //je réinitiliase le choix des produits
+    this.productsMap = null;
+    //je réinitialise le produit choisi
+    this.productChoose = null
+    //je réinitiliase l'arrayList de la map
+    this.arrayDeHashMenu = null;
+    //je reinitiliase les boutons enfoncés
+    this.currentPage = null;
+    this.currentCat = null;
+    //je reinitialise le produit choisi
+    this.productChoose = null;
+    this.menuAValider = 0;
+    this.router.navigate(['homeMessage', 'Menu annulé']);
   }
 
   veuillezCommander() {

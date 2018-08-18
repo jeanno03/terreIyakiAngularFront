@@ -4,6 +4,13 @@
       <a class="navbar-brand" routerLink="/home">TerreIyaki</a>
     </div>
     <ul class="nav navbar-nav">
+    <!-- <li *ngIf="user" class="spacer-right2">
+      Bienvenue
+      <br/>
+      <strong>{{user.displayName}}</strong>
+    </li> -->
+
+    
       <li *ngIf="user">
         <a (click)="emailOnProfil(user.email)">Profil</a>
       </li>
@@ -22,27 +29,22 @@
       </li> -->
       <!-- <a routerLink="/panier" routerLinkActive="active">Panier</a> -->
 
+      <!-- <li *ngIf="user" class="spacer-right2">
+        <strong *ngIf="panier.theId!=null">Commande {{panier.theId}}</strong>
+        <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>|{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+            </strong>
+          </span>
+        <br/>{{panier.type}}
+        <span *ngIf="panier.myTable!=null">, table n°{{panier.myTable}}</span>
+      </li> -->
+
       <li *ngIf="user">
         <a class="clickable" class="active" (click)=logoutWithGoogle()>Déconnexion</a>
       </li>
 
-
-
-      <li *ngIf="user" class="spacer-right2">
-        <strong>Bienvenue</strong>
-        <br/>{{user.displayName}}
-      </li>
-
-      <li *ngIf="user" class="spacer-right2">
-        <strong *ngIf="panier.theId!=null">Commande n°{{panier.theId}}</strong>
-        <br/>{{panier.type}}
-        <span *ngIf="panier.myTable!=null"> - Table n°{{panier.myTable}}</span>
-        <span *ngIf="panierVatprice.vatPriceTotal!=null">
-          <br/>Montant : {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
-        </span>
-      </li>
-
     </ul>
+
+
 
     <!-- <span *ngIf="user">
       <strong>Votre identifiant gmail</strong>
@@ -51,16 +53,59 @@
   </div>
 </nav>
 
+
+
+
+
+
+
+<div class="panel panel-info presentation" *ngIf="user">
+  <!-- <div class="container"> -->
+      <!-- <section class="col-md-3"> -->
+          <!-- <div class="col-xd-3"> -->
+    <div class="panel-heading">
+        Bienvenue<br/> <strong>{{user.displayName}}</strong>
+  </div>
+    <div class="panel-body">
+        <strong *ngIf="panier.theId!=null">Commande {{panier.theId}}</strong>
+        <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong> - {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+            </strong>
+          </span>
+        <br/>{{panier.type}}
+        <span *ngIf="panier.myTable!=null"> - table n°{{panier.myTable}}</span>
+    </div>
+  </div>
+
+
+
+
+<!-- <div *ngIf="user" class="spacer-right2">
+    Bienvenue<br/> <strong>{{user.displayName}}</strong>
+
+
+    <li *ngIf="user" class="spacer-right2">
+        <strong *ngIf="panier.theId!=null">Commande {{panier.theId}}</strong>
+        <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>|{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+            </strong>
+          </span>
+        <br/>{{panier.type}}
+        <span *ngIf="panier.myTable!=null">, table n°{{panier.myTable}}</span>
+      </li>
+
+</div> -->
+
 <!-- <div *ngIf="message">{{message}}</div> -->
+<div class="container-fluid">
+  <div class="container spacer" *ngIf="user">
+    <!-- <button class="btn btn-info spacer-right2" (click)=allerCommander(user.email)>Commander</button> -->
+    <button routerLink="/carte" routerLinkActive="active" class="btn btn-info spacer-right2">Carte</button>
+    <button routerLink="/menu" routerLinkActive="active" class="btn btn-info spacer-right2">Menus</button>
+    <button routerLink="/myTable/Nos tables" routerLinkActive="active" class="btn btn-info spacer-right2">Tables</button>
+    <button routerLink="/test" routerLinkActive="active" class="btn btn-alert spacer-right2">Test</button>
+  </div>
 
-<div class="container spacer" *ngIf="user">
-  <!-- <button class="btn btn-info spacer-right2" (click)=allerCommander(user.email)>Commander</button> -->
-  <button routerLink="/carte" routerLinkActive="active" class="btn btn-info spacer-right2">Carte</button>
-  <button routerLink="/menu" routerLinkActive="active" class="btn btn-info spacer-right2">Menus</button>
-  <button routerLink="/myTable/Nos tables" routerLinkActive="active" class="btn btn-info spacer-right2">Tables</button>
-  <!-- <button routerLink="/test" routerLinkActive="active" class="btn btn-alert spacer-right2">Test</button> -->
+
+
+  <router-outlet>
+  </router-outlet>
 </div>
-
-
-<router-outlet>
-</router-outlet>
