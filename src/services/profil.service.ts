@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class ProfilService {
 
-  public API = '//localhost:8080';
+  // public API = '//localhost:8080';
+  public API = 'http://jeannory.dynamic-dns.net:8080';
 
   constructor(public http: HttpClient) { }
 

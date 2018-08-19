@@ -4,7 +4,7 @@
 
       <div class="tab-content">
         <div class="tab-pane active">
-          <div *ngIf="theMessage">
+          <div class="alert alert-success spacer-leftV2" role="alert" *ngIf="theMessage">
             {{theMessage.theMessage}}
           </div>
 
@@ -89,7 +89,19 @@
                   <label class="control-label">Prénom</label>
                   <input class="form-control" type="text" [(ngModel)]="userFromAp.firstName" name="firstName" required />
                 </div>
-                <button [disabled]="!f.valid" type="submit" class="btn btn-success">Save </button>
+
+                <ul class="nav nav-pills">
+                  <li>
+
+                    <button class="btn btn-danger spacer-right-top" (click)=annuler()>Annuler
+                    </button>
+                  </li>
+                  <li>
+                    <button [disabled]="!f.valid" type="submit" class="btn btn-info spacer-right-top">Enregistrer </button>
+
+                  </li>
+                </ul>
+
               </form>
 
             </div>
@@ -113,13 +125,21 @@
                   <label class="control-label">Prénom</label>
                   <input class="form-control" type="text" [(ngModel)]="myUserModel.firstName" name="firstName" required />
                 </div>
-                <button [disabled]="!f.valid" type="submit" class="btn btn-success">Save </button>
+
+                <ul class="nav nav-pills">
+                  <li>
+                    <button class="btn btn-danger spacer-right-top" (click)=annuler()>Annuler
+                    </button>
+                  </li>
+                  <li>
+                    <button [disabled]="!f.valid" type="submit" class="btn btn-info spacer-right-top">Enregistrer</button>
+                  </li>
+                </ul>
+
               </form>
 
             </div>
           </div>
-
-
 
         </div>
       </div>

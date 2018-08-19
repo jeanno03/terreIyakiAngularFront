@@ -35,7 +35,6 @@ export class ProfilComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.userFromAp = [];
     //cette méthode récupère l'utilisateur de l'app s'il existe
     //soit this.userFromAp
@@ -52,10 +51,18 @@ export class ProfilComponent implements OnInit {
   }
 
   creerProfil() {
+        //on initialise le mess
+        this.theMessage = null;
+        //on reinitialise la page
+        this.router.navigate(['profil',this.email]);
     this.creer = "true";
   }
 
   modifierProfil() {
+        //on initialise le mess
+        this.theMessage = null;
+        //on reinitialise la page
+        this.router.navigate(['profil',this.email]);
     this.modifier = "true";
     //on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
     this.getUserByEmail(this.email);
@@ -66,6 +73,7 @@ export class ProfilComponent implements OnInit {
 
 
   creerUserFromAp() {
+
     //Les infos de myUserModel sont récupéré par le formulaire html
     //seul l email doit etre rajouté 
     this.myUserModel.setEmail(this.email);
@@ -143,6 +151,12 @@ export class ProfilComponent implements OnInit {
     }, err => {
       console.log(err);
     })
+  }
+
+  annuler() {
+    //on initialise le mess
+    this.theMessage = null;
+    this.router.navigate(['homeMessage', 'Annulation modification']);
   }
 
 }

@@ -63,6 +63,7 @@ export class CarteComponent implements OnInit {
       }, err => {
         console.log(err);
       })
+
   }
 
   getPlatsByCategory(name: string) {
@@ -174,7 +175,8 @@ export class CarteComponent implements OnInit {
   }
 
   veuillezCommander() {
-    console.log("Veuillez commander");
+    this.message = null;
+    this.router.navigate(['homeMessage', 'Veuillez ouvrir une commande']);
   }
 
 }

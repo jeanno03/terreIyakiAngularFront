@@ -310,7 +310,8 @@ export class CommandeActionComponent implements OnInit {
         this.retourVatpriceTotal = null;
 
         this.returnOrderItem = null;
-        this.router.navigateByUrl('commandeAction');
+        // this.router.navigateByUrl('commandeAction');
+        this.router.navigate(['homeMessage', this.message.theMessage]);
 
       }, err => {
         console.log(err);
@@ -336,7 +337,8 @@ export class CommandeActionComponent implements OnInit {
         this.retourVatpriceTotal = null;
 
         this.returnOrderItem = null;
-        this.router.navigateByUrl('commandeAction');
+        // this.router.navigateByUrl('commandeAction');
+        this.router.navigate(['homeMessage', this.message.theMessage]);
 
       }, err => {
         console.log(err);

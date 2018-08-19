@@ -10,7 +10,7 @@
         </li>
 
         <li *ngIf="message">
-            <div class="alert alert-success" role="alert">
+          <div class="alert alert-success spacer-leftV2" role="alert">
             {{message.theMessage}}
           </div>
         </li>
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div class="container spacer">
+      <div class="container spacer" *ngIf="products">
 
         <div class="container">
           <div class="row">
