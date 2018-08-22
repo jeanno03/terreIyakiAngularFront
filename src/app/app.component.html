@@ -24,6 +24,11 @@
         <a class="clickable" class="active" (click)=allerCommander(user.email)>Commander</a>
       </li>
 
+      <li *ngIf="user">
+          <a class="clickable" class="active" (click)=mesCommandes(user.email)>Mes Commandes</a>
+        </li>
+      
+
       <!-- <li *ngIf="user">
         <a class="clickable" class="active" (click)=allerPanier(user.email)>Panier</a>
       </li> -->

@@ -4,11 +4,14 @@
 
       <div class="tab-content">
         <div class="tab-pane active">
-          <div class="alert alert-success spacer-leftV2" role="alert" *ngIf="theMessage">
-            {{theMessage.theMessage}}
-          </div>
-
-
+          <span *ngIf="theMessage">
+            <div class="alert alert-danger spacer-leftV2" role="alert" *ngIf="theMessage.categoryMessage.number==2">
+              {{theMessage.theMessage}}
+            </div>
+            <div class="alert alert-success spacer-leftV2" role="alert" *ngIf="theMessage.categoryMessage.number==1">
+              {{theMessage.theMessage}}
+            </div>
+          </span>
 
           <div *ngIf="userFromAp">
             <div>

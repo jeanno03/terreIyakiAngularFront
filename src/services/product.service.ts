@@ -16,8 +16,8 @@ export class ProductService {
   productTest: any;
   productsTest: Array<any>;
 
-  // public API = '//localhost:8080';
-  public API = 'http://jeannory.dynamic-dns.net:8080';
+  public API = '//localhost:8080';
+  // public API = 'http://jeannory.dynamic-dns.net:8080';
 
   constructor(public http: HttpClient) { }
 

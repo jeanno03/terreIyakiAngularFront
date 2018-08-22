@@ -1,0 +1,19 @@
+<div class="container spacer">
+  <div class="panel panel-info">
+    <div class="panel-header">
+      Mes commandes
+    </div>
+    <div class="panel-body">
+      <ul *ngFor="let m of myOrders">
+        <li>
+         N° {{m.theId}} - {{m.orderType.name}} - {{m.statut.name}} -<a (click)="getOrderVatPrice(m.theId)">montant</a>
+        </li>
+      </ul>
+
+      <div>
+          {{myOrderVat}} €
+      </div>
+
+    </div>
+  </div>
+</div>

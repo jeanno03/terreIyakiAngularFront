@@ -96,5 +96,10 @@ export class AppComponent {
     this.router.navigateByUrl('panier');
   }
 
+  mesCommandes(email: string) {
+
+    this.router.navigateByUrl('mesCommandes');
+  }
+
 }
 

@@ -31,6 +31,7 @@ import { TestService } from '../services/test.service';
 import { CommandeActionComponent } from './commande-action/commande-action.component';
 import { PanierComponent } from './panier/panier.component';
 import { ProfilService } from '../services/profil.service';
+import { MesCommandesComponent } from './mes-commandes/mes-commandes.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
   { path: 'menu', component: MenuComponent },
   { path: 'myTable/:message', component: MyTableComponent },
   { path: 'test', component: TestComponent },
+  { path: 'mesCommandes', component: MesCommandesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -56,7 +58,8 @@ const appRoutes: Routes = [
     TestComponent,
     ProfilComponent,
     CommandeActionComponent,
-    PanierComponent
+    PanierComponent,
+    MesCommandesComponent
   ],
   imports: [
     BrowserModule,
