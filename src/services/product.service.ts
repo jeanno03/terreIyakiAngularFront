@@ -29,7 +29,7 @@ export class ProductService {
   }
 
   getCategoryByName(name: string) {
-    return this.http.get<Category>(this.API + '/getCategoryByName?name=' + name);
+    return this.http.get(this.API + '/getCategoryByName?name=' + name);
   }
 
   //nom de méthode pouvant porter a confusion

@@ -117,7 +117,7 @@ export class CommandeService {
   //récupère toutes les commandes de l'user
   // avec pagination desc
   getListOrderByMyUserId(userId: number, page:number, size:number){
-    return this.http.get(this.API+ '/getListOrderByMyUserId?id='+userId+'&page='+page+'&size'+size);
+    return this.http.get(this.API+ '/getListOrderByMyUserId?id='+userId+'&page='+page+'&size='+size);
   }
 
 

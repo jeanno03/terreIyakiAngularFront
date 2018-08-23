@@ -30,7 +30,7 @@ export class CarteComponent implements OnInit {
   categories: Array<any>;
   products: Array<any>;
   productsReturn: Array<any>;
-  category: Category = null;
+  category: any;
   products2: any;
   id: number = 0;
   currentPage: string;
@@ -79,7 +79,7 @@ export class CarteComponent implements OnInit {
 
     this.productService.getCategoryByName(name).subscribe(data => {
       this.category = data;
-      this.id = this.category[0].id;
+      this.id = this.category.theId;
       this.productsReturn = this.getProductsById(this.id);
     }, err => {
       console.log(err);
