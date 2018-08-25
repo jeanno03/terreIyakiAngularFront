@@ -32,6 +32,7 @@ import { CommandeActionComponent } from './commande-action/commande-action.compo
 import { PanierComponent } from './panier/panier.component';
 import { ProfilService } from '../services/profil.service';
 import { MesCommandesComponent } from './mes-commandes/mes-commandes.component';
+import { UrlService } from '../services/url.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -84,7 +85,8 @@ const appRoutes: Routes = [
     ProfilService,
     PanierService,
     PanierVatPriceService,
-    UserFromAppService
+    UserFromAppService,
+    UrlService
   ],
   bootstrap: [AppComponent]
 })

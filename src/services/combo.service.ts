@@ -4,16 +4,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComboService {
 
-  public API = '//localhost:8080';
-  // public API = 'http://jeannory.dynamic-dns.net:8080';
+  private API;
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+    public urlService:UrlService
+  ) { 
+this.API=urlService.getAPI();
+  }
 
   getComboProducts(): Observable<any[]> {
     return this.http.get<any[]>(this.API + '/comboes').

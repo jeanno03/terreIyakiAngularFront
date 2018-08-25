@@ -1,16 +1,22 @@
 import { map } from 'rxjs-compat/operator/map';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  public API = '//localhost:8080';
-  // public API = 'http://jeannory.dynamic-dns.net:8080';
+  private API;
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+    public urlService:UrlService
+  ) { 
+this.API=urlService.getAPI();
+  }
+
 
   //pas utilisé
   getMessage(number: number) {

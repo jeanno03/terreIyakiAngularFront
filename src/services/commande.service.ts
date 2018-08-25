@@ -3,18 +3,23 @@ import { OrderItemModel } from '../models/orderItemModel';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommandeService {
 
-  public API = '//localhost:8080';
-  // public API = 'http://jeannory.dynamic-dns.net:8080';
+  private API;
 
   orderItemModel: OrderItemModel;
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+    public urlService:UrlService
+  ) { 
+this.API=urlService.getAPI();
+  }
 
   getAllOrderType(): Observable<any[]> {
     return this.http.get<any[]>(this.API + '/orderTypes?page=0&size=10&sort=name,asc').

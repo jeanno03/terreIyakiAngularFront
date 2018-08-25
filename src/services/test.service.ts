@@ -26,10 +26,4 @@ export class TestService {
   }
 
 
-  // //return la list de produit en fonction de l id parent
-  // getValueFromMap(numero: string) {
-  //   return this.hashExemple3.get(numero);
-  // }
-
-
 }

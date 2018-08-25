@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
+import { UrlService } from './url.service';
 
 
 @Injectable({
@@ -16,10 +17,14 @@ export class ProductService {
   productTest: any;
   productsTest: Array<any>;
 
-  public API = '//localhost:8080';
-  // public API = 'http://jeannory.dynamic-dns.net:8080';
+  private API ;
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+    public urlService:UrlService
+  ) { 
+this.API=urlService.getAPI();
+  }
 
   findAllCategories(): Observable<any[]> {
     return this.http.get<any[]>(this.API + '/categories').
