@@ -126,5 +126,11 @@ this.API=urlService.getAPI();
   }
 
 
+  //on récupère en brut tous les orders items de la commande
+  getOrderItemsByOrder(myOrderId:any){
+    return this.http.get(this.API+'/getOrderItemsByOrder?myOrderId='+myOrderId);
+  }
+
+
 
 }

@@ -33,6 +33,7 @@ import { PanierComponent } from './panier/panier.component';
 import { ProfilService } from '../services/profil.service';
 import { MesCommandesComponent } from './mes-commandes/mes-commandes.component';
 import { UrlService } from '../services/url.service';
+import { ErrorComponent } from './error/error.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -60,7 +61,8 @@ const appRoutes: Routes = [
     ProfilComponent,
     CommandeActionComponent,
     PanierComponent,
-    MesCommandesComponent
+    MesCommandesComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

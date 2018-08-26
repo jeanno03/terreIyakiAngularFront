@@ -6,14 +6,33 @@
     <div class="panel-body">
       <ul *ngFor="let m of myOrders">
         <li>
-         N° {{m.theId}} - {{m.orderType.name}} - {{m.statut.name}} -<a (click)="getOrderVatPrice(m.theId)">montant</a>
+         N° {{m.theId}} - {{m.orderType.name}} - {{m.statut.name}} -{{m.vatAmount}} €
+         <a (click)="getOrderVatPrice(m.theId)">Montant</a> - 
+         <a (click)="getOrderItemsFromMap(m.theId)">Détails</a>        
         </li>
       </ul>
 
       <div>
           {{myOrderVat}} €
       </div>
+      
+      <div>
+        <ul *ngFor="let o of orderItemsDetailChoose">
+          <li *ngIf="o.product!=null">
+{{o.product.name}} - {{o.price}} € - taxe : {{o.tax}} %
+          </li>
+        </ul>
+    </div>
 
+
+  <br/>
+  ************************************************
+  <br/>
+  <ul *ngFor="let my of myOrdersModelModifyList">
+    <li>
+n° {{my.getTheId()}} - date {{my.getOrderDate()}} - table {{my.getTableNumber()}} - type {{my.getOrderTypeName()}} - statut {{my.getStatutName()}} - mt {{my.getOrderVatPrice()}}
+    </li>
+  </ul>
     </div>
   </div>
 </div>

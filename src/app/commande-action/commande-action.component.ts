@@ -299,18 +299,22 @@ export class CommandeActionComponent implements OnInit {
       subscribe(data => {
         this.message = data;
 
+        
+        // si vente ok 
         // on refraichit le panier et cette page
+        if(this.message.categoryMessage.number==1){
 
-        this.panierService.setOption('theId', null);
-        this.panierService.setOption('theDate', null);
-        this.panierService.setOption('type', null);
-        this.panierService.setOption('statut', null);
-        this.panierService.setOption('myTable', null);
-        this.panierVatPriceService.setOption('vatPriceTotal', null);
-        this.retourVatpriceTotal = null;
+          this.panierService.setOption('theId', null);
+          this.panierService.setOption('theDate', null);
+          this.panierService.setOption('type', null);
+          this.panierService.setOption('statut', null);
+          this.panierService.setOption('myTable', null);
+          this.panierVatPriceService.setOption('vatPriceTotal', null);
+          this.retourVatpriceTotal = null;
+          this.returnOrderItem = null;
 
-        this.returnOrderItem = null;
-        // this.router.navigateByUrl('commandeAction');
+        }
+
         this.router.navigate(['homeMessage', this.message.theMessage]);
 
       }, err => {
