@@ -120,9 +120,15 @@ this.API=urlService.getAPI();
 
 
   //récupère toutes les commandes de l'user
-  // avec pagination desc
+  // avec pagination desc ==> non utilisé c'est la méthode du bas qui sera retenu
   getListOrderByMyUserId(userId: number, page:number, size:number){
     return this.http.get(this.API+ '/getListOrderByMyUserId?id='+userId+'&page='+page+'&size='+size);
+  }
+
+    //récupère toutes les commandes de l'user
+  // sans pagination
+  getListOrderByMyUserIdNoPagination(userId: number){
+    return this.http.get(this.API+ '/getListOrderByMyUserIdNoPagination?id='+userId);
   }
 
 

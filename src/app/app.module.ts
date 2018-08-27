@@ -34,6 +34,8 @@ import { ProfilService } from '../services/profil.service';
 import { MesCommandesComponent } from './mes-commandes/mes-commandes.component';
 import { UrlService } from '../services/url.service';
 import { ErrorComponent } from './error/error.component';
+import { TvaTransformPipe } from '../pipes/tva-transform.pipe';
+
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -62,7 +64,8 @@ const appRoutes: Routes = [
     CommandeActionComponent,
     PanierComponent,
     MesCommandesComponent,
-    ErrorComponent
+    ErrorComponent,
+    TvaTransformPipe
   ],
   imports: [
     BrowserModule,

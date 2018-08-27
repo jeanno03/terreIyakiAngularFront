@@ -1,38 +1,81 @@
 <div class="container spacer">
   <div class="panel panel-info">
-    <div class="panel-header">
-      Mes commandes
-    </div>
-    <div class="panel-body">
-      <ul *ngFor="let m of myOrders">
-        <li>
-         N° {{m.theId}} - {{m.orderType.name}} - {{m.statut.name}} -{{m.vatAmount}} €
-         <a (click)="getOrderVatPrice(m.theId)">Montant</a> - 
-         <a (click)="getOrderItemsFromMap(m.theId)">Détails</a>        
-        </li>
-      </ul>
+    <!-- <div class="panel-body"> -->
 
-      <div>
-          {{myOrderVat}} €
-      </div>
-      
-      <div>
-        <ul *ngFor="let o of orderItemsDetailChoose">
-          <li *ngIf="o.product!=null">
-{{o.product.name}} - {{o.price}} € - taxe : {{o.tax}} %
-          </li>
-        </ul>
-    </div>
+    <select [ngModel]="selectedDevice" (ngModelChange)="getOrderItemsFromMap($event)" class="spacer-left">
+      <option [ngValue]="selectedDevice" disabled>Choissisez votre commande</option>
+      <option *ngFor="let m of myOrders" [ngValue]="m.theId">{{m.orderDate | date:'d/MM/yyyy' | uppercase}} - n°{{m.theId}}
+        - TTC : {{m.vatAmount | currency:'EUR':true:'1.1-1'}}</option>
+    </select>
 
+    <!-- </div> -->
+  </div>
+</div>
 
-  <br/>
-  ************************************************
-  <br/>
-  <ul *ngFor="let my of myOrdersModelModifyList">
-    <li>
-n° {{my.getTheId()}} - date {{my.getOrderDate()}} - table {{my.getTableNumber()}} - type {{my.getOrderTypeName()}} - statut {{my.getStatutName()}} - mt {{my.getOrderVatPrice()}}
-    </li>
-  </ul>
-    </div>
+<div *ngIf="orderItemsDetailChoose" class="panel panel-info">
+  <div class="panel-heading" *ngIf="maCommande">
+    Commande n°{{maCommande.theId}} - {{maCommande.orderType.name}} - {{maCommande.statut.name}} au {{maCommande.orderDate |
+    date:'d/MM/yyyy' | uppercase}}
+  </div>
+  <div class="panel-body">
+    <table class="table table-success">
+      <thead>
+        <tr>
+          <th>
+            produits
+          </th>
+          <th>
+            Ht
+          </th>
+          <th>
+            <div class="spacer-right">
+              Qté
+            </div>
+          </th>
+          <th>
+            TVA
+          </th>
+          <th>
+            Prix TTC
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of orderItemsDetailChoose">
+          <td *ngIf="o.product!=null">
+            <div class="spacer-right">
+              {{o.product.name}}
+            </div>
+          </td>
+          <td *ngIf="o.product!=null">
+            <div class="spacer-right">
+              {{o.price | currency:'EUR':true:'1.1-1'}}
+            </div>
+          </td>
+          <td *ngIf="o.product!=null">
+            <div class="spacer-right">
+              1
+            </div>
+          </td>
+          <td *ngIf="o.product!=null">
+            <div class="spacer-right">
+              {{o.tax | tvaTransform}}%
+            </div>
+          </td>
+          <td *ngIf="o.product!=null">
+            <div class="spacer-right">
+              {{o.vatPrice | currency:'EUR':true:'1.1-1'}}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{maCommande.vatAmount | currency:'EUR':true:'1.1-1'}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
