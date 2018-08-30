@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/mergeMap';
 import { UserFromAppService } from '../../services/user-from-app.service';
+import { TheMessageService } from '../../services/the-message.service';
 
 
 //vatPrice calulé dans app et commande action
@@ -42,6 +43,7 @@ export class CarteComponent implements OnInit {
   returnOrderItem: Array<any>;
   i: number;
   retourVatpriceTotal: number;
+  theMessage:any;
 
   constructor(
     public productService: ProductService,
@@ -49,13 +51,23 @@ export class CarteComponent implements OnInit {
     public panierService: PanierService,
     public commandeService: CommandeService,
     public panierVatPriceService: PanierVatPriceService,
-    public userFromAppService: UserFromAppService
+    public userFromAppService: UserFromAppService,
+    public theMessageService:TheMessageService
+    // public theMessageService : TheMessageService
   ) {
     this.panier = panierService.getPanier();
     this.userFromAp = userFromAppService.getFirebaseUser();
+    // this.theMessage=null;
+    // this.theMessage = this.theMessageService.getTheMessage();
+
+    // this.theMessageService.setOption("theMessage",null);
+    // this.theMessageService.setOption("categoryMessageNumber",null);
   }
 
   ngOnInit() {
+
+
+
     this.message=null;
     this.productService.findAllCategories()
       .subscribe(data => {
@@ -175,8 +187,36 @@ export class CarteComponent implements OnInit {
   }
 
   veuillezCommander() {
-    this.message = null;
-    this.router.navigate(['homeMessage', 'Veuillez ouvrir une commande']);
+    // this.message = null;
+    // this.router.navigate(['homeMessage', 'Veuillez ouvrir une commande']);
+    // this.theMessage=this.theMessageService.getTheMessage();
+
+  if(this.theMessage!=null){
+
+    if(this.theMessage.theMessage=="Merci d'ouvrir une commande"){
+      this.theMessageService.setOption("theMessage", "Veuillez ouvrir une commande SVP!!!!!");
+      this.theMessageService.setOption("categoryMessageNumber", 2);
+      this.theMessage = this.theMessageService.getTheMessage();
+      this.router.navigateByUrl('carte');
+    }
+    else if(this.theMessage.theMessage=="Veuillez ouvrir une commande SVP!!!!!"){
+      this.theMessageService.setOption("theMessage", "Merci d'ouvrir une commande");
+      this.theMessageService.setOption("categoryMessageNumber", 2);
+      this.theMessage = this.theMessageService.getTheMessage();
+      this.router.navigateByUrl('carte');
+    }
+
+  }
+  if(this.theMessage==null){
+    this.theMessageService.setOption("theMessage", "Merci d'ouvrir une commande");
+    this.theMessageService.setOption("categoryMessageNumber", 2);
+    this.theMessage = this.theMessageService.getTheMessage();
+    this.router.navigateByUrl('carte');
+  }
+
+    
+    
+  
   }
 
 }

@@ -5,7 +5,7 @@
 
 
 
-            <div class="panel-body" *ngIf="message==null">
+            <div class="panel-body">
                 <p class="centrer">Bienvenue dans notre restaurant</p>
             </div>
 
@@ -16,8 +16,12 @@
         </div>
     </div>
 
+
+
+
+
     <div class="panel-body" *ngIf="message">
-            <p>{{message}}</p>
+            <p>A virer {{message}}</p>
     </div>
 
 </div>

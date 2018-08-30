@@ -8,6 +8,8 @@ import * as firebase from 'firebase';
 import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated";
 import { Router } from '@angular/router';
 import { Alert } from 'selenium-webdriver';
+import { UserFromAppService } from '../services/user-from-app.service';
+import { TheMessageService } from '../services/the-message.service';
 
 
 @Component({
@@ -28,6 +30,11 @@ export class AppComponent {
   orderTypeChoice: any;
   userFromAp: any = null;
   message: string = null;
+  theMessage: any;
+//   currentMainPage: any;
+
+//   elementChoice: Array<string>;
+// choice:string;
 
 
   constructor(
@@ -38,17 +45,52 @@ export class AppComponent {
     public commandeService: CommandeService,
     public panierService: PanierService,
     public panierVatPriceService: PanierVatPriceService,
+    public userFromAppService: UserFromAppService,
+    public theMessageService: TheMessageService
   ) {
     this.panier = panierService.getPanier();
     this.panierVatprice = panierVatPriceService.getPanierVatPrice();
+    // this.elementChoice = [
+    //   'La Carte',
+    //   'Nos Menus',
+    //   'Nos tables',
+    //   'Page Test'
+    // ]
+
+    // this.theMessageService.setOption("theMessage", null);
+    // this.theMessageService.setOption("categoryMessageNumber", null);
+
+    //on initialise tous les objets partagés
+    // this.theMessageService.setOption("theMessage", null);
+    // this.theMessageService.setOption("categoryMessageNumber", null);
+    //  this.router.navigateByUrl('/home');
+    //  this.theMessage=null;
   }
+
 
   loginWithGoogle() {
     this.auth.getAuthState().subscribe(
-      (user) => this.user = user);
+      (user) => {
+        this.user = user
+        // this.userFromAppService.setOption("email",this.user.email);
+        // this.userFromAppService.setOption("displayName",this.user.displayName);
+        if (this.user) {
+          this.theMessage = "Connexion de " + this.user.email + " réussi !";
+          this.theMessageService.setOption("theMessage", this.theMessage);
+          this.theMessageService.setOption("categoryMessageNumber", 1);
+        }
+
+
+        // console.log("this.theMessage : " + this.theMessage);
+        ;
+      }, err => {
+        console.log(err);
+      })
     this.topics = this.db.list('/topics');
     this.auth.loginWithGoogle();
-    this.router.navigate(['homeMessage','Vous êtes connecté']);
+    // this.router.navigate(['homeMessage','Vous êtes connecté']);
+    this.router.navigateByUrl('/home');
+
   }
 
   logoutWithGoogle() {
@@ -101,5 +143,27 @@ export class AppComponent {
     this.router.navigateByUrl('mesCommandes');
   }
 
-}
 
+  // 'La Carte',
+  // 'Nos Menus',
+  // 'Nos tables',
+  // 'Page Test'
+  // goOnPage(leChoix:string){
+  //   this.choice=null;
+  //   if(leChoix=='La Carte'){
+  //     this.choice='carte';
+  //   }
+  //   if(leChoix=='Nos Menus'){
+  //     this.choice='menu';
+  //   }
+  //   if(leChoix=='Page Test'){
+  //     this.choice='test';
+  //   }
+  //   if(this.choice){
+  //     this.router.navigateByUrl(this.choice);
+  //   }
+  // if(leChoix=='Nos tables'){
+  //   this.router.navigate(['myTable', 'Nos tables']);
+  // }
+  // }
+}

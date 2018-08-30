@@ -33,8 +33,9 @@ import { PanierComponent } from './panier/panier.component';
 import { ProfilService } from '../services/profil.service';
 import { MesCommandesComponent } from './mes-commandes/mes-commandes.component';
 import { UrlService } from '../services/url.service';
-import { ErrorComponent } from './error/error.component';
+import { TheMessageService } from '../services/the-message.service';
 import { TvaTransformPipe } from '../pipes/tva-transform.pipe';
+import { MessageComponent } from './message/message.component';
 
 
 const appRoutes: Routes = [
@@ -48,7 +49,10 @@ const appRoutes: Routes = [
   { path: 'myTable/:message', component: MyTableComponent },
   { path: 'test', component: TestComponent },
   { path: 'mesCommandes', component: MesCommandesComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  
+  // { path: 'homeTheMessage/:theMessage /:categoryMessageNumber', component: HomeComponent },
+  // { path: 'homeTheMessage/:theMessage', component: HomeComponent }
 ];
 
 
@@ -64,8 +68,8 @@ const appRoutes: Routes = [
     CommandeActionComponent,
     PanierComponent,
     MesCommandesComponent,
-    ErrorComponent,
-    TvaTransformPipe
+    TvaTransformPipe,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +95,8 @@ const appRoutes: Routes = [
     PanierService,
     PanierVatPriceService,
     UserFromAppService,
-    UrlService
+    UrlService,
+    TheMessageService
   ],
   bootstrap: [AppComponent]
 })

@@ -8,6 +8,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
+import { TheMessageService } from './the-message.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,8 @@ export class AuthService {
   private returnOrderItem: Array<any> = null;
   private retourVatpriceTotal: number;
   private i: number;
+  private theMessage: any;
+
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -27,12 +31,16 @@ export class AuthService {
     public userfromAppService: UserFromAppService,
     public commandeService: CommandeService,
     public panierService: PanierService,
-    public panierVatPriceService: PanierVatPriceService
+    public panierVatPriceService: PanierVatPriceService,
+    public theMessageService: TheMessageService,
+    public router: Router
   ) {
     this.authState = this.afAuth.authState;
     this.authState.subscribe(user => {
       if (user) {
         this.currentUser = user;
+
+
 
         // window.alert("bienvenue " + this.currentUser.displayName);
         this.profilService.getUserByEmail(this.currentUser.email).subscribe(data => {
@@ -50,7 +58,9 @@ export class AuthService {
           this.panierService.setOption('myTable', null);
           this.panierVatPriceService.setOption('vatPriceTotal', null);
 
+
           this.userFromAp = null;
+
           this.userFromAp = data;
 
           //on renvoie les donnees de l'user vers userfromAppService pour partage
@@ -61,11 +71,19 @@ export class AuthService {
             userfromAppService.setOption("firstName", this.userFromAp.firstName);
             userfromAppService.setOption("lastName", this.userFromAp.lastName);
 
+
+            // { path: 'homeTheMessage/:theMessage:categoryMessageNumber', component: HomeComponent },
+
+            // //on envoie le message de succès si connecté
+            // this.theMessage = "Connexion de "+this.userFromAp.email +" réussi !";
+            // // this.router.navigate(['homeTheMessage', this.theMessage, 1]);
+            // this.router.navigate(['homeTheMessage', this.theMessage]);
+
             //on va chercher le dernier panier commande en cours s'il existe
             //et on le partage s'il existe
             this.commandeService.selectLastMyOrderByUser(this.userFromAp.id).subscribe(data => {
 
-              
+
               this.lastOrder = null;
               this.lastOrder = data;
               if (this.lastOrder != null) {
@@ -98,6 +116,9 @@ export class AuthService {
             }, err => {
               console.log(err);
             })
+
+
+
           }
         }, err => {
           console.log(err);
@@ -116,6 +137,8 @@ export class AuthService {
   loginWithGoogle() {
     return this.afAuth.auth.signInWithPopup(
       new firebase.auth.GoogleAuthProvider());
+
+
   }
 
   logoutWithGoogle() {

@@ -2,12 +2,19 @@
   <div class="panel panel-info">
     <div class="panel-body">
 
+        <div class="btn-group btn-group carteNav" [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
+            <button type="button" class="clickable" class="btn btn-outline-primary" 
+            (click)=getPlatsByCategory(c.name) 
+            *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'">{{c.name}}</button>
+          </div>
+
+
       <ul class="nav nav-pills">
-        <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
+        <!-- <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
           <a class="clickable" class="active" (click)=getPlatsByCategory(c.name) *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'">
             {{c.name}}
           </a>
-        </li>
+        </li> -->
 
         <li *ngIf="message">
           <div class="alert alert-success spacer-leftV2" role="alert">
