@@ -1,10 +1,23 @@
-<div class="container spacer">
-    <div class="panel panel-info">
-        <div class="panel-body" *ngIf="message">
-            {{message}}
-        </div>
-        <div class="panel-body" *ngIf="message==null">
-                Home
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="titre">
+
+
+
+            <div class="panel-body" *ngIf="message==null">
+                <p class="centrer">Bienvenue dans notre restaurant</p>
             </div>
+
+            <div>
+                <img class="logo" src="assets/images/logo_terre_Iyaki.png">
+            </div>
+
+        </div>
     </div>
+
+    <div class="panel-body" *ngIf="message">
+            <p>{{message}}</p>
+    </div>
+
 </div>

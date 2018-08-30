@@ -1,79 +1,17 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-.presentation{
-    width: 20%;
-    margin-left:5px;
-    margin-top:10px;
-}
-
-.elementMenu{
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
-  }
-
-.spacerMenu{
-    margin-top:30px;
-    // width: 100%;
-    // margin-right: auto;
-    // margin-left: auto;
-}
-
-.spacer{
-    margin-top:30px;
-}
-
-.spacer-right{
-    margin-right: 10px;
-}
-
-.spacer-right-top{
-    margin-right: 10px;
-    margin-top: 10px;
-}
-
-.nav-green{
-    color:green;
-}
-
-.back-green{
-    background-color: green;
-    color:white;
-}
-
-.container2{
-    margin-top:15px;
-}
-
-.spacer-right2{
-    margin-right: 5px;
-}
-
-.spacer-left-right{
-    margin-right: 5px;
-    margin-left: 10px;
-}
-
-.spacer-top{
-    margin-top: 10px;
-}
-
-.spacer-left{
-    margin-left: 10px;
-}
-
 .nav-pills>li>a {
-    color: green;
+    color: black;
     background-color: white;
 }
     
 .nav-pills > li > a:hover, .x-nav-tabs > .active > a, .x-nav-tabs > .active > a:hover {
     color: white;
-    background: green;
+    background: #0080FF;
+}
+
+.page{
+    margin:1%;
 }
 
 .image {
@@ -88,48 +26,119 @@
     background-position:50% 50%;
 }
 
-.divParent{
-    box-sizing: content-box;
-    width: 75%;
-}
-
-.divEnfantPhoto{
-    margin-right: 10px;
-} 
-
-.divEnfantDescription{
-    max-width: 50%;
-    min-width: 50%;
-    margin-right: 10px;
-}      
-
-.row{
-    width: 65%;
-}
-
-.col-sm-2{
-    margin-right: 10px;
 
 
-.col-sm-8{
-    min-width: 50%;
-    margin-right: 10px;
-}
 
-.panierButton{
+// .presentation{
+//     width: 20%;
+//     margin-left:5px;
+//     margin-top:10px;
+// }
+
+// .elementMenu{
+//     margin-right: 10px;
+//     margin-left: 10px;
+// }
+
+// .row {
+//     margin-right: -15px;
+//     margin-left: -15px;
+//   }
+
+// .spacerMenu{
+//     margin-top:30px;
+//     // width: 100%;
+//     // margin-right: auto;
+//     // margin-left: auto;
+// }
+
+// .spacer{
+//     margin-top:30px;
+// }
+
+// .spacer-right{
+//     margin-right: 10px;
+// }
+
+// .spacer-right-top{
+//     margin-right: 10px;
+//     margin-top: 10px;
+// }
+
+// // .nav-green{
+// //     color:green;
+// // }
+
+// // .back-green{
+// //     background-color: green;
+// //     color:white;
+// // }
+
+// .container2{
+//     margin-top:15px;
+// }
+
+// .spacer-right2{
+//     margin-right: 5px;
+// }
+
+// .spacer-left-right{
+//     margin-right: 5px;
+//     margin-left: 10px;
+// }
+
+// .spacer-top{
+//     margin-top: 10px;
+// }
+
+// .spacer-left{
+//     margin-left: 10px;
+// }
+
+
+
+// .divParent{
+//     box-sizing: content-box;
+//     width: 75%;
+// }
+
+// .divEnfantPhoto{
+//     margin-right: 10px;
+// } 
+
+// .divEnfantDescription{
+//     max-width: 50%;
+//     min-width: 50%;
+//     margin-right: 10px;
+// }      
+
+// .row{
+//     width: 65%;
+// }
+
+// .col-sm-2{
+//     margin-right: 10px;
+
+
+// .col-sm-8{
+//     min-width: 50%;
+//     margin-right: 10px;
+// }
+
+// .panierButton{
     
-    background-color: #9bb ;
-    margin:auto;
-}
+//     background-color: #9bb ;
+//     margin:auto;
+// }
 
-.panierLetter{
-    color:red; 
-    margin:auto;
-}
+// .panierLetter{
+//     color:red; 
+//     margin:auto;
+// }
 
-#panierLetter{
-    color:red; 
-    margin:auto;
-}
+// #panierLetter{
+//     color:red; 
+//     margin:auto;
+// }
 
-}
+// }
