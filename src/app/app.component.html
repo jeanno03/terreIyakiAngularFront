@@ -16,9 +16,9 @@
                 <li class="nav-item" *ngIf="!user">
                   <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
                 </li>
-                <li class="nav-item" *ngIf="user">
+                <!-- <li class="nav-item" *ngIf="user">
                   <a class="nav-link" (click)=allerCommander(user.email)>Commander</a>
-                </li>
+                </li> -->
               </ul>
               <!-- Right -->
               <ul class="navbar-nav ml-auto">
@@ -110,12 +110,20 @@
               <!-- <div class="row navRow">  -->
 
 
+                  
+
 
 <main>
 
-        <div class="row navRow"> 
+        <div class="row"> 
            <div class="col-md-2">
             <ul class="nav flex-column nav-pills navVertical">
+                <li class="nav-item">
+                    <a type="button" class="clickable" class="nav-link active" (click)=allerCommander(user.email) *ngIf="user">Commander</a>
+                  </li>
+                  <li class="nav-item">
+                      <a type="button" class="clickable" class="nav-link active" (click)=allerCommanderNon() *ngIf="!user">Commander</a>
+                    </li>
               <li class="nav-item">
                 <a type="button" class="clickable" class="nav-link active" routerLink="/carte" routerLinkActive="active">Carte</a>
               </li>
@@ -123,7 +131,7 @@
                 <a type="button" class="clickable" class="nav-link" routerLink="/menu" routerLinkActive="active">Menus</a>
               </li>
               <li class="nav-item">
-                <a type="button" class="clickable" class="nav-link" routerLink="/myTable/Nos tables" routerLinkActive="active">Tables</a>
+                <a type="button" class="clickable" class="nav-link" routerLink="/myTable" routerLinkActive="active">Tables</a>
               </li>
               <li class="nav-item">
                 <a type="button" class="clickable" class="nav-link disabled" routerLink="/test" routerLinkActive="active">Test</a>

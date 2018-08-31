@@ -4,14 +4,14 @@
 
       <div class="tab-content">
         <div class="tab-pane active">
-          <span *ngIf="theMessage">
+          <!-- <span *ngIf="theMessage">
             <div class="alert alert-danger spacer-leftV2" role="alert" *ngIf="theMessage.categoryMessage.number==2">
               {{theMessage.theMessage}}
             </div>
             <div class="alert alert-success spacer-leftV2" role="alert" *ngIf="theMessage.categoryMessage.number==1">
               {{theMessage.theMessage}}
             </div>
-          </span>
+          </span> -->
 
           <div *ngIf="userFromAp">
             <div>
@@ -57,22 +57,25 @@
             </table>
           </div>
 
-          <ul class="nav nav-pills">
+          <!-- <ul class="nav nav-pills"> -->
 
             <!-- si utilisateur enregistré a terreIyaki -->
-            <li *ngIf="userFromAp&&modifier!='true'">
+            <!-- <li *ngIf="userFromAp&&modifier!='true'">
               <a class="active" (click)="modifierProfil()">
                 Modifier votre compte
               </a>
-            </li>
+            </li> -->
 
             <!-- si utilisateur non enregistré a terreIyaki et si on a pas cliqué sur creer -->
-            <li *ngIf="!userFromAp&&creer!='true'">
+            <!-- <li *ngIf="!userFromAp&&creer!='true'">
               <a class="active" (click)="creerProfil()">
                 Créer votre profil
               </a>
             </li>
-          </ul>
+          </ul> -->
+
+          <button *ngIf="userFromAp&&modifier!='true'" type="button" class="btn btn-warning" (click)="modifierProfil()">Modifier votre compte</button>
+          <button *ngIf="!userFromAp&&creer!='true'" type="button" class="btn btn-warning" (click)="creerProfil()">Créer votre profil</button>
 
 
           <!-- si utilisateur enregistré a terreIyaki et si on clique sur modifier -->

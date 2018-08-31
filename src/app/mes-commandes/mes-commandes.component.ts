@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommandeService } from '../../services/commande.service';
 import { UserFromAppService } from '../../services/user-from-app.service';
 import { MyOrderModelModify } from '../../models/myOrderModelModify';
+import { TheMessageService } from '../../services/the-message.service';
 
 @Component({
   selector: 'app-mes-commandes',
@@ -20,7 +21,7 @@ export class MesCommandesComponent implements OnInit {
   orderItemsDetailChoose: any;
 
   maCommande:any;
-
+  selectedDevice:any;
   // //test a faire
   // myOrdersModelModify: MyOrderModelModify;
   // myOrdersModelModifyList: Array<MyOrderModelModify>;
@@ -33,7 +34,8 @@ export class MesCommandesComponent implements OnInit {
 
   constructor(
     public commandeService: CommandeService,
-    public userFromAppService: UserFromAppService
+    public userFromAppService: UserFromAppService,
+    public theMessageService:TheMessageService
   ) {
     this.userFromAp = userFromAppService.getFirebaseUser();
   }
@@ -41,6 +43,9 @@ export class MesCommandesComponent implements OnInit {
   //a l'initialisation je lance toutes les commandes de l'user
   ngOnInit() {
     this.getUserOrders();
+            //on reinitialise les messages
+            this.theMessageService.setOption("theMessage", null);
+            this.theMessageService.setOption("categoryMessageNumber", null);
   }
 
   getUserOrders() {

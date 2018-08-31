@@ -47,7 +47,7 @@ const appRoutes: Routes = [
   { path: 'panier', component: PanierComponent },
   { path: 'carte', component: CarteComponent },
   { path: 'menu', component: MenuComponent },
-  { path: 'myTable/:message', component: MyTableComponent },
+  { path: 'myTable', component: MyTableComponent },
   { path: 'test', component: TestComponent },
   { path: 'mesCommandes', component: MesCommandesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

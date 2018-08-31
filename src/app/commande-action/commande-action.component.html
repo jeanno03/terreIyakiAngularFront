@@ -1,21 +1,35 @@
-<div class="container spacer">
-  <div class="panel panel-info">
-    <div class="panel-body">
+<!-- <div class="container spacer"> -->
+  <div>
+  <!-- <div class="panel panel-info"> -->
+    <div>
+    <!-- <div class="panel-body"> -->
+        <div>
 
-      <ul class="nav nav-pills" *ngIf="panier.theId==null">
+<div *ngIf="panier.theId==null">
+        <div class="btn-group btn-group carteNav" [ngClass]="{'active':o.name==currentPage}" *ngFor="let o of orderType">
+            <button type="button" class="clickable" class="btn btn-outline-primary" 
+            (click)=getOrderType(o.name)>{{o.name}}</button>
+          </div>
+</div>
+
+      <!-- <ul class="nav nav-pills" *ngIf="panier.theId==null">
         <li *ngFor="let o of orderType">
           <a class="clickable" class="active" (click)=getOrderType(o.name)>{{o.name}}</a>
         </li>
-      </ul>
+      </ul> -->
+
+
+
+<!-- 
       <ul class="nav nav-pills">
         <li *ngIf="message">
-          {{message.theMessage}}
+         a virer {{message.theMessage}}
         </li>
-      </ul>
-      <ul class="nav nav-pills">
+      </ul> -->
+      <!-- <ul class="nav nav-pills">
         <li *ngIf="panier.theId!=null&&retourVatpriceTotal==0">
           Veuillez choisir vos produits
-        </li>
+        </li> -->
         <!-- <li *ngIf="retourVatpriceTotal>0">
           <button class="btn btn-info spacer-right2">Montant : {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}</button>
         </li> -->
@@ -29,10 +43,21 @@
             Annuler
           </button>
         </li> -->
-      </ul>
+      <!-- </ul> -->
+
+      <div class="alert alert-info" *ngIf="panier.theId!=null&&retourVatpriceTotal==0">
+          Veuillez choisir vos produits à la carte oû dans un menu
+        </div>
 
     </div>
   </div>
+
+
+
+
+
+
+  <!-- ***************************début panier -->
   <div class="container spacer" *ngIf="returnOrderItem!=null">
     <table class="table-striped">
       <tr>
@@ -146,6 +171,13 @@ s'il s'agit des produits hors menu
           </tr>
     </table>
   </div>
+  <!-- ***************************fin panier -->
+
+
+
+
+
+  
 
   <!-- <div class="panel panel-info spacer-top"> -->
   <div class="panel-body spacer-top">

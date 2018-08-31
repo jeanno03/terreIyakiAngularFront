@@ -5,6 +5,7 @@ import { PanierService } from '../../services/panier.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommandeService } from '../../services/commande.service';
 import { Component, OnInit } from '@angular/core';
+import { TheMessageService } from '../../services/the-message.service';
 
 @Component({
   selector: 'app-commande-action',
@@ -42,7 +43,8 @@ export class CommandeActionComponent implements OnInit {
     public router: Router,
     public panierService: PanierService,
     public userFromAppService: UserFromAppService,
-    public panierVatPriceService: PanierVatPriceService
+    public panierVatPriceService: PanierVatPriceService,
+    public theMessageService:TheMessageService
   ) {
     this.userFromAp = userFromAppService.getFirebaseUser();
     this.panier = panierService.getPanier();
@@ -70,6 +72,11 @@ export class CommandeActionComponent implements OnInit {
   ngOnInit() {
     this.chooseOrderType();
     // this.getMyOrderByMyUser();
+
+        //on reinitialise les messages
+        this.theMessageService.setOption("theMessage", null);
+        this.theMessageService.setOption("categoryMessageNumber", null);
+        // this.theMessageService.getTheMessage();
   }
 
   //le choix du type de la commande
@@ -107,11 +114,17 @@ export class CommandeActionComponent implements OnInit {
           //puis je route en fonction de la demande
           //si numero du message = 5 on renvoie vers home
           if (this.message.number == 5) {
-            this.router.navigate(['homeMessage', this.message.theMessage]);
+            // this.router.navigate(['homeMessage', this.message.theMessage]);
+            this.theMessageService.setOption("theMessage", this.message.theMessage);
+            this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
+            this.router.navigateByUrl('home');
           }
           //si numero du message = 6 on renvoie vers table pour choix
           else if (this.message.number == 6) {
-            this.router.navigate(['myTable', this.message.theMessage]);
+            this.theMessageService.setOption("theMessage", this.message.theMessage);
+            this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
+            this.router.navigateByUrl('myTable');
+            // this.router.navigate(['myTable', this.message.theMessage]);
           }
 
         }, err => {
@@ -166,6 +179,10 @@ export class CommandeActionComponent implements OnInit {
         this.message = data;
         //on doit rafraichir page
 
+        this.theMessageService.setOption("theMessage", this.message.theMessage);
+        this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
+        // this.theMessage = this.theMessageService.getTheMessage();
+
         //on récupère tous les orderItems de la derniere commade
         this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
           this.returnOrderItem = data;
@@ -189,6 +206,8 @@ export class CommandeActionComponent implements OnInit {
       .subscribe(data => {
         this.message = data;
         //on doit rafraichir page
+        this.theMessageService.setOption("theMessage", this.message.theMessage);
+        this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
 
         //on récupère tous les orderItems de la derniere commade
         this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
@@ -213,6 +232,8 @@ export class CommandeActionComponent implements OnInit {
       .subscribe(data => {
         this.message = data;
         //on doit rafraichir page
+        this.theMessageService.setOption("theMessage", this.message.theMessage);
+        this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
 
         //on récupère tous les orderItems de la derniere commade
         this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
@@ -261,6 +282,8 @@ export class CommandeActionComponent implements OnInit {
           this.commandeService.deleteComboOrderItem(this.arrayLongClassModel).
             subscribe(data => {
               this.message = data;
+              this.theMessageService.setOption("theMessage", this.message.theMessage);
+              this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
 
               //on doit rafraichir page
 
@@ -313,9 +336,12 @@ export class CommandeActionComponent implements OnInit {
           this.retourVatpriceTotal = null;
           this.returnOrderItem = null;
 
+          this.theMessageService.setOption("theMessage", this.message.theMessage);
+          this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number)
+          this.router.navigateByUrl('home');
         }
 
-        this.router.navigate(['homeMessage', this.message.theMessage]);
+        // this.router.navigate(['homeMessage', this.message.theMessage]);
 
       }, err => {
         console.log(err);
@@ -341,8 +367,12 @@ export class CommandeActionComponent implements OnInit {
         this.retourVatpriceTotal = null;
 
         this.returnOrderItem = null;
-        // this.router.navigateByUrl('commandeAction');
-        this.router.navigate(['homeMessage', this.message.theMessage]);
+
+        this.theMessageService.setOption("theMessage", this.message.theMessage);
+        this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number)
+
+         this.router.navigateByUrl('home');
+        // this.router.navigate(['homeMessage', this.message.theMessage]);
 
       }, err => {
         console.log(err);

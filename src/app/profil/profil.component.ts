@@ -4,6 +4,7 @@ import { MyUserModel } from '../../models/myUserModel';
 import { ProfilService } from '../../services/profil.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TheMessageService } from '../../services/the-message.service';
 
 @Component({
   selector: 'app-profil',
@@ -29,7 +30,8 @@ export class ProfilComponent implements OnInit {
     public router: Router,
     public profilService: ProfilService,
     public messageService: MessageService,
-    public userFromAppService: UserFromAppService
+    public userFromAppService: UserFromAppService,
+    public theMessageService: TheMessageService
   ) {
     this.email = activatedRoute.snapshot.params['email'];
   }
@@ -39,6 +41,9 @@ export class ProfilComponent implements OnInit {
     //cette méthode récupère l'utilisateur de l'app s'il existe
     //soit this.userFromAp
     this.getUserByEmail(this.email);
+    //on reinitialise les messages
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
   }
 
   getUserByEmail(email: string) {
@@ -51,18 +56,18 @@ export class ProfilComponent implements OnInit {
   }
 
   creerProfil() {
-        //on initialise le mess
-        this.theMessage = null;
-        //on reinitialise la page
-        this.router.navigate(['profil',this.email]);
+    //on initialise le mess
+    this.theMessage = null;
+    //on reinitialise la page
+    this.router.navigate(['profil', this.email]);
     this.creer = "true";
   }
 
   modifierProfil() {
-        //on initialise le mess
-        this.theMessage = null;
-        //on reinitialise la page
-        this.router.navigate(['profil',this.email]);
+    //on initialise le mess
+    this.theMessage = null;
+    //on reinitialise la page
+    this.router.navigate(['profil', this.email]);
     this.modifier = "true";
     //on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
     this.getUserByEmail(this.email);
@@ -83,6 +88,11 @@ export class ProfilComponent implements OnInit {
       this.myUserModel.getLastName()
     ).subscribe(data => {
       this.theMessage = data;
+
+      this.theMessageService.setOption("theMessage", this.theMessage.theMessage);
+      this.theMessageService.setOption("categoryMessageNumber", this.theMessage.categoryMessage.number);
+
+
       //on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
 
       //on envoie l'user en partage s'il existe
@@ -128,7 +138,8 @@ export class ProfilComponent implements OnInit {
       this.userFromAp.lastName
     ).subscribe(data => {
       this.theMessage = data;
-      console.log("this.theMessage.number : " + this.theMessage.number);
+      this.theMessageService.setOption("theMessage", this.theMessage.theMessage);
+      this.theMessageService.setOption("categoryMessageNumber", this.theMessage.categoryMessage.number);
 
       //en cas de reussite on retire le formulaire
       //number==3 ==> succès
@@ -155,8 +166,14 @@ export class ProfilComponent implements OnInit {
 
   annuler() {
     //on initialise le mess
-    this.theMessage = null;
-    this.router.navigate(['homeMessage', 'Annulation modification']);
+    // this.theMessage = null;
+    // this.router.navigate(['homeMessage', 'Annulation modification']);
+
+    this.theMessageService.setOption("theMessage", 'Annulation modification');
+    this.theMessageService.setOption("categoryMessageNumber", 2);
+    // this.theMessage = null;
+    // this.router.navigate(['profil', this.email]);
+    this.router.navigateByUrl("home");
   }
 
 }

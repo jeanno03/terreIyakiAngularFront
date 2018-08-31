@@ -122,8 +122,13 @@ export class AppComponent {
         this.router.navigateByUrl('/commandeAction');
       }
       else {
-        this.message = "veuillez d'abord vous enregistrer dans profil"
-        this.router.navigate(['homeMessage', this.message]);
+
+        
+        this.theMessageService.setOption("theMessage", "veuillez d'abord vous enregistrer dans profil");
+        this.theMessageService.setOption("categoryMessageNumber", 2);
+        this.router.navigate(['profil', this.user.email]);
+        // this.message = "veuillez d'abord vous enregistrer dans profil"
+        // this.router.navigate(['homeMessage', this.message]);
 
       }
 
@@ -166,4 +171,10 @@ export class AppComponent {
   //   this.router.navigate(['myTable', 'Nos tables']);
   // }
   // }
+
+  allerCommanderNon(){
+    this.theMessage = "Veuillez d'abord vous connecter";
+    this.theMessageService.setOption("theMessage", this.theMessage);
+    this.theMessageService.setOption("categoryMessageNumber", 2);
+  }
 }

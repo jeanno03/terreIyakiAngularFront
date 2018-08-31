@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/Rx';
 import 'rxjs/add/operator/mergeMap';
+import { TheMessageService } from '../../services/the-message.service';
 
 @Component({
   selector: 'app-my-table',
@@ -34,7 +35,8 @@ export class MyTableComponent implements OnInit {
     public userFromAppService: UserFromAppService,
     public commandeService: CommandeService,
     public router: Router,
-    public panierService: PanierService
+    public panierService: PanierService,
+    public theMessageService: TheMessageService
   ) {
     this.message = activatedRoute.snapshot.params['message'];
     this.userFromAp = userFromAppService.getFirebaseUser();
@@ -42,6 +44,11 @@ export class MyTableComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+        //on reinitialise les messages
+        this.theMessageService.setOption("theMessage", null);
+        this.theMessageService.setOption("categoryMessageNumber", null);
 
     //si pas de commande ou si a choisi a emporter 
     //pas de possibilité d'ouvrir une table
@@ -79,6 +86,8 @@ export class MyTableComponent implements OnInit {
       .subscribe(data => {
         this.theMessage = data;
         this.message = null;
+        this.theMessageService.setOption("theMessage", this.theMessage.theMessage);
+        this.theMessageService.setOption("categoryMessageNumber", this.theMessage.categoryMessage.number);
         //on récupère l id de la table
         this.tablePersiter = tableNumber;
         //on doit rafraichir la page
@@ -100,6 +109,8 @@ export class MyTableComponent implements OnInit {
 
   impossibleTableReserve() {
     this.message = "veillez choisir une table disponible";
+    this.theMessageService.setOption("theMessage", this.message);
+    this.theMessageService.setOption("categoryMessageNumber", 2);
   }
 
   //la table est déjà choisi ==> mess d erreur
@@ -109,6 +120,9 @@ export class MyTableComponent implements OnInit {
     // this.theMessage.theMessage = this.errMessage;
     this.theMessage = null;
     this.message = ("Vous avez déjà choisie une table");
+    this.theMessageService.setOption("theMessage", this.message);
+    this.theMessageService.setOption("categoryMessageNumber", 2);
+
   }
 
   //le client na pas commandé ou a choisi a emporter
@@ -116,6 +130,12 @@ export class MyTableComponent implements OnInit {
   tableFerme() {
     this.theMessage = null;
     this.message = ("Veuillez ouvrir une commande sur place");
+
+     
+        this.theMessageService.setOption("theMessage", this.message);
+        this.theMessageService.setOption("categoryMessageNumber", 2);
+
+
   }
 
 }

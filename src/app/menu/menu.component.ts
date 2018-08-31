@@ -14,6 +14,7 @@ import { ComboService } from '../../services/combo.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { map } from 'rxjs-compat/operator/map';
+import { TheMessageService } from '../../services/the-message.service';
 
 //vatPrice calulé dans app et commande action
 //a l'initialisation
@@ -67,6 +68,7 @@ export class MenuComponent implements OnInit {
   retourVatpriceTotal: number;
 
   vireMenu: any;
+  theMessage:any;
 
   constructor(
     public comboService: ComboService,
@@ -74,7 +76,8 @@ export class MenuComponent implements OnInit {
     public userFromAppService: UserFromAppService,
     public commandeService: CommandeService,
     public panierVatPriceService: PanierVatPriceService,
-    public panierService: PanierService
+    public panierService: PanierService,
+    public theMessageService:TheMessageService
   ) {
     this.panier = panierService.getPanier();
     this.userFromAp = userFromAppService.getFirebaseUser();
@@ -83,6 +86,11 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    //on reinitialise les messages
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
+
     this.vireMenu = 0;
 
     this.comboService.getComboProducts()
@@ -235,6 +243,12 @@ export class MenuComponent implements OnInit {
       .subscribe(data => {
         this.message = data;
 
+        this.theMessageService.setOption("theMessage", this.message.theMessage);
+        this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
+        this.theMessage = this.theMessageService.getTheMessage();
+
+
+
         //bloc qui va calculer mt panier en fonction de tous les orderItem de la commande
 
         //panier.theId ==> id de la commande 
@@ -269,8 +283,8 @@ export class MenuComponent implements OnInit {
           //on rafraichit la page pour MAJ du mt du panier
           // this.router.navigateByUrl('menu');
 
-          this.router.navigate(['homeMessage', this.message.theMessage]);
-
+          // this.router.navigate(['homeMessage', this.message.theMessage]);
+this.router.navigateByUrl('menu');
         }, err => {
           console.log(err);
         })
@@ -305,7 +319,13 @@ export class MenuComponent implements OnInit {
     //je reinitialise le produit choisi
     this.productChoose = null;
     this.menuAValider = 0;
-    this.router.navigate(['homeMessage', 'Menu annulé']);
+    // this.router.navigate(['homeMessage', 'Menu annulé']);
+
+    this.theMessageService.setOption("theMessage", "Menu en cours supprimé");
+    this.theMessageService.setOption("categoryMessageNumber", 2);
+    this.theMessage = this.theMessageService.getTheMessage();
+    this.router.navigateByUrl('menu');
+
   }
 
   veuillezCommander() {
@@ -327,6 +347,13 @@ export class MenuComponent implements OnInit {
     //je reinitialise le produit choisi
     this.productChoose = null;
     this.menuAValider = 0;
-    this.router.navigate(['homeMessage', 'Veuillez ouvrir une commande']);
+    // this.router.navigate(['homeMessage', 'Veuillez ouvrir une commande']);
+
+    this.theMessageService.setOption("theMessage", "Veuillez ouvrir une commande");
+    this.theMessageService.setOption("categoryMessageNumber", 2);
+    this.theMessage = this.theMessageService.getTheMessage();
+    this.router.navigateByUrl('menu');
+
+
   }
 }
