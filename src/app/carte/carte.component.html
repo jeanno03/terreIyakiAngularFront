@@ -1,6 +1,9 @@
-<div class="container spacer">
-  <div class="panel panel-info">
-    <div class="panel-body">
+<!-- <div class="container spacer"> -->
+    <div>
+
+  <!-- <div class="panel panel-info"> -->
+      <div>
+    <!-- <div class="panel-body"> -->
 
         <div class="btn-group btn-group carteNav" [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
             <button type="button" class="clickable" class="btn btn-outline-primary" 
@@ -9,33 +12,35 @@
           </div>
 
 
-      <ul class="nav nav-pills">
+      <!-- <ul class="nav nav-pills"> -->
         <!-- <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
           <a class="clickable" class="active" (click)=getPlatsByCategory(c.name) *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'">
             {{c.name}}
           </a>
         </li> -->
 
-        <li *ngIf="message">
+        <!-- <li *ngIf="message">
           <div class="alert alert-success spacer-leftV2" role="alert">
             {{message.theMessage}}
           </div>
         </li>
-      </ul>
+      </ul> -->
 
-      <div class="tab-content" *ngIf="products">
+      <!-- <div class="tab-content" *ngIf="products">
         <div class="tab-pane active" id="tab1">
         </div>
-      </div>
+      </div> -->
 
-      <div class="container spacer" *ngIf="products">
+      <!-- <div class="container spacer" *ngIf="products"> -->
+          <div *ngIf="products">
 
-        <div class="container">
-          <div class="row">
+          <!-- <div class="container"> -->
+        <div>
+          <!-- <div class="row"> -->
 
-            <table class="table-striped">
+            <!-- <table class="table-striped"> -->
 
-              <tr>
+              <!-- <tr>
                 <th>
                   <div class="col-sm-2">photo</div>
                 </th>
@@ -45,25 +50,26 @@
                 <th>
                   <div class="col-sm-2">prix</div>
                 </th>
-              </tr>
+              </tr> -->
+<div  class="row produitList" *ngFor="let p of products">
+              <!-- <tr *ngFor="let p of products"> -->
 
-              <tr *ngFor="let p of products">
-
-                <td>
-                  <div class="col-sm-2">
+                <!-- <td> -->
+                  <div class="col-md-2">
                     <img class="image" src={{p.picture}} />
                   </div>
-                </td>
+                <!-- </td>
 
-                <td>
-                  <div class="col-sm-8">
+                <td> -->
+                  <div class="col-md-8">
                     <strong>{{p.name}}</strong>
-                    <br/> {{p.description}}
+                    <br/> <br/> {{p.description}}
+                
                   </div>
-                </td>
+                <!-- </td>
 
-                <td>
-                  <div class="col-sm-2">
+                <td> -->
+                  <div class="col-md-2">
                     <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId) *ngIf="panier.theId!=null">
                       {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
                       <br/> Ajouter
@@ -72,15 +78,17 @@
                       {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
                     </button>
                   </div>
-                </td>
+                <!-- </td> -->
 
-              </tr>
+              <!-- </tr> -->
+            </div>
 
-            </table>
-          </div>
+            <!-- </table> -->
+
+          <!-- </div> -->
         </div>
       </div>
 
-    </div>
+    <!-- </div> -->
   </div>
 </div>

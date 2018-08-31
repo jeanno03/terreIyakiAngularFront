@@ -14,6 +14,7 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/mergeMap';
 import { UserFromAppService } from '../../services/user-from-app.service';
 import { TheMessageService } from '../../services/the-message.service';
+import { CarteProductService } from '../../services/carte-product.service';
 
 
 //vatPrice calulé dans app et commande action
@@ -44,6 +45,7 @@ export class CarteComponent implements OnInit {
   i: number;
   retourVatpriceTotal: number;
   theMessage:any;
+  carteProduct:any;
 
   constructor(
     public productService: ProductService,
@@ -52,11 +54,15 @@ export class CarteComponent implements OnInit {
     public commandeService: CommandeService,
     public panierVatPriceService: PanierVatPriceService,
     public userFromAppService: UserFromAppService,
-    public theMessageService:TheMessageService
-    // public theMessageService : TheMessageService
+    public theMessageService:TheMessageService,
+    public carteProductService : CarteProductService
   ) {
     this.panier = panierService.getPanier();
     this.userFromAp = userFromAppService.getFirebaseUser();
+
+    // console.log("mon choix v01 : "+this.carteProduct.name);
+
+
     // this.theMessage=null;
     // this.theMessage = this.theMessageService.getTheMessage();
 
@@ -66,19 +72,57 @@ export class CarteComponent implements OnInit {
 
   ngOnInit() {
 
-
+    //on reinitialise les messages
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
 
     this.message=null;
     this.productService.findAllCategories()
       .subscribe(data => {
         this.categories = data;
+
+        this.carteProduct=this.carteProductService.getCarteElement();
+
+        if(this.carteProduct.name!=null){
+          
+          this.getPlatsByCategory(this.carteProduct.name);
+        }
+
+        else {
+          this.carteProductService.setOption("name","Plats");
+          this.categories.forEach(element => {
+            if(element.name=="Plats"){
+              this.id=element.theId;
+            }
+          });
+          this.getPlatsByCategory("Plats");
+         } ;
+
+         
+  
+  
+
+
       }, err => {
         console.log(err);
       })
 
+
+
+
   }
 
   getPlatsByCategory(name: string) {
+
+    //on reinitialise les messages
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
+    this.theMessage=null;
+
+    this.carteProductService.setOption("name",name);
+    console.log("je choisi litem :" +name);
+    // this.carteProduct=this.carteProductService.getCarteElement();
+
     this.message=null;
     this.currentPage = name;
     this.getCategoryByName(name);
@@ -157,6 +201,37 @@ export class CarteComponent implements OnInit {
       // alert("produit choisi");
       this.message = data;
 
+      // this.theMessageService.setOption("theMessage", null);
+      // this.theMessageService.setOption("categoryMessageNumber", null);
+      // this.theMessage = this.theMessageService.getTheMessage();
+      // this.router.navigateByUrl('carte');
+
+
+
+      if(this.theMessage==null){
+        this.theMessageService.setOption("theMessage", this.message.theMessage);
+        this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
+        this.theMessage = this.theMessageService.getTheMessage();
+      }
+
+
+
+      if(this.theMessage!=null){
+
+        if(this.theMessage.theMessage=="Produit ajouté au panier!"){
+          this.theMessageService.setOption("theMessage", "Autre produit ajouté au panier!!!!!");
+          this.theMessageService.setOption("categoryMessageNumber", 1);
+          this.theMessage = this.theMessageService.getTheMessage();
+          // this.router.navigateByUrl('carte');
+        }
+        else if(this.theMessage.theMessage=="Autre produit ajouté au panier!!!!!"){
+          this.theMessageService.setOption("theMessage", "Produit ajouté au panier!");
+          this.theMessageService.setOption("categoryMessageNumber", 1);
+          this.theMessage = this.theMessageService.getTheMessage();
+          // this.router.navigateByUrl('carte');
+        }
+    
+      }
 
 
 

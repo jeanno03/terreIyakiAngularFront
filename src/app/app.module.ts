@@ -36,6 +36,7 @@ import { UrlService } from '../services/url.service';
 import { TheMessageService } from '../services/the-message.service';
 import { TvaTransformPipe } from '../pipes/tva-transform.pipe';
 import { MessageComponent } from './message/message.component';
+import { CarteProductService } from '../services/carte-product.service';
 
 
 const appRoutes: Routes = [
@@ -96,7 +97,8 @@ const appRoutes: Routes = [
     PanierVatPriceService,
     UserFromAppService,
     UrlService,
-    TheMessageService
+    TheMessageService,
+    CarteProductService
   ],
   bootstrap: [AppComponent]
 })
