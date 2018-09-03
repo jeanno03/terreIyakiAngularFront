@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { Alert } from 'selenium-webdriver';
 import { UserFromAppService } from '../services/user-from-app.service';
 import { TheMessageService } from '../services/the-message.service';
-
+import { FalseUser } from '../models/falseUser';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +31,7 @@ export class AppComponent {
   userFromAp: any = null;
   message: string = null;
   theMessage: any;
+  falseUser:FalseUser;
 //   currentMainPage: any;
 
 //   elementChoice: Array<string>;
@@ -92,6 +93,18 @@ export class AppComponent {
     this.router.navigateByUrl('/home');
 
   }
+
+  //fausse connection
+falseLoginWithGoogle(){
+this.falseUser=new FalseUser("test@getMail.com", "test original");
+this.user=this.falseUser;
+if (this.user) {
+  this.theMessage = "Connexion de " + this.user.email + " réussi !";
+  this.theMessageService.setOption("theMessage", this.theMessage);
+  this.theMessageService.setOption("categoryMessageNumber", 1);
+}
+this.router.navigateByUrl('/home');
+}
 
   logoutWithGoogle() {
     window.alert(this.user.email + " a été déconnecté")

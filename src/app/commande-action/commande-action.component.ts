@@ -76,6 +76,7 @@ export class CommandeActionComponent implements OnInit {
         //on reinitialise les messages
         this.theMessageService.setOption("theMessage", null);
         this.theMessageService.setOption("categoryMessageNumber", null);
+        // this.router.navigate(['profil', this.email]);
         // this.theMessageService.getTheMessage();
   }
 

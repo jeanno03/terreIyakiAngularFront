@@ -6,16 +6,17 @@
 
 .bloc-principal {
     min-height: calc(100vh - 40px)
-   
 }
 
 header{
     margin-left:1%;
     margin-right:1%;  
 }
+
 main{
     margin:1%;
 }
+
 footer {
 margin-left:1%;
 margin-right:1%;  
@@ -25,7 +26,29 @@ margin-right:1%;
 width: 100%;
 }
 
+h1 {
+    font-size: 5.9vw;
+}
 
+h2 {
+font-size: 3.0vh;
+}
+
+p {
+font-size: 2vmin;
+}
+
+a {
+font-size: 2vmin;
+}
+
+strong{
+font-size: 2vmin; 
+}
+
+h3,.h3{
+    font-size:20px;
+    }
 
 // .site-header,
 // .site-content,

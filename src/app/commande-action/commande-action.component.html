@@ -1,198 +1,131 @@
-<!-- <div class="container spacer"> -->
+<div>
   <div>
-  <!-- <div class="panel panel-info"> -->
     <div>
-    <!-- <div class="panel-body"> -->
-        <div>
-
-<div *ngIf="panier.theId==null">
+      <div *ngIf="panier.theId==null">
         <div class="btn-group btn-group carteNav" [ngClass]="{'active':o.name==currentPage}" *ngFor="let o of orderType">
-            <button type="button" class="clickable" class="btn btn-outline-primary" 
-            (click)=getOrderType(o.name)>{{o.name}}</button>
-          </div>
-</div>
-
-      <!-- <ul class="nav nav-pills" *ngIf="panier.theId==null">
-        <li *ngFor="let o of orderType">
-          <a class="clickable" class="active" (click)=getOrderType(o.name)>{{o.name}}</a>
-        </li>
-      </ul> -->
-
-
-
-<!-- 
-      <ul class="nav nav-pills">
-        <li *ngIf="message">
-         a virer {{message.theMessage}}
-        </li>
-      </ul> -->
-      <!-- <ul class="nav nav-pills">
-        <li *ngIf="panier.theId!=null&&retourVatpriceTotal==0">
-          Veuillez choisir vos produits
-        </li> -->
-        <!-- <li *ngIf="retourVatpriceTotal>0">
-          <button class="btn btn-info spacer-right2">Montant : {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}</button>
-        </li> -->
-        <!-- <li *ngIf="retourVatpriceTotal>0">
-          <button class="btn btn-info spacer-right2" (click)=confirmOrder()>
-            confirmer
-          </button>
-        </li>
-        <li *ngIf="retourVatpriceTotal>0">
-          <button class="btn btn-danger spacer-right2" (click)=deleteOrder()>
-            Annuler
-          </button>
-        </li> -->
-      <!-- </ul> -->
-
-      <div class="alert alert-info" *ngIf="panier.theId!=null&&retourVatpriceTotal==0">
-          Veuillez choisir vos produits à la carte oû dans un menu
+          <button type="button" class="clickable" class="btn btn-outline-primary" (click)=getOrderType(o.name)><p>{{o.name}}</p></button>
         </div>
+      </div>
+      <div class="alert alert-info" *ngIf="panier.theId!=null&&retourVatpriceTotal==0">
+        <p>Veuillez choisir vos produits à la carte ou dans un menu</p>
+      </div>
 
     </div>
   </div>
-
-
-
-
-
-
   <!-- ***************************début panier -->
   <div class="container spacer" *ngIf="returnOrderItem!=null">
-    <table class="table-striped">
+    <table table class="table table-hover">
       <tr>
         <th>
-          <span class="spacer-right">Choix</span>
+          <p class="spacer-right">Choix</p>
         </th>
         <th>
-          <span class="spacer-right">Qté</span>
+          <p class="spacer-right">Qté</p>
         </th>
         <th>
-          <span class="spacer-right">Unité</span>
+          <p class="spacer-right">Unité</p>
         </th>
         <th>
-          <span class="spacer-right">Total</span>
-        </th>
-        <!-- <th>
-          <span class="spacer-right"></span>
+          <p class="spacer-right">Total</p>
         </th>
         <th>
-          <span class="spacer-right"></span>
-        </th> -->
-        <!-- <th>
-          <span class="spacer-right">
-            <button class="btn btn-danger" (click)=deleteOrder()>
-              Annuler
-            </button>
-          </span>
-        </th> -->
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
       </tr>
-
       <!-- concernant les conditions des bouttons, 
 s'il s'agit d'un menu on affiche que le menu
 *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0" 
 s'il s'agit des produits hors menu
 *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'"
 -->
-
       <tr *ngFor="let r of returnOrderItem">
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
             {{r.productName}}
-          </span>
-
-          <span class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          </p>
+          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
             {{r.comboName}}
-          </span>
+          </p>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
             {{r.quantite}}
-          </span>
-          <span class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          </p>
+          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
             {{r.quantite}}
-          </span>
+          </p>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
             {{r.vatPrice | currency:'EUR':true:'1.1-1'}}
-          </span>
-          <span class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          </p>
+          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
             {{r.vatComboPrice | currency:'EUR':true:'1.1-1'}}
-          </span>
+          </p>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
             {{r.quantite*r.vatPrice | currency:'EUR':true:'1.1-1'}}
-          </span>
-          <span class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          </p>
+          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
             {{r.quantite*r.vatComboPrice | currency:'EUR':true:'1.1-1'}}
-          </span>
+          </p>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
             <button (click)="incrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2">+</button>
-          </span>
+          </p>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
             <button (click)="decrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2">-</button>
-          </span>
+          </p>
         </td>
         <td>
-          <span class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
             <button (click)="deleteOrderItem(r.idProduct)" class="btn btn-info spacer-right2">X</button>
-          </span>
+          </p>
 
-          <span class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
             <button (click)="deleteOrderItemCombo(r.theId)" class="btn btn-info spacer-right2">X</button>
-          </span>
+          </p>
         </td>
       </tr>
       <tr>
-        <td>
-          &nbsp;
-        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
-          <tr>
-            <td>
-              <strong *ngIf="panier.theId!=null">Total</strong>
-            </td>
-            <td>
+      <tr>
+        <td>
+          <strong *ngIf="panier.theId!=null">Total</strong>
+        </td>
+        <td>
 
-            </td>
-            <td>
-            </td>
-            <td>
-              <strong *ngIf="panier.theId!=null">
-                {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}
-              </strong>
-            </td>
-          </tr>
+        </td>
+        <td>
+        </td>
+        <td>
+          <strong *ngIf="panier.theId!=null">
+            {{retourVatpriceTotal | currency:'EUR':true:'1.1-1'}}
+          </strong>
+        </td>
+        <td></td>
+        <td> <button class="btn btn-danger spacer-left-right" *ngIf="retourVatpriceTotal>0" (click)=deleteOrder()>
+            <p>Annuler</p>
+          </button></td>
+        <td> <button class="btn btn-info spacer-right2" *ngIf="retourVatpriceTotal>0" (click)=confirmOrder()>
+            <p>confirmer</p>
+          </button></td>
+      </tr>
     </table>
   </div>
   <!-- ***************************fin panier -->
-
-
-
-
-
-  
-
-  <!-- <div class="panel panel-info spacer-top"> -->
-  <div class="panel-body spacer-top">
-    <ul class="nav nav-pills" *ngIf="retourVatpriceTotal>0">
-      <li>
-        <button class="btn btn-danger spacer-left-right" (click)=deleteOrder()>
-          Annuler
-        </button>
-      </li>
-      <li>
-        <button class="btn btn-info spacer-right2" (click)=confirmOrder()>
-          confirmer
-        </button>
-      </li>
-    </ul>
-  </div>
-  <!-- </div> -->
 </div>

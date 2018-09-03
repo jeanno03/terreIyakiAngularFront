@@ -22,6 +22,8 @@ export class MesCommandesComponent implements OnInit {
 
   maCommande:any;
   selectedDevice:any;
+
+  myOrderPrice:any;
   // //test a faire
   // myOrdersModelModify: MyOrderModelModify;
   // myOrdersModelModifyList: Array<MyOrderModelModify>;
@@ -151,11 +153,32 @@ export class MesCommandesComponent implements OnInit {
 
   }
 
+  //récupère le total HT
+  getOrderPrice(myOrderId: number) {
+    this.myOrderPrice = 0;
+    this.commandeService.returnOrderItemByOrder(myOrderId)
+      .subscribe(data => {
+        this.orderItems = data;
+        this.orderItems.forEach(element => {
+
+          this.myOrderPrice = this.myOrderPrice + element.price;
+
+        }, err => {
+          console.log(err);
+        })
+      })
+
+
+  }
+
   //return la list de orderItems en fonction de la key de la hashMap
   getOrderItemsFromMap(id: number) {
     this.orderItemsDetailChoose = Array.from(this.hashCommande.get(id));
     console.log("myOrderId : "+ id);
     this.getTheOrder(id);
+    //on récupère le montant HT
+    this.getOrderPrice(id);
+
   }
   
   //récupère les ordersItems détaillé de la commande en fonction de l'id commande

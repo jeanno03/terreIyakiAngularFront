@@ -1,250 +1,87 @@
-<!-- <div class="container spacer"> -->
-<!-- <div> -->
 <div class="panel panel-infos" *ngIf="vireMenu!=1">
-  <!-- <div class="panel-body"> -->
-  <!-- <div>
-      <ul class="nav nav-pills">
-        <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of comboes">
-          <a class="clickable" class="active" (click)=getComboByName(c.name)>{{c.name}}</a>
-        </li>
-
-
-      </ul>
-    </div> -->
-
   <div class="btn-group btn-group carteNav" [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of comboes">
-    <button type="button" class="clickable" class="btn btn-outline-primary" (click)=getComboByName(c.name)>{{c.name}}</button>
+    <button type="button" class="clickable" class="btn btn-outline-primary" (click)=getComboByName(c.name)><p>{{c.name}}</p></button>
   </div>
-
-
-
 </div>
-
-<!-- <span *ngIf="productChoose">
-    <strong>{{productChoose.name}}</strong>
-  </span> -->
-
-
-
-<!-- <div class="container"> -->
 <div>
-  <!-- <div class="panel-heading">
-
-    <span *ngIf="message">
-      A virer <strong>{{message.theMessage}}</strong>
-    </span>
-
-  </div> -->
-
-  <!-- <div class="container"> -->
   <div>
-
-    <!-- <div class="panel-body"> -->
-    <!-- <div class="row"> -->
-    <!-- <section class="col-md-9" *ngIf="combo&&vireMenu!=1"> -->
     <section *ngIf="combo&&vireMenu!=1">
-      <!-- <div class="container spacer" *ngIf="combo&&vireMenu!=1"> -->
-      <!-- <table class="table-striped"> -->
-
-      <!-- <tr>
-              <th> -->
-      <!-- <div class="col-xs-1 spacer-right">
-                  photo
-                </div> -->
-      <!-- </th>
-              <th> -->
-      <!-- <div class="col-xs-7 spacer-right">
-                  description
-                </div> -->
-      <!-- </th>
-              <th> -->
-      <!-- <div class="col-xs-1 spacer-right">
-                  prix
-                </div> -->
-      <!-- </th>
-            </tr>
-
-            <tr>
-              <td> -->
       <div class="row">
         <div class="col-sm-2 spacer-right">
           <img class="image" src={{combo.picture}} />
         </div>
-        <!-- </td>
-              <td> -->
         <div class="col-sm-8 spacer-right">
           <strong>{{combo.name}}</strong>
-          <br/> {{combo.description}}
+          <p>{{combo.description}}</p>
         </div>
-        <!-- </td>
-              <td> -->
         <div class="col-sm-2 spacer-right">
           <button class="btn btn-info spacer-right2" (click)=selectCombo(combo.id) *ngIf="panier.theId!=null">
-            {{combo.vatPrice | currency:'EUR':true:'1.1-1'}}
-            <br/>Ajouter</button>
+            <p>{{combo.vatPrice | currency:'EUR':true:'1.1-1'}}
+            <br/>Ajouter</p></button>
           <button class="btn btn-info spacer-right2" (click)=veuillezCommander() *ngIf="panier.theId==null">
-            {{combo.vatPrice | currency:'EUR':true:'1.1-1'}}
+            <p>{{combo.vatPrice | currency:'EUR':true:'1.1-1'}}</p>
           </button>
         </div>
       </div>
-      <!-- </td>
-            </tr> -->
-
-      <!-- </table> -->
-
-      <!-- </div> -->
-
     </section>
-
-    <!-- <section class="col-xs-3">
-<div></div>
-  </section> -->
-    <!-- </div> -->
   </div>
-
 </div>
-
-
-
-
 <!-- le menu a sélectionner -->
 <div *ngIf="category">
-
-  <!-- <div class="container"> -->
   <div>
-    <div class="alert alert-success invitationChoix">Composez votre menu </div>
-    <!-- <span class="badge badge-secondary invitationChoix">Composez votre menu</span> -->
-
-    <!-- <div class="panel-body">
-        <ul class="nav nav-pills">
-          <li [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
-            <a class="clickable" class="active" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</a>
-          </li>
-
-        </ul>
-      </div> -->
-
+    <div class="alert alert-success invitationChoix"><p>Composez votre menu</p></div>
     <div class="btn-group btn-group carteNav2" [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
-      <button type="button" class="clickable" class="btn btn-outline-primary" (click)=getProductsFromComboCat(c.parentComboCategoryId)>{{c.name}}</button>
+      <button type="button" class="clickable" class="btn btn-outline-primary" (click)=getProductsFromComboCat(c.parentComboCategoryId)><p>{{c.name}}</p></button>
     </div>
-
-
-
-
   </div>
-
 </div>
-
-
-
-<!-- ca va jusqu a la fin ce bloc ****************************************-->
 <!-- le menu a sélectionner -->
 <div *ngIf="category">
-
-  <!-- <div class="container"> -->
-  <!-- <div> -->
-  <!-- <div class="panel-body"> -->
-  <!-- <section class="row"> -->
-  <!-- <div> -->
-  <!-- <section class="col-sm-8 alert alert-secondary"> -->
-
-  <!-- <div class="container spacerMenu" *ngIf="productsMap!=null"> -->
-
   <div class="produitComboList" *ngIf="productsMap!=null">
     <div class="row" *ngFor="let p of productsMap">
-      <!-- <table class="table-striped"> -->
-
-      <!-- <tr>
-                  <th>
-                    <span class="spacer-right">photo</span>
-                  </th>
-                  <th>
-                    <span class="spacer-right">Produits</span>
-                  </th>
-                  <th>
-                    <span class="spacer-right"></span>
-                  </th>
-                </tr> -->
-
-      <!-- <div *ngFor="let p of productsMap"> -->
-
-      <!-- <td> -->
       <div class="col-sm-2">
         <img class="image2" src={{p.picture}} />
       </div>
-      <!-- </td>
-
-                  <td> -->
       <div class="col-sm-8">
-        {{p.description}}
+        <p>{{p.description}}</p>
       </div>
-      <!-- </td>
-
-                  <td> -->
       <div class="col-sm-2">
         <button class="btn btn-info spacer-right2" (click)="productOnHashMenu(p.id)">
-          <br/>Choisir</button>
+          <p>Choisir</p></button>
       </div>
-      <!-- </td> -->
-
-      <!-- </div> -->
-
-      <!-- </table> -->
     </div>
   </div>
-
-
-
-
-
   <!--row début **************************************-->
-<div class="row" *ngIf="combo!=null">
+  <div class="row" *ngIf="combo!=null">
     <div class="col-sm-2">
-        <div class="badge badge-success invitationChoix">Votre sélection</div>
-    
+      <div class="badge badge-success invitationChoix"><p>Votre sélection</p></div>
     </div>
     <div class="col-sm-10">
-      </div>
-</div>
+    </div>
+  </div>
   <div class="row" *ngIf="combo!=null">
-
-      <div class="col-sm-2 borderChoice">
+    <div class="col-sm-2 borderChoice">
       <strong>{{combo.name}}</strong>
     </div>
-
     <div class="col-sm-8 borderChoice">
       <div *ngFor="let a of arrayDeHashMenu">
-      <span class="letterProduct">{{a.name}}</span>
+        <span class="letterProduct"><p>{{a.name}}</p></span>
+      </div>
     </div>
-    </div>
-
     <div class="col-sm-2 borderChoice">
       <ul class="nav nav-pills">
         <li>
           <button class="btn btn-danger boutonMenu" (click)=deleteMenu()>
-            Annuler
+            <p>Annuler</p>
           </button>
         </li>
-
-
         <li *ngIf="menuAValider==1">
           <button class="btn btn-info boutonMenu" (click)=createComboOrderItems()>
-            Valider
+            <p>Valider</p>
           </button>
         </li>
       </ul>
     </div>
-
   </div>
-<!-- </div> -->
   <!--row fin **************************************-->
-
-
-
-
-
-  <!-- </section> -->
-  <!-- </div> -->
-  <!-- </div> -->
 </div>
-<!-- ca va jusqu a la 139 début ce bloc ****************************************-->

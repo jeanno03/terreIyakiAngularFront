@@ -1,11 +1,11 @@
     <section *ngIf="theMessage">
       <div class="col-md-12">
     <div class="alert alert-success messagePage" *ngIf="theMessage.categoryMessageNumber==1">
-        <div class="centrer">{{theMessage.theMessage}}</div>
+        <div class="centrer"><p>{{theMessage.theMessage}}</p></div>
       </div>
 
       <div class="alert alert-danger messagePage" *ngIf="theMessage.categoryMessageNumber==2">
-          <div class="centrer">{{theMessage.theMessage}}</div>
+          <div class="centrer"><p>{{theMessage.theMessage}}</p></div>
         </div>
       </div>
     

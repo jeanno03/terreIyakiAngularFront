@@ -1,66 +1,53 @@
 <div class="bloc-principal">
-<!-- <div class="container"> -->
-  
-  <!-- <section class="pageApp"> -->
-      <header>
-        <div class="row">
-          <div class="col-md-12">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-              <a class="navbar-brand" routerLink="/home">TerreIyaki</a>
-      
-              <!-- Left -->
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item" *ngIf="user">
-                  <a class="nav-link" (click)="emailOnProfil(user.email)">Profil</a>
-                </li>
-                <li class="nav-item" *ngIf="!user">
-                  <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
-                </li>
-                <!-- <li class="nav-item" *ngIf="user">
-                  <a class="nav-link" (click)=allerCommander(user.email)>Commander</a>
-                </li> -->
-              </ul>
-              <!-- Right -->
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item" *ngIf="user">
-                  <a class="nav-link" (click)=mesCommandes(user.email)>Mes Commandes</a>
-                </li>
-                <li class="nav-item" *ngIf="user">
-                  <a class="nav-link" (click)=logoutWithGoogle()>Déconnexion</a>
-                </li>
-      
-                <div *ngIf="user">
-                  {{user.displayName}}
-                </div>
-              </ul>
-            </nav>
-      
-      
-          </div>
-        </div>
-
-        <div class="alert alert-success">
-          <div class="row">
-      
-            <div class="col-md-12">
+  <header>
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+          <a class="navbar-brand" routerLink="/home">TerreIyaki</a>
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngIf="user">
+              <a class="nav-link" (click)="emailOnProfil(user.email)">Profil</a>
+            </li>
+            <li class="nav-item" *ngIf="!user">
+              <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
+            </li>
+            <li class="nav-item" *ngIf="!user">
+                <a class="nav-link" (click)=falseLoginWithGoogle()>Simulation Connexion</a>
+              </li>
+          </ul>
+          <!-- Right -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" *ngIf="user">
+              <a class="nav-link" (click)=mesCommandes(user.email)>Mes Commandes</a>
+            </li>
+            <!--désactivé pour l instant-->
+            <!-- <li class="nav-item" *ngIf="user">
+              <a class="nav-link" (click)=logoutWithGoogle()>Déconnexion</a>
+            </li> -->
+            <div *ngIf="user">
+              <p>{{user.displayName}}</p>
             </div>
-      
-      
-      
-          </div>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="alert alert-success">
+      <div class="row">
+        <div class="col-md-12">
         </div>
+      </div>
+    </div>
+  </header>
+  <!--*********************************--il s'agit du panier a reprendre *********************************-->
 
-      </header>
-      
-        <!--*********************************--il s'agit du panier a reprendre *********************************-->
-      
-        <!-- <div class="row">
+  <!-- <div class="row">
           <div class="col-md-12">
       <div class="panel panel-info presentation" *ngIf="user">-->
-        <!-- <div class="container"> -->
-        <!-- <section class="col-md-3"> -->
-        <!-- <div class="col-xd-3"> -->
-        <!--  <div class="panel-heading">
+  <!-- <div class="container"> -->
+  <!-- <section class="col-md-3"> -->
+  <!-- <div class="col-xd-3"> -->
+  <!--  <div class="panel-heading">
               <br/> <strong>{{user.displayName}}</strong> A effacer soon
         </div>
           <div class="panel-body">
@@ -74,12 +61,12 @@
         </div>
       </div>
       </div> -->
-      
-        <!--*********************************--il s'agit du panier a reprendre *********************************-->
 
-      
-      
-        <!-- <div *ngIf="user" class="spacer-right2">
+  <!--*********************************--il s'agit du panier a reprendre *********************************-->
+
+
+
+  <!-- <div *ngIf="user" class="spacer-right2">
           <br/> <strong>{{user.displayName}}</strong>
       
       
@@ -93,11 +80,11 @@
             </li>
       
       </div> -->
-      
-        <!-- <div *ngIf="message">{{message}}</div> -->
-      
 
-          <!-- <div class="row">
+  <!-- <div *ngIf="message">{{message}}</div> -->
+
+
+  <!-- <div class="row">
               <div class="col-md-2">
                 <ul class="nav flex-column nav-pills navVertical" *ngFor="let e of elementChoice">
                   <li class="nav-item"[ngClass]="{'active':e==currentMainPage}" >
@@ -106,102 +93,54 @@
                 </ul>
              
               </div> -->
-              
-              <!-- <div class="row navRow">  -->
 
-
-                  
-
-
-<main>
-
-        <div class="row"> 
-           <div class="col-md-2">
-            <ul class="nav flex-column nav-pills navVertical">
-                <li class="nav-item">
-                    <a type="button" class="clickable" class="nav-link active" (click)=allerCommander(user.email) *ngIf="user">Commander</a>
-                  </li>
-                  <li class="nav-item">
-                      <a type="button" class="clickable" class="nav-link active" (click)=allerCommanderNon() *ngIf="!user">Commander</a>
-                    </li>
-              <li class="nav-item">
-                <a type="button" class="clickable" class="nav-link active" routerLink="/carte" routerLinkActive="active">Carte</a>
-              </li>
-              <li class="nav-item">
-                <a type="button" class="clickable" class="nav-link" routerLink="/menu" routerLinkActive="active">Menus</a>
-              </li>
-              <li class="nav-item">
-                <a type="button" class="clickable" class="nav-link" routerLink="/myTable" routerLinkActive="active">Tables</a>
-              </li>
-              <li class="nav-item">
-                <a type="button" class="clickable" class="nav-link disabled" routerLink="/test" routerLinkActive="active">Test</a>
-              </li>
-            </ul>
-          </div>
-      
-      
-          <div class="col-md-10">
-            <div class="row">
-              <div class="col-md-12">
-                <router-outlet>
-                </router-outlet>
-              </div>
-            </div>
-
-            
-          </div>
-        </div>
-
+  <!-- <div class="row navRow">  -->
+  <main>
+    <div class="row">
+      <div class="col-md-2">
+        <ul class="nav flex-column nav-pills navVertical">
+          <li class="nav-item">
+            <a type="button" class="clickable" class="nav-link active" (click)=allerCommander(user.email) *ngIf="user">Commander</a>
+          </li>
+          <li class="nav-item">
+            <a type="button" class="clickable" class="nav-link active" (click)=allerCommanderNon() *ngIf="!user">Commander</a>
+          </li>
+          <li class="nav-item">
+            <a type="button" class="clickable" class="nav-link active" routerLink="/carte" routerLinkActive="active">Carte</a>
+          </li>
+          <li class="nav-item">
+            <a type="button" class="clickable" class="nav-link" routerLink="/menu" routerLinkActive="active">Menus</a>
+          </li>
+          <li class="nav-item">
+            <a type="button" class="clickable" class="nav-link" routerLink="/myTable" routerLinkActive="active">Tables</a>
+          </li>
+          <li class="nav-item">
+            <a type="button" class="clickable" class="nav-link disabled" routerLink="/test" routerLinkActive="active">Test</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-10">
         <div class="row">
-            <div class="col-md-2">
-              </div>
-            <div class="col-md-8">
-                <app-message></app-message>
-                <!-- <section *ngIf="theMessage">
-        
-                    <div class="alert alert-success messagePage" *ngIf="theMessage.categoryMessageNumber==1">
-                        <div class="centrer">{{theMessage.theMessage}}</div>
-                      </div>
-                
-                      <div class="alert alert-danger messagePage" *ngIf="theMessage.categoryMessageNumber==2">
-                          <div class="centrer">{{theMessage.theMessage}}</div>
-                        </div>
-                
-                    </section> -->
-              </div>
-            </div>
-      
-      
-      </main>
-      
-          <!-- </section> -->
-        
-        </div>
-
-
-      <footer>
-        <section class="row">
-      
-          <div class="col-sm-12 alert alert-dark footerPage">
-            Projet parallèle : Spring Boot - Service Rest - Angular
+          <div class="col-md-12">
+            <router-outlet>
+            </router-outlet>
           </div>
-      
-        </section>
-      </footer>
-
-      <!-- </div> -->
-      
-      
-      <!-- 
-        <div class="container-fluid">
-            <div class="container spacer" *ngIf="user">
-        
-              
-              <button routerLink="/carte" routerLinkActive="active" class="btn btn-info spacer-right2">Carte</button>
-              <button routerLink="/menu" routerLinkActive="active" class="btn btn-info spacer-right2">Menus</button>
-              <button routerLink="/myTable/Nos tables" routerLinkActive="active" class="btn btn-info spacer-right2">Tables</button>
-              <button routerLink="/test" routerLinkActive="active" class="btn btn-alert spacer-right2">Test</button>
-            </div>
-        <router-outlet>
-        </router-outlet>
-      </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <app-message></app-message>
+      </div>
+    </div>
+  </main>
+</div>
+<footer>
+  <section class="row">
+    <div class="col-sm-12 alert alert-dark footerPage">
+      <p class="centrer">Projet parallèle : Spring Boot - Service Rest - Angular</p>
+    </div>
+  </section>
+</footer>

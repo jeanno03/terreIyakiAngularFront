@@ -1,17 +1,7 @@
 <div class="container spacer">
-  <!-- <div class="panel panel-info">
-    <div class="panel-body">
-      <ul class="nav nav-pills">
-        <li>
-        a virer  {{message}}
-          <span *ngIf="theMessage!=null">a virer {{theMessage.theMessage}}</span>
-        </li>
-      </ul>
-    </div>
-  </div> -->
   <div class="alert alert-success">
-      <strong>Nos tables</strong>
-    </div>
+    <strong>Nos tables</strong>
+  </div>
 
   <div class="container spacer">
     <div class="panel panel-info">
@@ -21,16 +11,16 @@
 
         <span *ngFor="let m of myTables | orderBy tableNumber">
           <button type="button" class="btn btn-primary spacer-right-top" (click)=tableFerme() *ngIf="m.statutName=='libre'">
-            N°{{m.tableNumber}}
-            <span class="badge">
-              {{m.statutName}}
-            </span>
+            <p>N°{{m.tableNumber}}
+              <span class="badge">
+                {{m.statutName}}
+              </span></p>
           </button>
           <button type="button" class="btn btn-danger spacer-right-top" (click)=tableFerme() *ngIf="m.statutName=='réservé'">
-            N°{{m.tableNumber}}
-            <span class="badge">
-              {{m.statutName}}
-            </span>
+            <p>N°{{m.tableNumber}}
+              <span class="badge">
+                {{m.statutName}}
+              </span></p>
           </button>
         </span>
 
@@ -39,20 +29,20 @@
             ==> possiblité d'ouvrir une table non réservé-->
       <div class="panel-body" *ngIf="mode==1">
 
-          <span *ngFor="let m of myTables | orderBy tableNumber">
-              <button type="button" class="btn btn-primary spacer-right-top" (click)=tableChoisi(m.tableNumber) *ngIf="m.statutName=='libre'">
-                N°{{m.tableNumber}}
-                <span class="badge">
-                  {{m.statutName}}
-                </span>
-              </button>
-              <button type="button" class="btn btn-danger spacer-right-top" (click)=impossibleTableReserve() *ngIf="m.statutName=='réservé'">
-                N°{{m.tableNumber}}
-                <span class="badge">
-                  {{m.statutName}}
-                </span>
-              </button>
-            </span>
+        <span *ngFor="let m of myTables | orderBy tableNumber">
+          <button type="button" class="btn btn-primary spacer-right-top" (click)=tableChoisi(m.tableNumber) *ngIf="m.statutName=='libre'">
+            <p>N°{{m.tableNumber}}
+              <span class="badge">
+                {{m.statutName}}
+              </span></p>
+          </button>
+          <button type="button" class="btn btn-danger spacer-right-top" (click)=impossibleTableReserve() *ngIf="m.statutName=='réservé'">
+            <p> N°{{m.tableNumber}}
+              <span class="badge">
+                {{m.statutName}}
+              </span></p>
+          </button>
+        </span>
 
       </div>
 
@@ -61,20 +51,20 @@
       <div class="panel-body" *ngIf="mode==2">
 
 
-          <span *ngFor="let m of myTables | orderBy tableNumber">
-              <button type="button" class="btn btn-primary spacer-right-top" (click)=tableDejaChoisi() *ngIf="m.statutName=='libre'">
-                N°{{m.tableNumber}}
-                <span class="badge">
-                  {{m.statutName}}
-                </span>
-              </button>
-              <button type="button" class="btn btn-danger spacer-right-top" (click)=tableDejaChoisi() *ngIf="m.statutName=='réservé'">
-                N°{{m.tableNumber}}
-                <span class="badge">
-                  {{m.statutName}}
-                </span>
-              </button>
-            </span>
+        <span *ngFor="let m of myTables | orderBy tableNumber">
+          <button type="button" class="btn btn-primary spacer-right-top" (click)=tableDejaChoisi() *ngIf="m.statutName=='libre'">
+            <p> N°{{m.tableNumber}}
+              <span class="badge">
+                {{m.statutName}}
+              </span></p>
+          </button>
+          <button type="button" class="btn btn-danger spacer-right-top" (click)=tableDejaChoisi() *ngIf="m.statutName=='réservé'">
+            <p>N°{{m.tableNumber}}
+              <span class="badge">
+                {{m.statutName}}
+              </span></p>
+          </button>
+        </span>
 
       </div>
 

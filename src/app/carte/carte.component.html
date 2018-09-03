@@ -1,94 +1,30 @@
-<!-- <div class="container spacer"> -->
-    <div>
-
-  <!-- <div class="panel panel-info"> -->
+<div>
+  <div>
+    <div class="btn-group btn-group carteNav" [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
+      <button type="button" class="clickable" class="btn btn-outline-primary" (click)=getPlatsByCategory(c.name) *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'"><p>{{c.name}}</p></button>
+    </div>
+    <div *ngIf="products">
       <div>
-    <!-- <div class="panel-body"> -->
-
-        <div class="btn-group btn-group carteNav" [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
-            <button type="button" class="clickable" class="btn btn-outline-primary" 
-            (click)=getPlatsByCategory(c.name) 
-            *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'">{{c.name}}</button>
+        <div class="row produitList" *ngFor="let p of products">
+          <div class="col-md-2">
+            <img class="image" src={{p.picture}} />
           </div>
-
-
-      <!-- <ul class="nav nav-pills"> -->
-        <!-- <li [ngClass]="{'active':c.name==currentPage}" *ngFor="let c of categories">
-          <a class="clickable" class="active" (click)=getPlatsByCategory(c.name) *ngIf="c.name=='Entrées'||c.name=='Plats'||c.name=='Desserts'||c.name=='Boissons'">
-            {{c.name}}
-          </a>
-        </li> -->
-
-        <!-- <li *ngIf="message">
-          <div class="alert alert-success spacer-leftV2" role="alert">
-            {{message.theMessage}}
+          <div class="col-md-8">
+            <strong>{{p.name}}</strong>
+            <br/>
+            <p>{{p.description}}</p>
           </div>
-        </li>
-      </ul> -->
-
-      <!-- <div class="tab-content" *ngIf="products">
-        <div class="tab-pane active" id="tab1">
-        </div>
-      </div> -->
-
-      <!-- <div class="container spacer" *ngIf="products"> -->
-          <div *ngIf="products">
-
-          <!-- <div class="container"> -->
-        <div>
-          <!-- <div class="row"> -->
-
-            <!-- <table class="table-striped"> -->
-
-              <!-- <tr>
-                <th>
-                  <div class="col-sm-2">photo</div>
-                </th>
-                <th>
-                  <div class="col-sm-8">Produit</div>
-                </th>
-                <th>
-                  <div class="col-sm-2">prix</div>
-                </th>
-              </tr> -->
-<div  class="row produitList" *ngFor="let p of products">
-              <!-- <tr *ngFor="let p of products"> -->
-
-                <!-- <td> -->
-                  <div class="col-md-2">
-                    <img class="image" src={{p.picture}} />
-                  </div>
-                <!-- </td>
-
-                <td> -->
-                  <div class="col-md-8">
-                    <strong>{{p.name}}</strong>
-                    <br/> <br/> {{p.description}}
-                
-                  </div>
-                <!-- </td>
-
-                <td> -->
-                  <div class="col-md-2">
-                    <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId) *ngIf="panier.theId!=null">
-                      {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
-                      <br/> Ajouter
-                    </button>
-                    <button class="btn btn-info spacer-right2" (click)=veuillezCommander() *ngIf="panier.theId==null">
-                      {{p.vatPrice | currency:'EUR':true:'1.1-1'}}
-                    </button>
-                  </div>
-                <!-- </td> -->
-
-              <!-- </tr> -->
-            </div>
-
-            <!-- </table> -->
-
-          <!-- </div> -->
+          <div class="col-md-2">
+            <button class="btn btn-info spacer-right2" (click)=selectProduct(p.theId) *ngIf="panier.theId!=null">
+              <p>{{p.vatPrice | currency:'EUR':true:'1.1-1'}}<br/>
+              Ajouter</p> 
+            </button>
+            <button class="btn btn-info spacer-right2" (click)=veuillezCommander() *ngIf="panier.theId==null">
+              <p>{{p.vatPrice | currency:'EUR':true:'1.1-1'}}</p>
+            </button>
+          </div>
         </div>
       </div>
-
-    <!-- </div> -->
+    </div>
   </div>
 </div>
