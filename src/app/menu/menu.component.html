@@ -8,7 +8,7 @@
     <section *ngIf="combo&&vireMenu!=1">
       <div class="row">
         <div class="col-sm-2 spacer-right">
-          <img class="image" src={{combo.picture}} />
+          <img class="img-responsive image" src={{combo.picture}} />
         </div>
         <div class="col-sm-8 spacer-right">
           <strong>{{combo.name}}</strong>
@@ -40,7 +40,7 @@
   <div class="produitComboList" *ngIf="productsMap!=null">
     <div class="row" *ngFor="let p of productsMap">
       <div class="col-sm-2">
-        <img class="image2" src={{p.picture}} />
+        <img class="img-responsive image2" src={{p.picture}} />
       </div>
       <div class="col-sm-8">
         <p>{{p.description}}</p>

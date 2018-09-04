@@ -6,14 +6,15 @@
         <!-- <div class="col-md-9"> -->
 
           <!-- Left -->
-          <ul class="navbar-nav mr-auto">
-              <div class="col-md-9">
+          <div class="col-md-8">
+          <ul class="navbar-nav">
+              <!-- <div class="col-md-9"> -->
               <li class="nav-item">
                 <a class="nav-link" routerLink="/home">TerreIyaki</a>
               </li>
-            </div>
+            <!-- </div> -->
 
-            <div class="col-md-2">
+            <!-- <div class="col-md-2"> -->
             <!-- <li class="nav-item" *ngIf="!user">
               <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
             </li>
@@ -23,13 +24,13 @@
             <li>
               <p *ngIf="user">{{user.displayName}}</p>
             </li> -->
-            </div>
-          </ul>
+            <!-- </div> -->
+          <!-- </ul> -->
 <!-- </div> -->
 
 <!-- <div class="col-md-2">
            Right -->
-          <ul class="navbar-nav ml-auto">
+          <!-- <ul class="navbar-nav ml-auto"> -->
             <li class="nav-item" *ngIf="!user">
               <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
               <!-- <a class="nav-link" (click)=falseLoginWithGoogle()>False Connexion</a> -->
@@ -46,7 +47,9 @@
                   <!-- <a class="dropdown-item" href="#">Link 3</a> -->
                 <!-- </div>
               </div> -->
-
+            </ul>
+            </div>
+            <div class="col-md-2">
               <div *ngIf="user">
                   <p>{{user.displayName}}</p>
                   <select [ngModel]="selectedDevice" (ngModelChange)="getChoice($event)" class="spacer-left">
@@ -61,13 +64,13 @@
                       </option>
                   </select>
                 </div>
-
+              </div>
 
 
             <!-- <li>
               <p *ngIf="user">{{user.displayName}}</p>
             </li> -->
-          </ul>
+         
 
           <!-- <div class="btn-group">
               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -82,9 +85,9 @@
               </div>
             </div> -->
 
-        <div class="col-md-1">
+        <div class="col-md-2">
             <a (click)=allerCommander(user.email)>
-          <img src="assets/images/panier.png" alt="image" class="img-responsive panier" />
+          <img src="assets/images/panier.png" alt="image" class="z panier" />
           <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
             </strong></span>
           </a>

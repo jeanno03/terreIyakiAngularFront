@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UrlService {
 
-  // private API = '//localhost:8080';
+  //  private API = '//localhost:8080';
 
   private API = 'http://jeannory.dynamic-dns.net:8080/main';
 

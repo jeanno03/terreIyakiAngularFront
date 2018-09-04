@@ -2,16 +2,19 @@
 //     margin:1%;
 //     // min-height: 580px;
 // }
+// @media screen and (max-width: 100px){
 .panier{
     // width: 100%;
     // height: auto;
     //  padding-right: 0;
-     width: 100%;
-     height: auto;
+     max-width : 50px;
+    // width:100%;
+    // height: auto;
+    // display: flex;
     //  padding-left:30px;
     // background-position:top right;
 }
-
+// }
 
 // .marginCenter{
 // margin-left:2%;
