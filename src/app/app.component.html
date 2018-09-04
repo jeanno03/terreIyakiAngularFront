@@ -1,40 +1,110 @@
 <div class="bloc-principal">
   <header>
-    <div class="row">
-      <div class="col-md-12">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-          <a class="navbar-brand" routerLink="/home">TerreIyaki</a>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+      <div class="row">
+
+        <!-- <div class="col-md-9"> -->
+
           <!-- Left -->
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item" *ngIf="user">
-              <a class="nav-link" (click)="emailOnProfil(user.email)">Profil</a>
-            </li>
-            <li class="nav-item" *ngIf="!user">
+              <div class="col-md-9">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/home">TerreIyaki</a>
+              </li>
+            </div>
+
+            <div class="col-md-2">
+            <!-- <li class="nav-item" *ngIf="!user">
               <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
             </li>
             <li class="nav-item" *ngIf="!user">
-                <a class="nav-link" (click)=falseLoginWithGoogle()>Simulation Connexion</a>
-              </li>
-          </ul>
-          <!-- Right -->
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item" *ngIf="user">
-              <a class="nav-link" (click)=mesCommandes(user.email)>Mes Commandes</a>
+              <a class="nav-link" (click)=falseLoginWithGoogle()>Simulation Connexion</a>
             </li>
-            <!--désactivé pour l instant-->
-            <!-- <li class="nav-item" *ngIf="user">
-              <a class="nav-link" (click)=logoutWithGoogle()>Déconnexion</a>
+            <li>
+              <p *ngIf="user">{{user.displayName}}</p>
             </li> -->
-            <div *ngIf="user">
-              <p>{{user.displayName}}</p>
             </div>
           </ul>
-        </nav>
+<!-- </div> -->
+
+<!-- <div class="col-md-2">
+           Right -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" *ngIf="!user">
+              <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
+              <!-- <a class="nav-link" (click)=falseLoginWithGoogle()>False Connexion</a> -->
+            </li>
+
+
+            <!-- <div class="dropdown" *ngIf="user">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    {{user.displayName}}
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" (click)=mesCommandes(user.email)>Mes Commandes</a>
+                  <a class="dropdown-item" (click)="emailOnProfil(user.email)">Profil</a> -->
+                  <!-- <a class="dropdown-item" href="#">Link 3</a> -->
+                <!-- </div>
+              </div> -->
+
+              <div *ngIf="user">
+                  <p>{{user.displayName}}</p>
+                  <select [ngModel]="selectedDevice" (ngModelChange)="getChoice($event)" class="spacer-left">
+                    <option [ngValue]="selectedDevice" disabled>
+                      <p>Mon Compte</p>
+                    </option>
+                    <option [ngValue]="'1'">
+                      <p>Mes Commandes</p>
+                    </option>
+                    <option [ngValue]="'2'">
+                        <p>Profil</p>
+                      </option>
+                  </select>
+                </div>
+
+
+
+            <!-- <li>
+              <p *ngIf="user">{{user.displayName}}</p>
+            </li> -->
+          </ul>
+
+          <!-- <div class="btn-group">
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Action
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </div> -->
+
+        <div class="col-md-1">
+            <a (click)=allerCommander(user.email)>
+          <img src="assets/images/panier.png" alt="image" class="img-responsive panier" />
+          <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+            </strong></span>
+          </a>
+        </div>
       </div>
-    </div>
+        <!-- </div> -->
+      <!-- </div> -->
+    </nav>
+
     <div class="alert alert-success">
       <div class="row">
         <div class="col-md-12">
+
+          <!-- <div class="nav-item" *ngIf="user">
+            <a class="nav-link" (click)=mesCommandes(user.email)>Mes Commandes</a>
+          </div>
+          <div class="nav-item" *ngIf="user">
+            <a class="nav-link" (click)="emailOnProfil(user.email)">Profil</a>
+          </div> -->
+
         </div>
       </div>
     </div>
@@ -42,57 +112,57 @@
   <!--*********************************--il s'agit du panier a reprendre *********************************-->
 
   <!-- <div class="row">
-          <div class="col-md-12">
-      <div class="panel panel-info presentation" *ngIf="user">-->
+            <div class="col-md-12">
+        <div class="panel panel-info presentation" *ngIf="user">-->
   <!-- <div class="container"> -->
   <!-- <section class="col-md-3"> -->
   <!-- <div class="col-xd-3"> -->
   <!--  <div class="panel-heading">
-              <br/> <strong>{{user.displayName}}</strong> A effacer soon
-        </div>
-          <div class="panel-body">
-              <strong *ngIf="panier.theId!=null">Commande {{panier.theId}}</strong>
-              <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong> - {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
-                  </strong>
-                </span>
-              <br/>{{panier.type}}
-              <span *ngIf="panier.myTable!=null"> - table n°{{panier.myTable}}</span>
+                <br/> <strong>{{user.displayName}}</strong> A effacer soon
+          </div>
+            <div class="panel-body">
+                <strong *ngIf="panier.theId!=null">Commande {{panier.theId}}</strong>
+                <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong> - {{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+                    </strong>
+                  </span>
+                <br/>{{panier.type}}
+                <span *ngIf="panier.myTable!=null"> - table n°{{panier.myTable}}</span>
+            </div>
           </div>
         </div>
-      </div>
-      </div> -->
+        </div> -->
 
   <!--*********************************--il s'agit du panier a reprendre *********************************-->
 
 
 
   <!-- <div *ngIf="user" class="spacer-right2">
-          <br/> <strong>{{user.displayName}}</strong>
-      
-      
-          <li *ngIf="user" class="spacer-right2">
-              <strong *ngIf="panier.theId!=null">Commande {{panier.theId}}</strong>
-              <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>|{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
-                  </strong>
-                </span>
-              <br/>{{panier.type}}
-              <span *ngIf="panier.myTable!=null">, table n°{{panier.myTable}}</span>
-            </li>
-      
-      </div> -->
+            <br/> <strong>{{user.displayName}}</strong>
+        
+        
+            <li *ngIf="user" class="spacer-right2">
+                <strong *ngIf="panier.theId!=null">Commande {{panier.theId}}</strong>
+                <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>|{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+                    </strong>
+                  </span>
+                <br/>{{panier.type}}
+                <span *ngIf="panier.myTable!=null">, table n°{{panier.myTable}}</span>
+              </li>
+        
+        </div> -->
 
   <!-- <div *ngIf="message">{{message}}</div> -->
 
 
   <!-- <div class="row">
-              <div class="col-md-2">
-                <ul class="nav flex-column nav-pills navVertical" *ngFor="let e of elementChoice">
-                  <li class="nav-item"[ngClass]="{'active':e==currentMainPage}" >
-                      <a type="button" class="clickable" class="nav-link" (click)=goOnPage(e)>{{e}}</a>
-                  </li>
-                </ul>
-             
-              </div> -->
+                <div class="col-md-2">
+                  <ul class="nav flex-column nav-pills navVertical" *ngFor="let e of elementChoice">
+                    <li class="nav-item"[ngClass]="{'active':e==currentMainPage}" >
+                        <a type="button" class="clickable" class="nav-link" (click)=goOnPage(e)>{{e}}</a>
+                    </li>
+                  </ul>
+               
+                </div> -->
 
   <!-- <div class="row navRow">  -->
   <main>
@@ -140,7 +210,7 @@
 <footer>
   <section class="row">
     <div class="col-sm-12 alert alert-dark footerPage">
-      <p class="centrer">Projet parallèle : Spring Boot - Service Rest - Angular</p>
+      <p class="centrer">Projet Spring Boot/Angular</p>
     </div>
   </section>
 </footer>

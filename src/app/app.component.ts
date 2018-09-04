@@ -190,4 +190,14 @@ this.router.navigateByUrl('/home');
     this.theMessageService.setOption("theMessage", this.theMessage);
     this.theMessageService.setOption("categoryMessageNumber", 2);
   }
+
+  
+  getChoice(choix:number){
+    if(choix==1){
+      this.router.navigateByUrl('mesCommandes');
+    }
+    if(choix==2){
+      this.router.navigate(['profil', this.user.email]);
+    }
+  }
 }
