@@ -39,6 +39,8 @@ export class MyTableComponent implements OnInit {
     public theMessageService: TheMessageService
   ) {
     this.message = activatedRoute.snapshot.params['message'];
+    // this.theMessage =null;
+    // this.theMessage = this.theMessageService.getTheMessage();
     this.userFromAp = userFromAppService.getFirebaseUser();
     this.panier = panierService.getPanier();
   }
@@ -47,8 +49,8 @@ export class MyTableComponent implements OnInit {
 
 
         //on reinitialise les messages
-        this.theMessageService.setOption("theMessage", null);
-        this.theMessageService.setOption("categoryMessageNumber", null);
+        // this.theMessageService.setOption("theMessage", null);
+        // this.theMessageService.setOption("categoryMessageNumber", null);
 
     //si pas de commande ou si a choisi a emporter 
     //pas de possibilité d'ouvrir une table

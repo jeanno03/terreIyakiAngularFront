@@ -78,6 +78,7 @@ export class CommandeActionComponent implements OnInit {
         this.theMessageService.setOption("categoryMessageNumber", null);
         // this.router.navigate(['profil', this.email]);
         // this.theMessageService.getTheMessage();
+
   }
 
   //le choix du type de la commande
@@ -340,6 +341,13 @@ export class CommandeActionComponent implements OnInit {
           this.theMessageService.setOption("theMessage", this.message.theMessage);
           this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number)
           this.router.navigateByUrl('home');
+        }
+        //si pas vente on renvoi vers la page de choix de table
+        else if(this.message.categoryMessage.number==2){
+
+          this.theMessageService.setOption("theMessage", this.message.theMessage);
+          this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number)
+          this.router.navigateByUrl('myTable');
         }
 
         // this.router.navigate(['homeMessage', this.message.theMessage]);

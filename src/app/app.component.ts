@@ -107,7 +107,7 @@ this.router.navigateByUrl('/home');
 }
 
   logoutWithGoogle() {
-    window.alert(this.user.email + " a été déconnecté")
+    // window.alert(this.user.email + " a été déconnecté")
     this.auth.logoutWithGoogle();
     this.router.navigateByUrl('/home');
   }
@@ -198,6 +198,12 @@ this.router.navigateByUrl('/home');
     }
     if(choix==2){
       this.router.navigate(['profil', this.user.email]);
+    }
+    if(choix==3){
+      this.logoutWithGoogle();
+      this.theMessage = "vous avez été déconnecté";
+      this.theMessageService.setOption("theMessage", this.theMessage);
+      this.theMessageService.setOption("categoryMessageNumber", 2);
     }
   }
 }

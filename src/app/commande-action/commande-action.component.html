@@ -9,12 +9,15 @@
       <div class="alert alert-info" *ngIf="panier.theId!=null&&retourVatpriceTotal==0">
         <p>Veuillez choisir vos produits à la carte ou dans un menu</p>
       </div>
-
+      <div class="alert alert-info" *ngIf="panier.theId!=null&&retourVatpriceTotal>0">
+          <strong>Votre panier</strong>
+        </div>
     </div>
   </div>
   <!-- ***************************début panier -->
   <div class="container spacer" *ngIf="returnOrderItem!=null">
     <table table class="table table-hover">
+      <div class="row">
       <tr>
         <th>
           <p class="spacer-right">Choix</p>
@@ -75,19 +78,19 @@ s'il s'agit des produits hors menu
           </p>
         </td>
         <td>
-          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
-            <button (click)="incrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2">+</button>
-          </p>
+          <div class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+            <button (click)="incrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2"><p>+</p></button>
+          </div>
         </td>
         <td>
-          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
-            <button (click)="decrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2">-</button>
-          </p>
+          <div class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+            <button (click)="decrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2"><p>-</p></button>
+          </div>
         </td>
         <td>
-          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
-            <button (click)="deleteOrderItem(r.idProduct)" class="btn btn-info spacer-right2">X</button>
-          </p>
+          <div class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+            <button (click)="deleteOrderItem(r.idProduct)" class="btn btn-info spacer-right2"><p>x</p></button>
+          </div>
 
           <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
             <button (click)="deleteOrderItemCombo(r.theId)" class="btn btn-info spacer-right2">X</button>
@@ -118,13 +121,14 @@ s'il s'agit des produits hors menu
           </strong>
         </td>
         <td></td>
-        <td> <button class="btn btn-danger spacer-left-right" *ngIf="retourVatpriceTotal>0" (click)=deleteOrder()>
-            <p>Annuler</p>
+        <td> <button class="btn btn-danger  spacer-right2" *ngIf="panier.theId!=null&&retourVatpriceTotal==0||retourVatpriceTotal>0" (click)=deleteOrder()>
+            <p class="boutonConfirm">Annuler</p>
           </button></td>
-        <td> <button class="btn btn-info spacer-right2" *ngIf="retourVatpriceTotal>0" (click)=confirmOrder()>
-            <p>confirmer</p>
+        <td> <button class="btn btn-info" *ngIf="retourVatpriceTotal>0" (click)=confirmOrder()>
+            <p class="boutonConfirm">Valider</p>
           </button></td>
       </tr>
+      </div>
     </table>
   </div>
   <!-- ***************************fin panier -->

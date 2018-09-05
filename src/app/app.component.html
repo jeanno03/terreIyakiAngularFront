@@ -1,101 +1,59 @@
 <div class="bloc-principal">
   <header>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-      <div class="row">
 
-        <!-- <div class="col-md-9"> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+      <a class="navbar-brand" routerLink="/home">TerreIyaki</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item" *ngIf="!user">
+            <a class="nav-link marginCenter" (click)=loginWithGoogle()>Connexion</a>
+            <!-- <a class="nav-link" (click)=falseLoginWithGoogle()>False Connexion</a> -->
+          </li>
+          <li class="nav-item">
 
-          <!-- Left -->
-          <div class="col-md-8">
-          <ul class="navbar-nav">
-              <!-- <div class="col-md-9"> -->
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/home">TerreIyaki</a>
-              </li>
-            <!-- </div> -->
-
-            <!-- <div class="col-md-2"> -->
-            <!-- <li class="nav-item" *ngIf="!user">
-              <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
-            </li>
-            <li class="nav-item" *ngIf="!user">
-              <a class="nav-link" (click)=falseLoginWithGoogle()>Simulation Connexion</a>
-            </li>
-            <li>
-              <p *ngIf="user">{{user.displayName}}</p>
-            </li> -->
-            <!-- </div> -->
-          <!-- </ul> -->
-<!-- </div> -->
-
-<!-- <div class="col-md-2">
-           Right -->
-          <!-- <ul class="navbar-nav ml-auto"> -->
-            <li class="nav-item" *ngIf="!user">
-              <a class="nav-link" (click)=loginWithGoogle()>Connexion</a>
-              <!-- <a class="nav-link" (click)=falseLoginWithGoogle()>False Connexion</a> -->
-            </li>
-
-
-            <!-- <div class="dropdown" *ngIf="user">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    {{user.displayName}}
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" (click)=mesCommandes(user.email)>Mes Commandes</a>
-                  <a class="dropdown-item" (click)="emailOnProfil(user.email)">Profil</a> -->
-                  <!-- <a class="dropdown-item" href="#">Link 3</a> -->
-                <!-- </div>
-              </div> -->
-            </ul>
+            <div *ngIf="user">
+              <p>{{user.displayName}}</p>
+              <select [ngModel]="selectedDevice" (ngModelChange)="getChoice($event)" class="spacer-left">
+                <option [ngValue]="selectedDevice" disabled>
+                  <p>Mon Compte</p>
+                </option>
+                <option [ngValue]="'1'">
+                  <p>Mes Commandes</p>
+                </option>
+                <option [ngValue]="'2'">
+                  <p>Profil</p>
+                </option>
+                <option [ngValue]="'3'">
+                  <p>Déconnexion</p>
+                </option>
+              </select>
             </div>
-            <div class="col-md-2">
-              <div *ngIf="user">
-                  <p>{{user.displayName}}</p>
-                  <select [ngModel]="selectedDevice" (ngModelChange)="getChoice($event)" class="spacer-left">
-                    <option [ngValue]="selectedDevice" disabled>
-                      <p>Mon Compte</p>
-                    </option>
-                    <option [ngValue]="'1'">
-                      <p>Mes Commandes</p>
-                    </option>
-                    <option [ngValue]="'2'">
-                        <p>Profil</p>
-                      </option>
-                  </select>
-                </div>
-              </div>
 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)=allerCommander(user.email) *ngIf="user">
+              <img src="assets/images/panier.png" alt="image" class="panier" />
+              <br/><span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+                </strong></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)=allerCommanderNon() *ngIf="!user">
+              <img src="assets/images/panier.png" alt="image" class="panier" />
+              <br/><span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+                </strong></span>
+            </a>
+          </li>
+        </ul>
 
-            <!-- <li>
-              <p *ngIf="user">{{user.displayName}}</p>
-            </li> -->
-         
-
-          <!-- <div class="btn-group">
-              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Action
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
-            </div> -->
-
-        <div class="col-md-2">
-            <a (click)=allerCommander(user.email)>
-          <img src="assets/images/panier.png" alt="image" class="z panier" />
-          <span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
-            </strong></span>
-          </a>
-        </div>
       </div>
-        <!-- </div> -->
-      <!-- </div> -->
     </nav>
+
+
 
     <div class="alert alert-success">
       <div class="row">
@@ -204,7 +162,7 @@
     <div class="row">
       <div class="col-md-2">
       </div>
-      <div class="col-md-8">
+      <div class="col-md-10">
         <app-message></app-message>
       </div>
     </div>
