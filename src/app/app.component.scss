@@ -7,7 +7,9 @@
     // width: 100%;
     // height: auto;
     //  padding-right: 0;
-     max-width : 50px;
+     width : 50px;
+     min-width : 40px;
+     cursor: pointer;
     // width:100%;
     // height: auto;
     // display: flex;
@@ -15,8 +17,46 @@
     // background-position:top right;
 }
 
+.totalWidth{
+    width: 100%
+}
+
+
+
+.home{
+    cursor: pointer;
+    color:black;
+}
+
+.cursorConnexion{
+    cursor: pointer;
+    //  padding-right: 2px;
+    // color:black;
+}
+
+// .pointeurPanier{
+//     cursor: pointer;
+// }
+
+// .bouttonHome{
+//     color:black;
+// }
+// .hightNav{
+//     min-width : 40px;
+// }
+
+// .minNav{
+//     min-width : 40px;
+// }
+
+
 .spacer-right2{
     margin-right: 5px;
+}
+
+.letterCenter{
+    font-size: 18px;
+    min-width: 40px;
 }
 
 // }
