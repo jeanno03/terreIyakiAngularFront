@@ -38,20 +38,12 @@ export class MyTableComponent implements OnInit {
     public panierService: PanierService,
     public theMessageService: TheMessageService
   ) {
-    this.message = activatedRoute.snapshot.params['message'];
-    // this.theMessage =null;
-    // this.theMessage = this.theMessageService.getTheMessage();
+    // this.message = activatedRoute.snapshot.params['message'];
     this.userFromAp = userFromAppService.getFirebaseUser();
     this.panier = panierService.getPanier();
   }
 
   ngOnInit() {
-
-
-        //on reinitialise les messages
-        // this.theMessageService.setOption("theMessage", null);
-        // this.theMessageService.setOption("categoryMessageNumber", null);
-
     //si pas de commande ou si a choisi a emporter 
     //pas de possibilité d'ouvrir une table
     if (this.panier.theId == null || this.panier.type == "A emporter") {

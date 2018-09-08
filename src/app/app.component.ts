@@ -31,11 +31,11 @@ export class AppComponent {
   userFromAp: any = null;
   message: string = null;
   theMessage: any;
-  falseUser:FalseUser;
-//   currentMainPage: any;
+  falseUser: FalseUser;
+  //   currentMainPage: any;
 
-//   elementChoice: Array<string>;
-// choice:string;
+  //   elementChoice: Array<string>;
+  // choice:string;
 
 
   constructor(
@@ -95,16 +95,16 @@ export class AppComponent {
   }
 
   //fausse connection
-falseLoginWithGoogle(){
-this.falseUser=new FalseUser("test@getMail.com", "test original");
-this.user=this.falseUser;
-if (this.user) {
-  this.theMessage = "Connexion de " + this.user.email + " réussi !";
-  this.theMessageService.setOption("theMessage", this.theMessage);
-  this.theMessageService.setOption("categoryMessageNumber", 1);
-}
-this.router.navigateByUrl('/home');
-}
+  falseLoginWithGoogle() {
+    this.falseUser = new FalseUser("test@getMail.com", "test original");
+    this.user = this.falseUser;
+    if (this.user) {
+      this.theMessage = "Connexion de " + this.user.email + " réussi !";
+      this.theMessageService.setOption("theMessage", this.theMessage);
+      this.theMessageService.setOption("categoryMessageNumber", 1);
+    }
+    this.router.navigateByUrl('/home');
+  }
 
   logoutWithGoogle() {
     // window.alert(this.user.email + " a été déconnecté")
@@ -136,7 +136,7 @@ this.router.navigateByUrl('/home');
       }
       else {
 
-        
+
         this.theMessageService.setOption("theMessage", "veuillez d'abord vous enregistrer dans profil");
         this.theMessageService.setOption("categoryMessageNumber", 2);
         this.router.navigate(['profil', this.user.email]);
@@ -185,25 +185,32 @@ this.router.navigateByUrl('/home');
   // }
   // }
 
-  allerCommanderNon(){
+  allerCommanderNon() {
     this.theMessage = "Veuillez d'abord vous connecter";
     this.theMessageService.setOption("theMessage", this.theMessage);
     this.theMessageService.setOption("categoryMessageNumber", 2);
   }
 
-  
-  getChoice(choix:number){
-    if(choix==1){
+
+  getChoice(choix: number) {
+    if (choix == 1) {
       this.router.navigateByUrl('mesCommandes');
     }
-    if(choix==2){
+    if (choix == 2) {
       this.router.navigate(['profil', this.user.email]);
     }
-    if(choix==3){
+    if (choix == 3) {
       this.logoutWithGoogle();
       this.theMessage = "vous avez été déconnecté";
       this.theMessageService.setOption("theMessage", this.theMessage);
       this.theMessageService.setOption("categoryMessageNumber", 2);
     }
+  }
+
+  allerTables() {
+    //on reinitialise les messages
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
+    this.router.navigateByUrl('myTable');
   }
 }

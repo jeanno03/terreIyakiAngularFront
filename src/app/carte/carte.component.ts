@@ -59,15 +59,6 @@ export class CarteComponent implements OnInit {
   ) {
     this.panier = panierService.getPanier();
     this.userFromAp = userFromAppService.getFirebaseUser();
-
-    // console.log("mon choix v01 : "+this.carteProduct.name);
-
-
-    // this.theMessage=null;
-    // this.theMessage = this.theMessageService.getTheMessage();
-
-    // this.theMessageService.setOption("theMessage",null);
-    // this.theMessageService.setOption("categoryMessageNumber",null);
   }
 
   ngOnInit() {

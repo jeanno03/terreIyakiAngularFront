@@ -13,7 +13,33 @@
             </div>
           </span> -->
 
-          <div *ngIf="userFromAp">
+          <div class="card width50" *ngIf="userFromAp">
+            <h3 class="card-header">Vos identifiants terreIyaki</h3>
+
+            <div class="card-body">
+              <p class="card-text">
+                Login : <strong>{{userFromAp.login}}</strong>
+              </p>
+              <p class="card-text">
+                Prénom : <strong>{{userFromAp.firstName}}</strong>
+              </p>
+              <p class="card-text">Nom : <strong>{{userFromAp.lastName}}</strong></p>
+              <a *ngIf="userFromAp&&modifier!='true'" type="button" class="btn btn-primary" (click)="modifierProfil()">Modifier
+                votre compte</a>
+              <a *ngIf="!userFromAp&&creer!='true'" type="button" class="btn btn-primary" (click)="creerProfil()">Créer votre
+                profil
+              </a>
+              <!-- <a href="#" class="btn btn-primary">Go somewhere</a>
+
+              <button *ngIf="userFromAp&&modifier!='true'" type="button" class="btn btn-warning" (click)="modifierProfil()"><p>Modifier
+                  votre compte</p></button>
+              <button *ngIf="!userFromAp&&creer!='true'" type="button" class="btn btn-warning" (click)="creerProfil()"><p>Créer
+                  votre profil</p></button> -->
+
+            </div>
+          </div>
+
+          <!-- <div *ngIf="userFromAp">
             <div>
               <h3>Vos identifiants terreIyaki</h3>
             </div>
@@ -27,7 +53,7 @@
                 </th>
                 <th>
                   <span class="spacer-right">
-                   <p>Prénom</p> 
+                    <p>Prénom</p>
                   </span>
                 </th>
                 <th>
@@ -45,7 +71,7 @@
                 </td>
                 <td>
                   <span class="spacer-right">
-                   <p>{{userFromAp.firstName}}</p> 
+                    <p>{{userFromAp.firstName}}</p>
                   </span>
                 </td>
                 <td>
@@ -55,44 +81,55 @@
                 </td>
               </tr>
             </table>
-          </div>
+          </div> -->
 
           <!-- <ul class="nav nav-pills"> -->
 
-            <!-- si utilisateur enregistré a terreIyaki -->
-            <!-- <li *ngIf="userFromAp&&modifier!='true'">
+          <!-- si utilisateur enregistré a terreIyaki -->
+          <!-- <li *ngIf="userFromAp&&modifier!='true'">
               <a class="active" (click)="modifierProfil()">
                 Modifier votre compte
               </a>
             </li> -->
 
-            <!-- si utilisateur non enregistré a terreIyaki et si on a pas cliqué sur creer -->
-            <!-- <li *ngIf="!userFromAp&&creer!='true'">
+          <!-- si utilisateur non enregistré a terreIyaki et si on a pas cliqué sur creer -->
+          <!-- <li *ngIf="!userFromAp&&creer!='true'">
               <a class="active" (click)="creerProfil()">
                 Créer votre profil
               </a>
             </li>
           </ul> -->
 
-          <button *ngIf="userFromAp&&modifier!='true'" type="button" class="btn btn-warning" (click)="modifierProfil()"><p>Modifier votre compte</p></button>
-          <button *ngIf="!userFromAp&&creer!='true'" type="button" class="btn btn-warning" (click)="creerProfil()"><p>Créer votre profil</p></button>
-
+          <!-- <button *ngIf="userFromAp&&modifier!='true'" type="button" class="btn btn-warning" (click)="modifierProfil()"><p>Modifier
+              votre compte</p></button>
+          <button *ngIf="!userFromAp&&creer!='true'" type="button" class="btn btn-warning" (click)="creerProfil()"><p>Créer
+              votre profil</p></button>
+ -->
 
           <!-- si utilisateur enregistré a terreIyaki et si on clique sur modifier -->
-          <div class="panel panel-infos" *ngIf="userFromAp&&modifier=='true'">
-            <div class="panel-heading"><p>Champs à modifier</p></div>
-            <div class="panel-body">
+
+          <!-- <div class="card width50" *ngIf="userFromAp">
+              <h3 class="card-header">Vos identifiants terreIyaki</h3>
+  
+              <div class="card-body">
+                <p class="card-text"> -->
+
+          <div class="card width50Top" *ngIf="userFromAp&&modifier=='true'">
+
+              <h3 class="card-header bg-danger">Champs à modifier</h3>
+     
+            <div class="card-body">
               <form #f="ngForm" (ngSubmit)="modifierUserFromAp(f.value)">
                 <div class="form-group">
-                  <label class="control-label"><p>login</p></label>
+                  <label class="control-label"><p class="card-text">login</p></label>
                   <input class="form-control" type="text" [(ngModel)]="userFromAp.login" name="login" required />
                 </div>
                 <div class="form-group">
-                  <label class="control-label"><p>Nom</p></label>
+                  <label class="control-label"><p class="card-text">Nom</p></label>
                   <input class="form-control" type="text" [(ngModel)]="userFromAp.lastName" name="lastName" required />
                 </div>
                 <div class="form-group">
-                  <label class="control-label"><p>Prénom</p></label>
+                  <label class="control-label"><p class="card-text">Prénom</p></label>
                   <input class="form-control" type="text" [(ngModel)]="userFromAp.firstName" name="firstName" required />
                 </div>
 
@@ -103,7 +140,8 @@
                     </button>
                   </li>
                   <li>
-                    <button [disabled]="!f.valid" type="submit" class="btn btn-info spacer-right-top"><p>Enregistrer</p> </button>
+                    <button [disabled]="!f.valid" type="submit" class="btn btn-info spacer-right-top"><p>Enregistrer</p>
+                    </button>
 
                   </li>
                 </ul>
@@ -115,7 +153,9 @@
 
           <!-- si utilisateur non enregistré a terreIyaki et si on clique sur creer -->
           <div class="panel panel-infos" *ngIf="!userFromAp&&creer=='true'">
-            <div class="panel-heading"><p>Enregistrez-vous</p></div>
+            <div class="panel-heading">
+              <p>Enregistrez-vous</p>
+            </div>
             <div class="panel-body">
               <form #f="ngForm" (ngSubmit)="creerUserFromAp(f.value)">
                 <div class="form-group">

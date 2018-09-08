@@ -45,57 +45,70 @@ s'il s'agit des produits hors menu
 *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'"
 -->
       <tr *ngFor="let r of returnOrderItem">
-        <td>
-          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+        <td *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right">
             {{r.productName}}
           </p>
-          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          </td>
+          <td *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          <p class="spacer-right">
             {{r.comboName}}
           </p>
         </td>
-        <td>
-          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
-            {{r.quantite}}
-          </p>
-          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+        <td *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right">
             {{r.quantite}}
           </p>
         </td>
-        <td>
-          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+        <td *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          <p class="spacer-right">
+            {{r.quantite}}
+          </p>
+        </td>
+        <td *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right">
             {{r.vatPrice | currency:'EUR':true:'1.1-1'}}
           </p>
-          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+        </td>
+        <td *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          <p class="spacer-right">
             {{r.vatComboPrice | currency:'EUR':true:'1.1-1'}}
           </p>
         </td>
-        <td>
-          <p class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+        <td *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <p class="spacer-right">
             {{r.quantite*r.vatPrice | currency:'EUR':true:'1.1-1'}}
           </p>
-          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+        </td>
+        <td *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          <p class="spacer-right">
             {{r.quantite*r.vatComboPrice | currency:'EUR':true:'1.1-1'}}
           </p>
         </td>
-        <td>
-          <div class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+        <td *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <div class="spacer-right">
             <button (click)="incrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2"><p>+</p></button>
           </div>
         </td>
-        <td>
-          <div class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+        <td *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <div class="spacer-right">
             <button (click)="decrementeOrderItem(r.idProduct)" class="btn btn-info spacer-right2"><p>-</p></button>
           </div>
         </td>
-        <td>
-          <div class="spacer-right" *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+        <td *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
+          <div class="spacer-right">
             <button (click)="deleteOrderItem(r.idProduct)" class="btn btn-info spacer-right2"><p>x</p></button>
           </div>
-
-          <p class="spacer-right" *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
-            <button (click)="deleteOrderItemCombo(r.theId)" class="btn btn-info spacer-right2">X</button>
-          </p>
         </td>
+
+          <td *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0"></td>
+          <td *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0"></td>
+          <td *ngIf="r.quantite==1&&r.comboName!='carte'&&r.vatPrice==0">
+          <div class="spacer-right">
+            <button (click)="deleteOrderItemCombo(r.theId)" class="btn btn-info spacer-right2"><p>X</p></button>
+          </div>
+        </td>
+
       </tr>
       <tr>
         <td></td>

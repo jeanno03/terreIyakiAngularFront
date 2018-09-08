@@ -3,82 +3,122 @@
 //     // min-height: 580px;
 // }
 // @media screen and (max-width: 100px){
-.panier{
-    // width: 100%;
-    // height: auto;
-    //  padding-right: 0;
-     max-width : 50px;
-    // width:100%;
-    // height: auto;
-    // display: flex;
-    //  padding-left:30px;
-    // background-position:top right;
-}
-
-.spacer-right2{
-    margin-right: 5px;
-}
-
-// }
-
-// .marginCenter{
-// margin-left:2%;
-// margin-right:2%;
-// }
-
-.nav-pills>li>a {
-    color: black;
-    background-color: white;
-}
+    .panier{
+        // width: 100%;
+        // height: auto;
+        //  padding-right: 0;
+         width : 50px;
+         min-width : 40px;
+         cursor: pointer;
+        // width:100%;
+        // height: auto;
+        // display: flex;
+        //  padding-left:30px;
+        // background-position:top right;
+    }
     
-.nav-pills > li > a:hover, .x-nav-tabs > .active > a, .x-nav-tabs > .active > a:hover {
-    color: white;
-    background: #0080FF;
-}
-
-.navVertical{
-    height: 100%;
-    border-style: inset;
-}
-
-.centrer{
-    text-align:center;
-}
-
-.marginCenter{
-    margin :auto;
-}
-
-// .navRow{
-//      min-height: 400px;
-   
-// }
-
-
-// header{
-//     position:absolute;
-//     top:1%;
-//     left:1%;
-//     right:1%;
-// }
-
-// footer{
-//     position:absolute;
-//     bottom:0%;
-//     left:0%;
-//     right:0%;
-// }
-
-
-// html, body {
-// 	height: 100%;
-// 	margin: 0; padding: 0;
-// }
-// body {
-// 	display : table;
-// 	width: 100%;
-// }
-// footer {
-// 	display : table-row;
-// 	height: 100px; /* à titre d'exemple */
-// }
+    .totalWidth{
+        width: 100%
+    }
+    
+    
+    
+    .home{
+        cursor: pointer;
+        color:black;
+    }
+    
+    .cursorConnexion{
+        cursor: pointer;
+        //  padding-right: 2px;
+        // color:black;
+    }
+    
+    // .pointeurPanier{
+    //     cursor: pointer;
+    // }
+    
+    // .bouttonHome{
+    //     color:black;
+    // }
+    // .hightNav{
+    //     min-width : 40px;
+    // }
+    
+    // .minNav{
+    //     min-width : 40px;
+    // }
+    
+    
+    .spacer-right2{
+        margin-right: 5px;
+    }
+    
+    .letterCenter{
+        font-size: 18px;
+        min-width: 40px;
+    }
+    
+    // }
+    
+    // .marginCenter{
+    // margin-left:2%;
+    // margin-right:2%;
+    // }
+    
+    .nav-pills>li>a {
+        color: black;
+        background-color: white;
+    }
+        
+    .nav-pills > li > a:hover, .x-nav-tabs > .active > a, .x-nav-tabs > .active > a:hover {
+        color: white;
+        background: #0080FF;
+    }
+    
+    .navVertical{
+        height: 100%;
+        border-style: inset;
+    }
+    
+    .centrer{
+        text-align:center;
+    }
+    
+    .marginCenter{
+        margin :auto;
+    }
+    
+    // .navRow{
+    //      min-height: 400px;
+       
+    // }
+    
+    
+    // header{
+    //     position:absolute;
+    //     top:1%;
+    //     left:1%;
+    //     right:1%;
+    // }
+    
+    // footer{
+    //     position:absolute;
+    //     bottom:0%;
+    //     left:0%;
+    //     right:0%;
+    // }
+    
+    
+    // html, body {
+    // 	height: 100%;
+    // 	margin: 0; padding: 0;
+    // }
+    // body {
+    // 	display : table;
+    // 	width: 100%;
+    // }
+    // footer {
+    // 	display : table-row;
+    // 	height: 100px; /* à titre d'exemple */
+    // }

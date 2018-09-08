@@ -1,20 +1,17 @@
 <div class="bloc-principal">
-  <header>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <a class="navbar-brand" routerLink="/home">TerreIyaki</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="nav navbar-nav ml-auto">
-          <li class="nav-item" *ngIf="!user">
-            <a class="nav-link marginCenter" (click)=loginWithGoogle()>Connexion</a>
-            <!-- <a class="nav-link" (click)=falseLoginWithGoogle()>False Connexion</a> -->
-          </li>
-          <li class="nav-item">
-
+    <header>
+  
+      <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="row totalWidth">
+  
+          <div class="col-md-2">
+            <a class="nav-link home" routerLink="/home"><h3>TerreIyaki</h3></a>
+          </div>
+  
+          <div class="col-md-7 totalWidth">&nbsp;</div>
+  
+          <div class="col-md-2">
+            <a class="nav-link cursorConnexion" (click)=loginWithGoogle() *ngIf="!user">Google-connexion</a>
             <div *ngIf="user">
               <p>{{user.displayName}}</p>
               <select [ngModel]="selectedDevice" (ngModelChange)="getChoice($event)" class="spacer-left">
@@ -32,28 +29,77 @@
                 </option>
               </select>
             </div>
-
-          </li>
-          <li class="nav-item">
+          </div>
+  
+          <div class="col-md-1">
             <a class="nav-link" (click)=allerCommander(user.email) *ngIf="user">
               <img src="assets/images/panier.png" alt="image" class="panier" />
               <br/><span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
                 </strong></span>
             </a>
-          </li>
-          <li class="nav-item">
+  
+  
             <a class="nav-link" (click)=allerCommanderNon() *ngIf="!user">
               <img src="assets/images/panier.png" alt="image" class="panier" />
               <br/><span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
                 </strong></span>
             </a>
-          </li>
-        </ul>
-
-      </div>
-    </nav>
-
-
+          </div>
+  
+        </div>
+      </nav>
+  
+  <!-- <a class="nav-link" (click)=falseLoginWithGoogle()>False Connexion</a> -->
+  
+      <!-- <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <a class="navbar-brand" routerLink="/home">TerreIyaki</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item" *ngIf="!user">
+              <a class="nav-link letterCenter" (click)=loginWithGoogle()>Connexion</a>
+              
+            </li>
+            <li class="nav-item">
+              <div *ngIf="user">
+                <p>{{user.displayName}}</p>
+                <select [ngModel]="selectedDevice" (ngModelChange)="getChoice($event)" class="spacer-left">
+                  <option [ngValue]="selectedDevice" disabled>
+                    <p>Mon Compte</p>
+                  </option>
+                  <option [ngValue]="'1'">
+                    <p>Mes Commandes</p>
+                  </option>
+                  <option [ngValue]="'2'">
+                    <p>Profil</p>
+                  </option>
+                  <option [ngValue]="'3'">
+                    <p>Déconnexion</p>
+                  </option>
+                </select>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)=allerCommander(user.email) *ngIf="user">
+                <img src="assets/images/panier.png" alt="image" class="panier" />
+                <br/><span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+                  </strong></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)=allerCommanderNon() *ngIf="!user">
+                <img src="assets/images/panier.png" alt="image" class="panier" />
+                <br/><span *ngIf="panierVatprice.vatPriceTotal!=null"><strong>{{panierVatprice.vatPriceTotal | currency:'EUR':true:'1.1-1'}}
+                  </strong></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav> -->
+  
 
     <div class="alert alert-success">
       <div class="row">
@@ -143,7 +189,7 @@
             <a type="button" class="clickable" class="nav-link" routerLink="/menu" routerLinkActive="active">Menus</a>
           </li>
           <li class="nav-item">
-            <a type="button" class="clickable" class="nav-link" routerLink="/myTable" routerLinkActive="active">Tables</a>
+            <a type="button" class="clickable" class="nav-link" (click)=allerTables() routerLinkActive="active">Tables</a>
           </li>
           <li class="nav-item">
             <a type="button" class="clickable" class="nav-link disabled" routerLink="/test" routerLinkActive="active">Test</a>
