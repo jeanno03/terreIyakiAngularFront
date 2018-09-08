@@ -3,7 +3,7 @@
 // }
 
 .spacer-right-top{
-    margin-right: 10px;
+    margin-right: 0px;
     margin-top: 10px;
 }
 
@@ -12,6 +12,16 @@
 }
 
 .width50Top{
-    width: 55%;
+    width: 40%;
     margin-top: 2%;
+}
+
+.bouttonAnnuler{
+    margin-right: 0;
+    // margin-left: 1%;
+    font-size: 2vmin;
+}
+
+.champToModif{
+    font-size: 2vw;
 }

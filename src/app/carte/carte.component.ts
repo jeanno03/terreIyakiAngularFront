@@ -89,17 +89,9 @@ export class CarteComponent implements OnInit {
           this.getPlatsByCategory("Plats");
          } ;
 
-         
-  
-  
-
-
       }, err => {
         console.log(err);
       })
-
-
-
 
   }
 

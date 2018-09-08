@@ -162,29 +162,6 @@ export class AppComponent {
   }
 
 
-  // 'La Carte',
-  // 'Nos Menus',
-  // 'Nos tables',
-  // 'Page Test'
-  // goOnPage(leChoix:string){
-  //   this.choice=null;
-  //   if(leChoix=='La Carte'){
-  //     this.choice='carte';
-  //   }
-  //   if(leChoix=='Nos Menus'){
-  //     this.choice='menu';
-  //   }
-  //   if(leChoix=='Page Test'){
-  //     this.choice='test';
-  //   }
-  //   if(this.choice){
-  //     this.router.navigateByUrl(this.choice);
-  //   }
-  // if(leChoix=='Nos tables'){
-  //   this.router.navigate(['myTable', 'Nos tables']);
-  // }
-  // }
-
   allerCommanderNon() {
     this.theMessage = "Veuillez d'abord vous connecter";
     this.theMessageService.setOption("theMessage", this.theMessage);
@@ -197,6 +174,9 @@ export class AppComponent {
       this.router.navigateByUrl('mesCommandes');
     }
     if (choix == 2) {
+      //on reinitialise les messages
+      this.theMessageService.setOption("theMessage", null);
+      this.theMessageService.setOption("categoryMessageNumber", null);
       this.router.navigate(['profil', this.user.email]);
     }
     if (choix == 3) {

@@ -41,9 +41,9 @@ export class ProfilComponent implements OnInit {
     //cette méthode récupère l'utilisateur de l'app s'il existe
     //soit this.userFromAp
     this.getUserByEmail(this.email);
-    //on reinitialise les messages
-    this.theMessageService.setOption("theMessage", null);
-    this.theMessageService.setOption("categoryMessageNumber", null);
+    // //on reinitialise les messages
+    // this.theMessageService.setOption("theMessage", null);
+    // this.theMessageService.setOption("categoryMessageNumber", null);
   }
 
   getUserByEmail(email: string) {
@@ -59,6 +59,9 @@ export class ProfilComponent implements OnInit {
     //on initialise le mess
     this.theMessage = null;
     //on reinitialise la page
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
+
     this.router.navigate(['profil', this.email]);
     this.creer = "true";
   }
@@ -67,6 +70,9 @@ export class ProfilComponent implements OnInit {
     //on initialise le mess
     this.theMessage = null;
     //on reinitialise la page
+    //on reinitialise la page
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
     this.router.navigate(['profil', this.email]);
     this.modifier = "true";
     //on réinterroge le serveur pour récupérer l'utilisateur sil a été créé dans l'application
@@ -78,7 +84,9 @@ export class ProfilComponent implements OnInit {
 
 
   creerUserFromAp() {
-
+    //on reinitialise la page
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
     //Les infos de myUserModel sont récupéré par le formulaire html
     //seul l email doit etre rajouté 
     this.myUserModel.setEmail(this.email);
@@ -131,6 +139,9 @@ export class ProfilComponent implements OnInit {
   }
 
   modifierUserFromAp() {
+    //on reinitialise la page
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
 
     this.messageService.getMessageEditUser(this.userFromAp.email,
       this.userFromAp.login,
@@ -172,8 +183,17 @@ export class ProfilComponent implements OnInit {
     this.theMessageService.setOption("theMessage", 'Annulation modification');
     this.theMessageService.setOption("categoryMessageNumber", 2);
     // this.theMessage = null;
-    // this.router.navigate(['profil', this.email]);
-    this.router.navigateByUrl("home");
+    this.modifier = "done";
+    this.router.navigate(['profil', this.email]);
+    // this.router.navigateByUrl("profil");
   }
 
+  annulerEnregistrement() {
+    this.theMessageService.setOption("theMessage", 'Annulation enregistrement');
+    this.theMessageService.setOption("categoryMessageNumber", 2);
+    // this.theMessage = null;
+    this.creer = null;
+    this.router.navigate(['profil', this.email]);
+    // this.router.navigateByUrl("profil");
+  }
 }
