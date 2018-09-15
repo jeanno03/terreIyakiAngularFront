@@ -44,7 +44,7 @@ s'il s'agit d'un menu on affiche que le menu
 s'il s'agit des produits hors menu
 *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'"
 -->
-      <tr *ngFor="let r of returnOrderItem">
+      <tr *ngFor="let r of returnOrderItem | orderBy : 'theId'">
         <td *ngIf="r.quantite>0&&r.productName!='menu'&&r.comment!='produit du menu ajouté'">
           <p class="spacer-right">
             {{r.productName}}

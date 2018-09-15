@@ -37,7 +37,8 @@ import { TheMessageService } from '../services/the-message.service';
 import { TvaTransformPipe } from '../pipes/tva-transform.pipe';
 import { MessageComponent } from './message/message.component';
 import { CarteProductService } from '../services/carte-product.service';
-
+import { CommentComponent } from './comment/comment.component';
+import { PageCommentService } from '../services/page-comment.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
   { path: 'myTable', component: MyTableComponent },
   { path: 'test', component: TestComponent },
   { path: 'mesCommandes', component: MesCommandesComponent },
+  { path: 'comment', component: CommentComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   
   // { path: 'homeTheMessage/:theMessage /:categoryMessageNumber', component: HomeComponent },
@@ -70,7 +72,8 @@ const appRoutes: Routes = [
     PanierComponent,
     MesCommandesComponent,
     TvaTransformPipe,
-    MessageComponent
+    MessageComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +101,8 @@ const appRoutes: Routes = [
     UserFromAppService,
     UrlService,
     TheMessageService,
-    CarteProductService
+    CarteProductService,
+    PageCommentService
   ],
   bootstrap: [AppComponent]
 })

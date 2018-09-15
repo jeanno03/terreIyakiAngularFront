@@ -30,7 +30,7 @@
 <div *ngIf="category">
   <div>
     <div class="alert alert-success invitationChoix"><p>Composez votre menu</p></div>
-    <div class="btn-group btn-group carteNav2" [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category">
+    <div class="btn-group btn-group carteNav2" [ngClass]="{'active':c.parentComboCategoryId==currentCat}" *ngFor="let c of this.category | orderBy : 'name'">
       <button type="button" class="clickable" class="btn btn-outline-primary" (click)=getProductsFromComboCat(c.parentComboCategoryId)><p>{{c.name}}</p></button>
     </div>
   </div>
@@ -65,7 +65,7 @@
     </div>
     <div class="col-sm-8 borderChoice">
       <div *ngFor="let a of arrayDeHashMenu">
-        <span class="letterProduct"><p>{{a.name}}</p></span>
+        <span class="letterProduct">{{a.name}}<br/></span>
       </div>
     </div>
     <div class="col-sm-2 borderChoice">

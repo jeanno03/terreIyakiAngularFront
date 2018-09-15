@@ -184,6 +184,7 @@ export class ProfilComponent implements OnInit {
     this.theMessageService.setOption("categoryMessageNumber", 2);
     // this.theMessage = null;
     this.modifier = "done";
+    this.getUserByEmail(this.email);
     this.router.navigate(['profil', this.email]);
     // this.router.navigateByUrl("profil");
   }
@@ -193,6 +194,7 @@ export class ProfilComponent implements OnInit {
     this.theMessageService.setOption("categoryMessageNumber", 2);
     // this.theMessage = null;
     this.creer = null;
+ //   this.getUserByEmail(this.email);
     this.router.navigate(['profil', this.email]);
     // this.router.navigateByUrl("profil");
   }

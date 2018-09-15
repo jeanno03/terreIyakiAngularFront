@@ -1,0 +1,48 @@
+
+
+<div class="card">
+    <h3 class="card-header">Aidez-nous à améliorer ce site</h3>
+
+<div class="card-body">
+
+<form #f="ngForm" (ngSubmit)="insertComment(f.value)">
+
+<div class="form-group">
+  <label><span class="letterComment">Remarques/suggestions :</span></label>
+  <div class="row">
+    <div class="col-md-10">
+  <textarea class="form-control" [(ngModel)]="commentModel.comment" name="comment" rows="2"  required></textarea>
+</div>
+<div class="col-md-2">
+    <button class="btn btn-info" [disabled]="!f.valid" type="submit">
+    <p>Envoyer</p>
+    </button>
+</div>
+</div>
+</div>
+
+</form>
+
+<div *ngFor="let c of comment">
+  <strong>{{c.myUserLogin}} le {{c.dateComment | date:'d/MM/yyyy' | uppercase}} :</strong><span class="letterComment" >{{c.comment}}</span>
+  </div>
+
+  <!-- <li *ngFor="let n of numerotation; let i=index">
+    <a click="goToPage()">{{i}}</a>
+  </li> -->
+
+  <div *ngIf="pageElement">
+  <!-- <span [ngClass]="{'active': p == pageActuel}" *ngFor="let p of pageList">
+      <a class="clickable" (click)="goToPage(p)">{{p}}</a> |
+  </span> -->
+
+  <ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let p of pageList">
+      <a class="nav-link" [ngClass]="{'active': p == pageActuel}" (click)="goToPage(p)">{{p}}</a>
+  </li>
+</ul>
+
+</div>
+</div>
+</div>
+

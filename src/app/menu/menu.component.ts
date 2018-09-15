@@ -157,18 +157,18 @@ export class MenuComponent implements OnInit {
           //algo de tri provisoire
           //le mieux c'est d attendre la creation définitive avant de lancer la méthode de trie 
           // realisé en java
-          for (this.j = 0; this.j < this.category.length; this.j++) {
+          // for (this.j = 0; this.j < this.category.length; this.j++) {
 
-            for (this.i = 0; this.i < this.category.length - 1; this.i++) {
+          //   for (this.i = 0; this.i < this.category.length - 1; this.i++) {
 
-              if (this.category[this.i].getComboCategoryNumber() > this.category[(this.i + 1)].getComboCategoryNumber()) {
+          //     if (this.category[this.i].getComboCategoryNumber() > this.category[(this.i + 1)].getComboCategoryNumber()) {
 
-                this.categoryModelProvisoire = this.category[this.i];
-                this.category[this.i] = this.category[(this.i + 1)];
-                this.category[(this.i + 1)] = this.categoryModelProvisoire;
-              }
-            }
-          }
+          //       this.categoryModelProvisoire = this.category[this.i];
+          //       this.category[this.i] = this.category[(this.i + 1)];
+          //       this.category[(this.i + 1)] = this.categoryModelProvisoire;
+          //     }
+          //   }
+          // }
 
           this.productMap.set(this.parentComboCategoryId, this.comboCategory.products);
 

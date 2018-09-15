@@ -24,7 +24,7 @@
       Prénom : <strong>{{userFromAp.firstName}}</strong>
     </p>
     <p class="card-text">Nom : <strong>{{userFromAp.lastName}}</strong></p>
-    <a *ngIf="userFromAp&&modifier!='true'" type="button" class="btn btn-primary" (click)="modifierProfil()"><p>Modifier</p></a>
+    <a *ngIf="userFromAp&&modifier!='true'" type="button" class="btn btn-primary" (click)="modifierProfil()"><span class="letterButtom">Modifier</span></a>
 
   </div>
 </div>
@@ -33,8 +33,8 @@
   <h3 class="card-header">Vos identifiants terreIyaki</h3>
 
   <div class="card-body">
-    <button type="button" class="btn btn-primary" (click)="creerProfil()"><p>Créer votre profil
-      </p>
+    <button type="button" class="btn btn-primary" (click)="creerProfil()"><span class="letterButtom">Créer votre profil
+    </span>
     </button>
   </div>
 </div>
@@ -51,19 +51,22 @@
 
     <form #f="ngForm" (ngSubmit)="modifierUserFromAp(f.value)">
       <div class="form-group">
-        <label class="control-label"><p class="card-text">login</p></label>
+        <label class="control-label"><p class="card-text">login
         <input class="form-control" type="text" [(ngModel)]="userFromAp.login" name="login" required />
+      </p></label>
       </div>
       <div class="form-group">
-        <label class="control-label"><p class="card-text">Nom</p></label>
+        <label class="control-label"><p class="card-text">Nom
         <input class="form-control" type="text" [(ngModel)]="userFromAp.lastName" name="lastName" required />
+      </p></label>
       </div>
       <div class="form-group">
-        <label class="control-label"><p class="card-text">Prénom</p></label>
+        <label class="control-label"><p class="card-text">Prénom
         <input class="form-control" type="text" [(ngModel)]="userFromAp.firstName" name="firstName" required />
+      </p></label>
       </div>
 
-      <button [disabled]="!f.valid" type="submit" class="btn btn-info spacer-right-top"><p>Enregistrer</p>
+      <button [disabled]="!f.valid" type="submit" class="btn btn-info spacer-right-top"><span class="letterButtom">Enregistrer</span>
       </button>
 
     </form>
@@ -82,20 +85,23 @@
   <div class="card-body">
     <form #f="ngForm" (ngSubmit)="creerUserFromAp(f.value)">
       <div class="form-group">
-        <label class="control-label"><p class="card-text">login</p></label>
+        <label class="control-label"><p class="card-text">login
 
         <input class="form-control" type="text" [(ngModel)]="myUserModel.login" name="login" required />
+      </p></label>
       </div>
       <div class="form-group">
-        <label class="control-label"><p class="card-text">Nom</p></label>
+        <label class="control-label"><p class="card-text">Nom
         <input class="form-control" type="text" [(ngModel)]="myUserModel.lastName" name="lastName" required />
+      </p></label>
       </div>
       <div class="form-group">
-        <label class="control-label"><p class="card-text">Prénom</p></label>
+        <label class="control-label"><p class="card-text">Prénom
         <input class="form-control" type="text" [(ngModel)]="myUserModel.firstName" name="firstName" required />
+      </p></label>
       </div>
 
-      <button [disabled]="!f.valid" type="submit" class="btn btn-info spacer-right-top"><p>Enregistrer</p></button>
+      <button [disabled]="!f.valid" type="submit" class="btn btn-info spacer-right-top"><span class="letterButtom">Enregistrer</span></button>
 
     </form>
 

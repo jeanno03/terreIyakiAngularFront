@@ -25,7 +25,8 @@ export class CommandeActionComponent implements OnInit {
 
   myUserOrder: any;
   panier: any = null;
-  returnOrderItem: Array<any>;
+  // returnOrderItem: Array<any>;
+  returnOrderItem: any;
   retourVatpriceTotal: number;
   i: number;
   hashOrderItem: Map<number, number>;
@@ -44,26 +45,30 @@ export class CommandeActionComponent implements OnInit {
     public panierService: PanierService,
     public userFromAppService: UserFromAppService,
     public panierVatPriceService: PanierVatPriceService,
-    public theMessageService:TheMessageService
+    public theMessageService: TheMessageService
   ) {
     this.userFromAp = userFromAppService.getFirebaseUser();
     this.panier = panierService.getPanier();
     // this.panierVatprice = panierVatPriceService.getPanierVatPrice();
 
     //on récupère tous les orderItems de la derniere commade si commande non vide
-    if(this.panier.theId!=null){
+    if (this.panier.theId != null) {
+
+      //1 er méthode testé voir commande service
       this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
         this.returnOrderItem = data;
-  
+
         //on récupère le montant total du panier
         this.retourVatpriceTotal = 0;
         for (this.i = 0; this.i < this.returnOrderItem.length; this.i++) {
           this.retourVatpriceTotal = this.retourVatpriceTotal + (this.returnOrderItem[this.i].vatPrice * this.returnOrderItem[this.i].quantite);
         }
-  
+
       }, err => {
         console.log(err);
       })
+
+
     }
 
 
@@ -73,11 +78,11 @@ export class CommandeActionComponent implements OnInit {
     this.chooseOrderType();
     // this.getMyOrderByMyUser();
 
-        //on reinitialise les messages
-        this.theMessageService.setOption("theMessage", null);
-        this.theMessageService.setOption("categoryMessageNumber", null);
-        // this.router.navigate(['profil', this.email]);
-        // this.theMessageService.getTheMessage();
+    //on reinitialise les messages
+    this.theMessageService.setOption("theMessage", null);
+    this.theMessageService.setOption("categoryMessageNumber", null);
+    // this.router.navigate(['profil', this.email]);
+    // this.theMessageService.getTheMessage();
 
   }
 
@@ -185,6 +190,7 @@ export class CommandeActionComponent implements OnInit {
         this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
         // this.theMessage = this.theMessageService.getTheMessage();
 
+        //méthode 1 voir commande service
         //on récupère tous les orderItems de la derniere commade
         this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
           this.returnOrderItem = data;
@@ -198,6 +204,7 @@ export class CommandeActionComponent implements OnInit {
         }, err => {
           console.log(err);
         })
+
       }, err => {
         console.log(err);
       })
@@ -211,7 +218,8 @@ export class CommandeActionComponent implements OnInit {
         this.theMessageService.setOption("theMessage", this.message.theMessage);
         this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
 
-        //on récupère tous les orderItems de la derniere commade
+        //méthode 1 voir commande service
+        // on récupère tous les orderItems de la derniere commade
         this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
           this.returnOrderItem = data;
           //on récupère le montant total du panier
@@ -224,6 +232,8 @@ export class CommandeActionComponent implements OnInit {
         }, err => {
           console.log(err);
         })
+
+
       }, err => {
         console.log(err);
       })
@@ -237,7 +247,8 @@ export class CommandeActionComponent implements OnInit {
         this.theMessageService.setOption("theMessage", this.message.theMessage);
         this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number);
 
-        //on récupère tous les orderItems de la derniere commade
+        //méthode 1 voir commande service
+        // on récupère tous les orderItems de la derniere commade
         this.commandeService.returnOrderItemByOrder(this.panier.theId).subscribe(data => {
           this.returnOrderItem = data;
           //on récupère le montant total du panier
@@ -250,6 +261,7 @@ export class CommandeActionComponent implements OnInit {
         }, err => {
           console.log(err);
         })
+
       }, err => {
         console.log(err);
       })
@@ -324,10 +336,10 @@ export class CommandeActionComponent implements OnInit {
       subscribe(data => {
         this.message = data;
 
-        
+
         // si vente ok 
         // on refraichit le panier et cette page
-        if(this.message.categoryMessage.number==1){
+        if (this.message.categoryMessage.number == 1) {
 
           this.panierService.setOption('theId', null);
           this.panierService.setOption('theDate', null);
@@ -343,7 +355,7 @@ export class CommandeActionComponent implements OnInit {
           this.router.navigateByUrl('home');
         }
         //si pas vente on renvoi vers la page de choix de table
-        else if(this.message.categoryMessage.number==2){
+        else if (this.message.categoryMessage.number == 2) {
 
           this.theMessageService.setOption("theMessage", this.message.theMessage);
           this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number)
@@ -380,7 +392,7 @@ export class CommandeActionComponent implements OnInit {
         this.theMessageService.setOption("theMessage", this.message.theMessage);
         this.theMessageService.setOption("categoryMessageNumber", this.message.categoryMessage.number)
 
-         this.router.navigateByUrl('home');
+        this.router.navigateByUrl('home');
         // this.router.navigate(['homeMessage', this.message.theMessage]);
 
       }, err => {

@@ -59,12 +59,20 @@ this.API=urlService.getAPI();
     return this.http.get<any>(this.API + '/createOrderItem?productId=' + productId + '&userId=' + userId);
   }
 
+  //les 2 méthodes suivantes sont liées
+  //la 1ere est celle fourni par SpringBoot
   returnOrderItemByOrder(idOrder: number) {
     return this.http.get(this.API + '/myOrders/' + idOrder + '/orderItems').
       map((result: any) => {
         return result._embedded.orderItems;
       })
   }
+
+  //la 2eme est une requete personnalité auquel j'applique un simple order by
+    //on récupère en brut tous les orders items de la commande
+    getOrderItemsByOrder(myOrderId:any){
+      return this.http.get(this.API+'/getOrderItemsByOrder?myOrderId='+myOrderId);
+    }
 
   //on enregistre le numero de table a la commande et on retourne un message de succès
   chooseTable(tableNumber: number, userId: number) {
@@ -132,10 +140,7 @@ this.API=urlService.getAPI();
   }
 
 
-  //on récupère en brut tous les orders items de la commande
-  getOrderItemsByOrder(myOrderId:any){
-    return this.http.get(this.API+'/getOrderItemsByOrder?myOrderId='+myOrderId);
-  }
+
 
 
 

@@ -11,7 +11,7 @@
 
       <div class="panel-body" *ngIf="mode==0">
 
-        <span *ngFor="let m of myTables | orderBy tableNumber">
+        <span *ngFor="let m of myTables | orderBy : 'tableNumber'">
           <button type="button" class="btn btn-primary spacer-right-top" (click)=tableFerme() *ngIf="m.statutName=='libre'">
             <p>N°{{m.tableNumber}}
               <span class="badge">
