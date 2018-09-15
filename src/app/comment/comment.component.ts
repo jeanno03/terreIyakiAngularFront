@@ -4,6 +4,7 @@ import { ProfilService } from '../../services/profil.service';
 import { TheMessageService } from '../../services/the-message.service';
 import { CommentModel } from '../../models/commentModel';
 import { PageCommentService } from '../../services/page-comment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comment',
@@ -17,7 +18,7 @@ export class CommentComponent implements OnInit {
   commentModel = new CommentModel();
   comment: any;
   pageElement: any;
-  numerotation: any;
+  // numerotation: any;
   pageList: Array<number>;
   i: number;
   pageActuel: number;
@@ -28,28 +29,26 @@ export class CommentComponent implements OnInit {
     public userFromAppService: UserFromAppService,
     public profilService: ProfilService,
     public theMessageService: TheMessageService,
-    public pageCommentService: PageCommentService
+    public pageCommentService: PageCommentService,
+    public router: Router
   ) {
     this.userFromAp = userFromAppService.getFirebaseUser();
-  }
-
-  ngOnInit() {
     // on réinitialise les messages
     this.theMessageService.setOption("theMessage", null);
     this.theMessageService.setOption("categoryMessageNumber", null);
 
     this.elementPageCommentService = this.pageCommentService.getPageComment();
     this.pageActuel = this.elementPageCommentService.pageEnCours;
-    console.log("this.pageActuel : " + this.pageActuel);
+    // console.log("this.pageActuel : " + this.pageActuel);
 
     if (this.elementPageCommentService.pageEnCours == null) {
       this.pageActuel = 0;
     }
-
-
-
     this.getPaginationComment(this.pageActuel);
     this.countComments();
+  }
+
+  ngOnInit() {
 
   }
 
@@ -62,10 +61,33 @@ export class CommentComponent implements OnInit {
           this.theMessageService.setOption("theMessage", this.theMessage.theMessage);
           this.theMessageService.setOption("categoryMessageNumber", this.theMessage.categoryMessage.number);
 
+          //j efface le textAera
           this.commentModel.setComment(null);
+
+
+
+          //je réinitialise la page des commentaire et le choix des pages
+          this.comment = null;
+          this.pageElement = null;
+
+          //Je rémet la derniere page
+          this.pageActuel = 0;
+          this.getPaginationComment(this.pageActuel);
+          this.countComments();
+
+          this.pageCommentService.setOption("pageEnCours", this.pageActuel);
+
+
+          // this.pageCommentService.setOption("pageEnCours", this.pageActuel)
+
+          //this.router.navigateByUrl('comment');
+
         }, err => {
           console.log(err)
         })
+
+
+
     }
     else {
       this.theMessageService.setOption("theMessage", "Connexion et enregistrement requis (Google-connexion puis Profil)");
@@ -78,8 +100,6 @@ export class CommentComponent implements OnInit {
     this.profilService.getPaginationComments(page)
       .subscribe(data => {
         this.comment = data;
-        this.numerotation = new Array(data.totalPages);
-
       }, err => {
         console.log(err)
       })
@@ -104,7 +124,7 @@ export class CommentComponent implements OnInit {
 
   goToPage(page: number) {
     this.pageActuel = page;
-    // this.currentPage = page;
+
     this.getPaginationComment(this.pageActuel);
     this.pageCommentService.setOption("pageEnCours", this.pageActuel);
   }

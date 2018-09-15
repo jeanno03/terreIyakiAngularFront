@@ -5,7 +5,7 @@
 
 <div class="card-body">
 
-<form #f="ngForm" (ngSubmit)="insertComment(f.value)">
+<form #f="ngForm" (ngSubmit)="insertComment()">
 
 <div class="form-group">
   <label><span class="letterComment">Remarques/suggestions :</span></label>
@@ -38,7 +38,7 @@
 
   <ul class="nav nav-pills">
   <li class="nav-item" *ngFor="let p of pageList">
-      <a class="nav-link" [ngClass]="{'active': p == pageActuel}" (click)="goToPage(p)">{{p}}</a>
+      <a class="nav-link letterComment" [ngClass]="{'active': p == pageActuel}" (click)="goToPage(p)">{{p}}</a>
   </li>
 </ul>
 

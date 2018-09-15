@@ -1,6 +1,6 @@
 export class CommentModel {
 
-    private comment: string;
+    comment: string;
 
     constructor() {
     }
